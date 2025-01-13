@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const CompareButton = () => {
   const comparisonCars = useSelector((state) => state.filters.comparisonCars);
-  const carCount = comparisonCars.length;
+  const totalSlots = 3; // Total comparison slots
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleButtonClick = () => {
@@ -23,7 +23,7 @@ const CompareButton = () => {
       >
         <span className="font-semibold">Compare Cars</span>
         <div className="bg-white text-green-500 w-8 h-8 rounded-full flex items-center justify-center font-bold">
-          {carCount}
+          {comparisonCars.length}
         </div>
       </div>
 
@@ -41,28 +41,39 @@ const CompareButton = () => {
 
             {/* Modal Content */}
             <h2 className="text-2xl font-bold mb-6">Selected Cars</h2>
-            {comparisonCars.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {comparisonCars.map((car) => (
+
+            {/* Display selected cars and placeholders */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {Array.from({ length: totalSlots }).map((_, index) => {
+                const car = comparisonCars[index]; // Get the car for the current slot, if available
+                return (
                   <div
-                    key={car.id}
-                    className="border p-4 rounded-lg shadow-md bg-gray-50"
+                    key={index}
+                    className="border p-4 rounded-lg shadow-md bg-gray-50 flex flex-col items-center justify-center"
                   >
-                    <h3 className="text-xl font-semibold mb-2">
-                      {car.brand} {car.model}
-                    </h3>
-                    <p className="text-sm">
-                      <strong>Variant:</strong> {car.variant || "N/A"}
-                    </p>
-                    <p className="text-sm">
-                      <strong>Finances:</strong> $370/week
-                    </p>
+                    {car ? (
+                      <>
+                        <img src={car.imageUrl} alt="" />
+                        <h3 className="text-lg font-semibold mb-2">
+                          {car.brand} {car.model}
+                        </h3>
+                        <p className="text-sm">
+                          <strong>Finances:</strong> $370/week
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        {/* Placeholder for "Select Car" */}
+                        <div className="w-20 h-20 bg-gray-200 rounded-full mb-4"></div>
+                        <p className="text-sm font-semibold text-primary">
+                          Select Car
+                        </p>
+                      </>
+                    )}
                   </div>
-                ))}
-              </div>
-            ) : (
-              <p>No cars selected for comparison.</p>
-            )}
+                );
+              })}
+            </div>
           </div>
         </div>
       )}
@@ -71,4 +82,3 @@ const CompareButton = () => {
 };
 
 export default CompareButton;
-

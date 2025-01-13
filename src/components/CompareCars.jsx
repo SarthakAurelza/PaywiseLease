@@ -84,35 +84,48 @@ const CompareCars = () => {
                     return (
                       <th
                         key={index}
-                        className="border border-gray-300 px-1 py-2 text-center w-1/4"
+                        className="border border-gray-300 px-1 py-2 text-center w-1/4 relative"
                       >
                         {car ? (
-                          <div className="flex flex-col items-center justify-around p-1 gap-4">
-                            <img
-                              className="w-[80%]"
-                              src={car.imageUrl}
-                              alt={car.model}
-                            />
-                            <div className="w-full flex flex-col text-lg">
-                              {car.brand.toUpperCase()} {car.model.toUpperCase()} <br />
-                              <span className="font-medium text-sm">
-                                {car.variant.toUpperCase()}
-                              </span>
-                            </div>
+                          <div className="relative">
+                            {/* Close (X) button */}
+                            <button
+                              className="absolute top-1 right-1 text-red-500 text-xl font-bold hover:text-red-700"
+                              onClick={() =>
+                                dispatch(removeFromComparison(car.id))
+                              }
+                            >
+                              ×
+                            </button>
 
-                            <div className="w-full rounded-xl bg-background py-2 px-1 flex gap-2 items-center justify-around">
-                              <p className="font-bold text-lg">
-                                <span className="sm:text-[8px] text-xs sm:font-semibold">
-                                  FROM{" "}
+                            <div className="flex flex-col items-center justify-around p-1 gap-4">
+                              <img
+                                className="w-[80%]"
+                                src={car.imageUrl}
+                                alt={car.model}
+                              />
+                              <div className="w-full flex flex-col text-lg">
+                                {car.brand.toUpperCase()}{" "}
+                                {car.model.toUpperCase()} <br />
+                                <span className="font-medium text-sm">
+                                  {car.variant.toUpperCase()}
                                 </span>
-                                $370
-                                <span className="sm:text-[10px] text-xs">
-                                  /week
-                                </span>
-                              </p>
-                              <button className="bg-primary text-white text-xs rounded-md p-1 sm:pl-3 sm:pr-3 h-7">
-                                View Calculation
-                              </button>
+                              </div>
+
+                              <div className="w-full rounded-xl bg-background py-2 px-1 flex gap-2 items-center justify-around">
+                                <p className="font-bold text-lg">
+                                  <span className="sm:text-[8px] text-xs sm:font-semibold">
+                                    FROM{" "}
+                                  </span>
+                                  $370
+                                  <span className="sm:text-[10px] text-xs">
+                                    /week
+                                  </span>
+                                </p>
+                                <button className="bg-primary text-white text-xs rounded-md p-1 sm:pl-3 sm:pr-3 h-7">
+                                  View Calculation
+                                </button>
+                              </div>
                             </div>
                           </div>
                         ) : (
