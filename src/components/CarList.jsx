@@ -98,8 +98,10 @@ const CarList = () => {
   return (
     <div className="bg-background sm:p-16 xs:p-6 w-full flex sm:flex-row flex-col sm:items-start items-center justify-between">
       {/* Main Content */}
-      <div className="bg-white sm:p-12 xs:p-4 pt-14 rounded-lg sm:w-[65%] w-full border flex flex-col items-center sm:items-start">
-        <h2 className="text-xl font-bold mb-4">Available Cars</h2>
+      <div className="bg-white sm:p-12 xs:p-4 pt-14 rounded-lg sm:w-[65%] w-full border flex flex-col items-center sm:items-center">
+        
+          <h2 className="text-xl font-bold mb-4">Available Cars</h2>
+        
         <div className="grid sm:grid-cols-2 grid-cols-1 sm:gap-12 gap-6">
           {paginatedCars.length > 0 ? (
             paginatedCars.map((car) => (

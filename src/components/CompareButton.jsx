@@ -1,17 +1,27 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromComparison } from "@/features/filtersSlice";
 
-const CompareButton = () => {
+const CompareButton = ({ compareCarsRef }) => {
+  const dispatch = useDispatch();
   const comparisonCars = useSelector((state) => state.filters.comparisonCars);
   const totalSlots = 3; // Total comparison slots
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleButtonClick = () => {
-    setIsModalOpen(true); // Open the modal on button click
+    setIsModalOpen(true);
+    console.log(comparisonCars);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false); // Close the modal
+  };
+
+  const handleCompareClick = () => {
+    setIsModalOpen(false); // Close the modal
+    if (compareCarsRef?.current) {
+      compareCarsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -53,13 +63,24 @@ const CompareButton = () => {
                   >
                     {car ? (
                       <>
-                        <img src={car.imageUrl} alt="" />
+                        <img
+                          className="w-full h-32 object-cover rounded-lg mb-2"
+                          src={car.imageUrl}
+                          alt={car.model}
+                        />
                         <h3 className="text-lg font-semibold mb-2">
                           {car.brand} {car.model}
                         </h3>
                         <p className="text-sm">
                           <strong>Finances:</strong> $370/week
                         </p>
+                        {/* Remove button */}
+                        <button
+                          onClick={() => dispatch(removeFromComparison(car.id))}
+                          className="text-red-500 text-sm mt-2"
+                        >
+                          Remove
+                        </button>
                       </>
                     ) : (
                       <>
@@ -73,6 +94,16 @@ const CompareButton = () => {
                   </div>
                 );
               })}
+            </div>
+
+            {/* Compare Button */}
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={handleCompareClick}
+                className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
+              >
+                Compare
+              </button>
             </div>
           </div>
         </div>

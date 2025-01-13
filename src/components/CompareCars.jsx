@@ -45,7 +45,7 @@ const CompareCars = () => {
   ];
 
   return (
-    <div className="w-full h-full pl-16 pr-16 flex flex-col">
+    <div className="w-full h-full pl-16 pr-16 pb-16 flex flex-col">
       <div className="w-full h-full rounded-xl bg-white p-16">
         <h2 className="text-3xl mb-8">Compare Cars</h2>
         <p className="text-primary font-light">
@@ -107,7 +107,7 @@ const CompareCars = () => {
                               <div className="w-full flex flex-col text-lg">
                                 {car.brand.toUpperCase()}{" "}
                                 {car.model.toUpperCase()} <br />
-                                <span className="font-medium text-sm">
+                                <span className="font-medium text-sm text-muted">
                                   {car.variant.toUpperCase()}
                                 </span>
                               </div>

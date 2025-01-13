@@ -20,7 +20,7 @@ const CarCard = ({
   const isInComparison = comparisonCars.some((car) => car.id === id); // Check if the car is already in the comparison list
 
   return (
-    <div className="w-[290px] sm:h-[332px] p-3 pb-4 flex flex-col items-center rounded-xl bg-[#F3F6F7] justify-between gap-4">
+    <div className="w-[290px] sm:h-[372px] p-3 pb-4 flex flex-col items-center rounded-xl bg-[#F3F6F7] justify-between gap-4">
       <div className="h-[40%] rounded-sm w-full">
         <img src={imageUrl} alt="" />
       </div>
@@ -38,7 +38,20 @@ const CarCard = ({
             if (isInComparison) {
               dispatch(removeFromComparison(id)); // Remove from comparison
             } else {
-              dispatch(addToComparison({ id, brand, engine, model, body, seats })); // Add to comparison
+              dispatch(
+                addToComparison({
+                  id,
+                  brand,
+                  engine,
+                  model,
+                  body,
+                  seats,
+                  transmission,
+                  fuel_consumption,
+                  imageUrl, // Ensure imageUrl is included here
+                  
+                })
+              )
             }
           }}
         >
@@ -48,25 +61,25 @@ const CarCard = ({
       </div>
       <div className="w-full grid grid-cols-2 gap-4">
         <div>
-          <p className="text-[#808080] text-[6px]">Engine</p>
-          <p className="text-[10px]">{engine}</p>
+          <p className="text-[#808080] text-[12px]">Engine</p>
+          <p className="text-[12px]">{engine}</p>
         </div>
 
         <div>
-          <p className="text-[6px] text-[#808080]">Body/Seats</p>
-          <p className="text-[10px]">
+          <p className="text-[12px] text-[#808080]">Body/Seats</p>
+          <p className="text-[12px]">
             {body} - {seats}
           </p>
         </div>
 
         <div>
-          <p className="text-[6px] text-[#808080]">Transmission</p>
-          <p className="text-[10px]">{transmission}</p>
+          <p className="text-[12px] text-[#808080]">Transmission</p>
+          <p className="text-[12px]">{transmission}</p>
         </div>
 
         <div>
-          <p className="text-[6px] text-[#808080]">Consumption</p>
-          <p className="text-[10px]">{fuel_consumption}L/100Km</p>
+          <p className="text-[12px] text-[#808080]">Consumption</p>
+          <p className="text-[12px]">{fuel_consumption}L/100Km</p>
         </div>
       </div>
       <div className="w-full bg-white h-12 p-2 rounded-md flex flex-row items-center justify-between">
