@@ -48,7 +48,7 @@ const CarCard = ({
                   seats,
                   transmission,
                   fuel_consumption,
-                  imageUrl, // Ensure imageUrl is included here
+                  imageUrl, 
                   
                 })
               )

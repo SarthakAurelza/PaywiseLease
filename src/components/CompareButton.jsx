@@ -1,28 +1,107 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromComparison } from "@/features/filtersSlice";
+import { removeFromComparison, addToComparison } from "@/features/filtersSlice";
+import supabase from "@/supabase/supabaseClient";
 
 const CompareButton = ({ compareCarsRef }) => {
   const dispatch = useDispatch();
   const comparisonCars = useSelector((state) => state.filters.comparisonCars);
   const totalSlots = 3; // Total comparison slots
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSelectCarModalOpen, setIsSelectCarModalOpen] = useState(false);
+  const [allCars, setAllCars] = useState([]); // Holds all cars from the database
+  const [availableCars, setAvailableCars] = useState([]); // Filtered cars
+  const [brands, setBrands] = useState([]); // Unique brands
+  const [filters, setFilters] = useState({
+    search: "",
+    expandedBrand: null, // For managing accordions
+  });
+
+  // Fetch all cars when the select car modal opens
+  const fetchAllCars = async () => {
+    try {
+      const { data, error } = await supabase.from("Car_Details").select("*");
+      if (error) {
+        console.error("Error fetching cars:", error);
+        return;
+      }
+
+      setAllCars(data);
+
+      // Extract unique brands
+      const uniqueBrands = [...new Set(data.map((car) => car.brand))].filter(Boolean);
+      setBrands(uniqueBrands);
+    } catch (err) {
+      console.error("Unexpected error fetching cars:", err);
+    }
+  };
+
+  // Filter cars based on search and expanded brand
+  const filterCars = () => {
+    let filteredCars = [...allCars];
+
+    if (filters.search) {
+      filteredCars = filteredCars.filter((car) =>
+        car.model.toLowerCase().includes(filters.search.toLowerCase())
+      );
+    }
+
+    if (filters.expandedBrand) {
+      filteredCars = filteredCars.filter((car) => car.brand === filters.expandedBrand);
+    }
+
+    setAvailableCars(filteredCars);
+  };
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: value,
+    }));
+  };
+
+  const handleAccordionToggle = (brand) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      expandedBrand: prevFilters.expandedBrand === brand ? null : brand,
+    }));
+  };
+
+  const handleAddCar = (car) => {
+    dispatch(addToComparison(car));
+    setIsSelectCarModalOpen(false);
+  };
 
   const handleButtonClick = () => {
     setIsModalOpen(true);
-    console.log(comparisonCars);
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false); // Close the modal
+    setIsModalOpen(false);
+  };
+
+  const handleCloseSelectCarModal = () => {
+    setIsSelectCarModalOpen(false);
   };
 
   const handleCompareClick = () => {
-    setIsModalOpen(false); // Close the modal
+    setIsModalOpen(false);
     if (compareCarsRef?.current) {
       compareCarsRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    if (isSelectCarModalOpen) {
+      fetchAllCars();
+    }
+  }, [isSelectCarModalOpen]);
+
+  useEffect(() => {
+    filterCars();
+  }, [filters.search, filters.expandedBrand, allCars]);
 
   return (
     <>
@@ -37,25 +116,22 @@ const CompareButton = ({ compareCarsRef }) => {
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Main Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white w-[90%] max-w-4xl rounded-lg p-6 shadow-lg relative">
-            {/* Close Button */}
             <button
               onClick={handleCloseModal}
-              className="absolute top-4 right-4 text-red-500 font-bold"
+              className="absolute top-4 right-4 bg-gray-100 hover:bg-gray-300 px-3 py-1 rounded-full font-bold"
             >
               X
             </button>
 
-            {/* Modal Content */}
-            <h2 className="text-2xl font-bold mb-6">Selected Cars</h2>
+            <h2 className="text-2xl text-primary mb-6">Selected Cars</h2>
 
-            {/* Display selected cars and placeholders */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {Array.from({ length: totalSlots }).map((_, index) => {
-                const car = comparisonCars[index]; // Get the car for the current slot, if available
+                const car = comparisonCars[index];
                 return (
                   <div
                     key={index}
@@ -63,48 +139,115 @@ const CompareButton = ({ compareCarsRef }) => {
                   >
                     {car ? (
                       <>
-                        <img
-                          className="w-full h-32 object-cover rounded-lg mb-2"
-                          src={car.imageUrl}
-                          alt={car.model}
-                        />
+                        <div className="flex flex-row items-start">
+                          <img
+                            className="w-[92%] h-32 object-cover rounded-lg mb-2"
+                            src={car.imageUrl}
+                            alt={car.model}
+                          />
+                          <button className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-full" onClick={() => dispatch(removeFromComparison(car.id))}>
+                            X
+                          </button>
+                        </div>
                         <h3 className="text-lg font-semibold mb-2">
                           {car.brand} {car.model}
                         </h3>
-                        <p className="text-sm">
-                          <strong>Finances:</strong> $370/week
-                        </p>
-                        {/* Remove button */}
-                        <button
-                          onClick={() => dispatch(removeFromComparison(car.id))}
-                          className="text-red-500 text-sm mt-2"
-                        >
-                          Remove
-                        </button>
                       </>
                     ) : (
-                      <>
-                        {/* Placeholder for "Select Car" */}
-                        <div className="w-20 h-20 bg-gray-200 rounded-full mb-4"></div>
-                        <p className="text-sm font-semibold text-primary">
+                      <div
+                        className="w-20 h-full mb-4 cursor-pointer flex flex-col items-center justify-around"
+                        onClick={() => setIsSelectCarModalOpen(true)}
+                      >
+                        <img src="/images/carIcon.png" alt="Select Car" />
+                        <span className="text-sm font-semibold text-primary">
                           Select Car
-                        </p>
-                      </>
+                        </span>
+                      </div>
                     )}
                   </div>
                 );
               })}
             </div>
 
-            {/* Compare Button */}
             <div className="mt-6 flex justify-end">
               <button
                 onClick={handleCompareClick}
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
+                className="bg-secondary text-primary px-4 py-2 rounded-2xl shadow"
               >
                 Compare
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Select Car Modal */}
+      {isSelectCarModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white w-[50%] max-w-4xl rounded-lg p-6 shadow-lg relative">
+            {/* Close Button */}
+            <button
+              onClick={handleCloseSelectCarModal}
+              className="absolute top-4 right-4 rounded-full bg-gray-200 px-2 py-1 font-bold hover:bg-gray-300"
+            >
+              X
+            </button>
+
+            <h2 className="text-2xl text-primary mb-4">Select a Car</h2>
+
+            {/* Search Bar */}
+            <div className="mb-4">
+              <input
+                type="text"
+                name="search"
+                placeholder="Search cars..."
+                className="w-full border rounded-lg px-3 py-2"
+                onChange={handleFilterChange}
+              />
+            </div>
+
+            {/* Brand Accordions */}
+            <div className="overflow-y-auto max-h-[50vh]">
+  {brands.map((brand) => (
+    <div key={brand} className="border-b">
+      {/* Accordion Header */}
+      <div
+        className="cursor-pointer flex justify-between items-center px-4 py-2 hover:bg-gray-100"
+        onClick={() => handleAccordionToggle(brand)}
+      >
+        <h3 className="text-lg font-semibold">{brand}</h3>
+        {/* Arrow Icon */}
+        <span
+          className={`transform transition-transform duration-300 ${
+            filters.expandedBrand === brand ? "rotate-180" : ""
+          }`}
+        >
+          <img src="/images/down.png" alt="" />
+        </span>
+      </div>
+
+      {/* Show models when accordion is expanded */}
+      {filters.expandedBrand === brand && (
+        <div className="px-4 py-2">
+          {availableCars
+            .filter((car) => car.brand === brand)
+            .map((car) => (
+              <div
+                onClick={() => handleAddCar(car)}
+                key={car.id}
+                className="flex justify-between items-center"
+              >
+                <span className="hover:bg-gray-100 w-full py-2 cursor-pointer">
+                  {car.model} - {car.variant}
+                </span>
+              </div>
+            ))}
+        </div>
+      )}
+    </div>
+  ))}
+</div>
+
           </div>
         </div>
       )}
