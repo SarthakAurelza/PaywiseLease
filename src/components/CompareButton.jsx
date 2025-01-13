@@ -6,18 +6,17 @@ import supabase from "@/supabase/supabaseClient";
 const CompareButton = ({ compareCarsRef }) => {
   const dispatch = useDispatch();
   const comparisonCars = useSelector((state) => state.filters.comparisonCars);
-  const totalSlots = 3; // Total comparison slots
+  const totalSlots = 3;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSelectCarModalOpen, setIsSelectCarModalOpen] = useState(false);
-  const [allCars, setAllCars] = useState([]); // Holds all cars from the database
-  const [availableCars, setAvailableCars] = useState([]); // Filtered cars
-  const [brands, setBrands] = useState([]); // Unique brands
+  const [allCars, setAllCars] = useState([]);
+  const [availableCars, setAvailableCars] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [filters, setFilters] = useState({
     search: "",
-    expandedBrand: null, // For managing accordions
+    expandedBrand: null,
   });
 
-  // Fetch all cars when the select car modal opens
   const fetchAllCars = async () => {
     try {
       const { data, error } = await supabase.from("Car_Details").select("*");
@@ -36,15 +35,8 @@ const CompareButton = ({ compareCarsRef }) => {
     }
   };
 
-  // Filter cars based on search and expanded brand
   const filterCars = () => {
     let filteredCars = [...allCars];
-
-    if (filters.search) {
-      filteredCars = filteredCars.filter((car) =>
-        car.model.toLowerCase().includes(filters.search.toLowerCase())
-      );
-    }
 
     if (filters.expandedBrand) {
       filteredCars = filteredCars.filter((car) => car.brand === filters.expandedBrand);
@@ -101,7 +93,7 @@ const CompareButton = ({ compareCarsRef }) => {
 
   useEffect(() => {
     filterCars();
-  }, [filters.search, filters.expandedBrand, allCars]);
+  }, [filters.expandedBrand, allCars]);
 
   return (
     <>
@@ -145,7 +137,10 @@ const CompareButton = ({ compareCarsRef }) => {
                             src={car.imageUrl}
                             alt={car.model}
                           />
-                          <button className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-full" onClick={() => dispatch(removeFromComparison(car.id))}>
+                          <button
+                            className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-full"
+                            onClick={() => dispatch(removeFromComparison(car.id))}
+                          >
                             X
                           </button>
                         </div>
@@ -196,58 +191,61 @@ const CompareButton = ({ compareCarsRef }) => {
             <h2 className="text-2xl text-primary mb-4">Select a Car</h2>
 
             {/* Search Bar */}
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <input
                 type="text"
                 name="search"
                 placeholder="Search cars..."
                 className="w-full border rounded-lg px-3 py-2"
-                onChange={handleFilterChange}
+                onChange={(e) => {
+                  handleFilterChange(e);
+                }}
+                value={filters.search}
+                readOnly // Makes the search bar non-functional
               />
             </div>
 
             {/* Brand Accordions */}
             <div className="overflow-y-auto max-h-[50vh]">
-  {brands.map((brand) => (
-    <div key={brand} className="border-b">
-      {/* Accordion Header */}
-      <div
-        className="cursor-pointer flex justify-between items-center px-4 py-2 hover:bg-gray-100"
-        onClick={() => handleAccordionToggle(brand)}
-      >
-        <h3 className="text-lg font-semibold">{brand}</h3>
-        {/* Arrow Icon */}
-        <span
-          className={`transform transition-transform duration-300 ${
-            filters.expandedBrand === brand ? "rotate-180" : ""
-          }`}
-        >
-          <img src="/images/down.png" alt="" />
-        </span>
-      </div>
+              {brands.map((brand) => (
+                <div key={brand} className="border-b text-muted-foreground">
+                  {/* Accordion Header */}
+                  <div
+                    className="cursor-pointer flex justify-between items-center px-4 py-2 hover:bg-gray-100"
+                    onClick={() => handleAccordionToggle(brand)}
+                  >
+                    <h3 className="text-lg">{brand}</h3>
+                    {/* Arrow Icon */}
+                    <span
+                      className={`transform transition-transform duration-300 ${
+                        filters.expandedBrand === brand ? "rotate-180" : ""
+                      }`}
+                    >
+                      <img src="/images/down.png" alt="" />
+                    </span>
+                  </div>
 
-      {/* Show models when accordion is expanded */}
-      {filters.expandedBrand === brand && (
-        <div className="px-4 py-2">
-          {availableCars
-            .filter((car) => car.brand === brand)
-            .map((car) => (
-              <div
-                onClick={() => handleAddCar(car)}
-                key={car.id}
-                className="flex justify-between items-center"
-              >
-                <span className="hover:bg-gray-100 w-full py-2 cursor-pointer">
-                  {car.model} - {car.variant}
-                </span>
-              </div>
-            ))}
-        </div>
-      )}
-    </div>
-  ))}
-</div>
-
+                  {/* Show models when accordion is expanded */}
+                  {filters.expandedBrand === brand && (
+                    <div className="px-4 py-2 text-foreground">
+                      {availableCars
+                        .filter((car) => car.brand === brand)
+                        .map((car) => (
+                          <div
+                            onClick={() => handleAddCar(car)}
+                            key={car.id}
+                            className="flex justify-between items-center"
+                          >
+                            <span className="hover:bg-gray-100 w-full py-2 cursor-pointer">
+                              {car.model} - {car.variant}
+                            </span>
+                          </div>
+                        ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}

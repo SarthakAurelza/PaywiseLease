@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromComparison } from "@/features/filtersSlice";
+import { removeFromComparison, addToComparison } from "@/features/filtersSlice";
 import supabase from "../supabase/supabaseClient";
-import { Button } from "./ui/button";
 
 const CompareCars = () => {
   const dispatch = useDispatch();
   const comparisonCars = useSelector((state) => state.filters.comparisonCars);
   const [carDetails, setCarDetails] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility state
+  const [allCars, setAllCars] = useState([]); // All cars fetched from the database
+  const [brands, setBrands] = useState([]); // Unique car brands
+  const [filters, setFilters] = useState({ search: "", expandedBrand: null }); // Filters for search and accordions
+  const [filteredCars, setFilteredCars] = useState([]); // Cars filtered by brand and search
 
   const totalSlots = 3; // Total comparison slots (e.g., Select Car placeholders)
 
@@ -35,6 +39,60 @@ const CompareCars = () => {
     fetchCarDetails();
   }, [comparisonCars]);
 
+  // Fetch all cars when the modal opens
+  useEffect(() => {
+    const fetchAllCars = async () => {
+      try {
+        const { data, error } = await supabase.from("Car_Details").select("*");
+        if (error) {
+          console.error("Error fetching cars:", error);
+          return;
+        }
+
+        setAllCars(data);
+
+        // Extract unique brands
+        const uniqueBrands = [...new Set(data.map((car) => car.brand))].filter(Boolean);
+        setBrands(uniqueBrands);
+      } catch (err) {
+        console.error("Unexpected error fetching cars:", err);
+      }
+    };
+
+    if (isModalOpen) {
+      fetchAllCars();
+    }
+  }, [isModalOpen]);
+
+  // Filter cars based on search input and expanded brand
+  useEffect(() => {
+    let cars = [...allCars];
+
+    if (filters.search) {
+      cars = cars.filter((car) =>
+        car.model.toLowerCase().includes(filters.search.toLowerCase())
+      );
+    }
+
+    if (filters.expandedBrand) {
+      cars = cars.filter((car) => car.brand === filters.expandedBrand);
+    }
+
+    setFilteredCars(cars);
+  }, [filters, allCars]);
+
+  const handleAccordionToggle = (brand) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      expandedBrand: prevFilters.expandedBrand === brand ? null : brand,
+    }));
+  };
+
+  const handleAddCar = (car) => {
+    dispatch(addToComparison(car));
+    setIsModalOpen(false); // Close the modal after selecting a car
+  };
+
   const featureKeys = [
     { key: "engine", label: "Engine" },
     { key: "seats", label: "Seats" },
@@ -59,7 +117,8 @@ const CompareCars = () => {
               {Array.from({ length: totalSlots }).map((_, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center justify-center border border-gray-300 rounded-lg w-1/3 mx-2 py-12"
+                  className="flex flex-col items-center justify-center border border-gray-300 rounded-lg w-1/3 mx-2 py-12 cursor-pointer"
+                  onClick={() => setIsModalOpen(true)} // Open the modal
                 >
                   <div className="w-20 h-20 bg-gray-100 rounded-full mb-4">
                     <img src="/images/carIcon.png" alt="Select Car" />
@@ -111,26 +170,13 @@ const CompareCars = () => {
                                   {car.variant.toUpperCase()}
                                 </span>
                               </div>
-
-                              <div className="w-full rounded-xl bg-background py-2 px-1 flex gap-2 items-center justify-around">
-                                <p className="font-bold text-lg">
-                                  <span className="sm:text-[8px] text-xs sm:font-semibold">
-                                    FROM{" "}
-                                  </span>
-                                  $370
-                                  <span className="sm:text-[10px] text-xs">
-                                    /week
-                                  </span>
-                                </p>
-                                <button className="bg-primary text-white text-xs rounded-md p-1 sm:pl-3 sm:pr-3 h-7">
-                                  View Calculation
-                                </button>
-                              </div>
                             </div>
                           </div>
                         ) : (
-                          <div className="flex flex-col items-center justify-center">
-                            {/* Placeholder for Car Icon */}
+                          <div
+                            className="flex flex-col items-center justify-center cursor-pointer"
+                            onClick={() => setIsModalOpen(true)} // Open the modal
+                          >
                             <div className="w-20 h-20 bg-gray-100 rounded-full mb-4">
                               <img
                                 src="/images/carIcon.png"
@@ -173,6 +219,79 @@ const CompareCars = () => {
           )}
         </div>
       </div>
+
+      {/* Modal for Selecting a Car */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white w-[90%] max-w-4xl rounded-lg p-6 shadow-lg relative">
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 bg-gray-200 px-3 py-1 rounded-full font-bold hover:bg-gray-300"
+            >
+              X
+            </button>
+
+            <h2 className="text-2xl text-primary mb-4">Select a Car</h2>
+
+            {/* Search Bar */}
+            <div className="mb-4">
+              <input
+                type="text"
+                name="search"
+                placeholder="Search cars..."
+                className="w-full border rounded-lg px-3 py-2"
+                onChange={(e) =>
+                  setFilters((prevFilters) => ({
+                    ...prevFilters,
+                    search: e.target.value,
+                  }))
+                }
+              />
+            </div>
+
+            {/* Brand Accordions */}
+            <div className="overflow-y-auto max-h-[60vh]">
+              {brands.map((brand) => (
+                <div key={brand} className="border-b">
+                  {/* Accordion Header */}
+                  <div
+                    className="cursor-pointer flex justify-between items-center px-4 py-2"
+                    onClick={() => handleAccordionToggle(brand)}
+                  >
+                    <h3 className="text-lg">{brand}</h3>
+                    <span
+                      className={`transform transition-transform ${
+                        filters.expandedBrand === brand ? "rotate-180" : ""
+                      }`}
+                    >
+                      <img src="/images/down.png" alt="" />
+                    </span>
+                  </div>
+
+                  {/* Show models when accordion is expanded */}
+                  {filters.expandedBrand === brand && (
+                    <div className="px-4 py-2">
+                      {filteredCars
+                        .filter((car) => car.brand === brand)
+                        .map((car) => (
+                          <div
+                            key={car.id}
+                            className="flex justify-between items-center py-2 cursor-pointer hover:bg-gray-100"
+                            onClick={() => handleAddCar(car)}
+                          >
+                            <span>
+                              {car.model} - {car.variant}
+                            </span>
+                          </div>
+                        ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
