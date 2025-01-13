@@ -1,0 +1,1502 @@
+[
+  {
+      "id": 1,
+      "brand": "Volkswagen",
+      "engine": "Electric",
+      "body": "Hatchback",
+      "transmission": "Automatic",
+      "fuel_consumption": "12.1",
+      "seats": 4,
+      "model": "Civic LX"
+  },
+  {
+      "id": 2,
+      "brand": "BMW",
+      "engine": "Electric",
+      "body": "Coupe",
+      "transmission": "CVT",
+      "fuel_consumption": "7.9",
+      "seats": 7,
+      "model": "CLA 250"
+  },
+  {
+      "id": 3,
+      "brand": "Toyota",
+      "engine": "Diesel",
+      "body": "Van",
+      "transmission": "Manual",
+      "fuel_consumption": "8.1",
+      "seats": 4,
+      "model": "Escalade ESV"
+  },
+  {
+      "id": 4,
+      "brand": "Honda",
+      "engine": "Diesel",
+      "body": "SUV",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "11.1",
+      "seats": 7,
+      "model": "Rogue SL"
+  },
+  {
+      "id": 5,
+      "brand": "Ford",
+      "engine": "Petrol",
+      "body": "Sedan",
+      "transmission": "CVT",
+      "fuel_consumption": "13.8",
+      "seats": 5,
+      "model": "Arteon SEL"
+  },
+  {
+      "id": 6,
+      "brand": "Nissan",
+      "engine": "Electric",
+      "body": "Coupe",
+      "transmission": "CVT",
+      "fuel_consumption": "6.5",
+      "seats": 7,
+      "model": "Panamera 4"
+  },
+  {
+      "id": 7,
+      "brand": "Nissan",
+      "engine": "Diesel",
+      "body": "Hatchback",
+      "transmission": "Manual",
+      "fuel_consumption": "8.5",
+      "seats": 5,
+      "model": "XC90 Recharge"
+  },
+  {
+      "id": 8,
+      "brand": "Hyundai",
+      "engine": "Electric",
+      "body": "Convertible",
+      "transmission": "CVT",
+      "fuel_consumption": "13.3",
+      "seats": 4,
+      "model": "Q7 Prestige"
+  },
+  {
+      "id": 9,
+      "brand": "Mercedes",
+      "engine": "Petrol",
+      "body": "SUV",
+      "transmission": "Automatic",
+      "fuel_consumption": "13.2",
+      "seats": 7,
+      "model": "Rogue SL"
+  },
+  {
+      "id": 10,
+      "brand": "BMW",
+      "engine": "Electric",
+      "body": "Coupe",
+      "transmission": "Automatic",
+      "fuel_consumption": "7.2",
+      "seats": 5,
+      "model": "Ram 1500 Limited"
+  },
+  {
+      "id": 11,
+      "brand": "Hyundai",
+      "engine": "Electric",
+      "body": "SUV",
+      "transmission": "Manual",
+      "fuel_consumption": "14.1",
+      "seats": 5,
+      "model": "Tiguan SE"
+  },
+  {
+      "id": 12,
+      "brand": "Hyundai",
+      "engine": "Petrol",
+      "body": "Hatchback",
+      "transmission": "Manual",
+      "fuel_consumption": "11.5",
+      "seats": 5,
+      "model": "Highlander Hybrid"
+  },
+  {
+      "id": 13,
+      "brand": "BMW",
+      "engine": "Diesel",
+      "body": "Van",
+      "transmission": "Manual",
+      "fuel_consumption": "9.6",
+      "seats": 2,
+      "model": "Taycan 4S"
+  },
+  {
+      "id": 14,
+      "brand": "Nissan",
+      "engine": "Diesel",
+      "body": "Sedan",
+      "transmission": "Automatic",
+      "fuel_consumption": "8.0",
+      "seats": 2,
+      "model": "Mazda3 Turbo"
+  },
+  {
+      "id": 15,
+      "brand": "Toyota",
+      "engine": "Electric",
+      "body": "SUV",
+      "transmission": "Automatic",
+      "fuel_consumption": "11.3",
+      "seats": 5,
+      "model": "RS7"
+  },
+  {
+      "id": 16,
+      "brand": "Volkswagen",
+      "engine": "Petrol",
+      "body": "Convertible",
+      "transmission": "CVT",
+      "fuel_consumption": "12.7",
+      "seats": 5,
+      "model": "S60 T8"
+  },
+  {
+      "id": 17,
+      "brand": "Nissan",
+      "engine": "Petrol",
+      "body": "Sedan",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "10.6",
+      "seats": 8,
+      "model": "Model 3"
+  },
+  {
+      "id": 18,
+      "brand": "Nissan",
+      "engine": "Petrol",
+      "body": "Hatchback",
+      "transmission": "Automatic",
+      "fuel_consumption": "11.7",
+      "seats": 4,
+      "model": "Silverado LT"
+  },
+  {
+      "id": 19,
+      "brand": "BMW",
+      "engine": "Diesel",
+      "body": "Coupe",
+      "transmission": "Automatic",
+      "fuel_consumption": "5.0",
+      "seats": 2,
+      "model": "A6 Allroad"
+  },
+  {
+      "id": 20,
+      "brand": "Hyundai",
+      "engine": "Petrol",
+      "body": "Hatchback",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "4.5",
+      "seats": 7,
+      "model": "C-Class Coupe"
+  },
+  {
+      "id": 21,
+      "brand": "Hyundai",
+      "engine": "Diesel",
+      "body": "Coupe",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "4.1",
+      "seats": 5,
+      "model": "M3 Competition"
+  },
+  {
+      "id": 22,
+      "brand": "Volkswagen",
+      "engine": "Diesel",
+      "body": "Convertible",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "11.4",
+      "seats": 8,
+      "model": "Corolla SE"
+  },
+  {
+      "id": 23,
+      "brand": "BMW",
+      "engine": "Diesel",
+      "body": "Van",
+      "transmission": "CVT",
+      "fuel_consumption": "14.8",
+      "seats": 8,
+      "model": "Range Rover Evoque"
+  },
+  {
+      "id": 24,
+      "brand": "Toyota",
+      "engine": "Petrol",
+      "body": "SUV",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "11.9",
+      "seats": 4,
+      "model": "F-150 Lariat"
+  },
+  {
+      "id": 25,
+      "brand": "Ford",
+      "engine": "Petrol",
+      "body": "Convertible",
+      "transmission": "CVT",
+      "fuel_consumption": "10.8",
+      "seats": 7,
+      "model": "E-Class Wagon"
+  },
+  {
+      "id": 26,
+      "brand": "Volkswagen",
+      "engine": "Electric",
+      "body": "Van",
+      "transmission": "Automatic",
+      "fuel_consumption": "13.2",
+      "seats": 5,
+      "model": "S60 T8"
+  },
+  {
+      "id": 27,
+      "brand": "Honda",
+      "engine": "Petrol",
+      "body": "Hatchback",
+      "transmission": "CVT",
+      "fuel_consumption": "11.7",
+      "seats": 5,
+      "model": "Highlander Hybrid"
+  },
+  {
+      "id": 28,
+      "brand": "Toyota",
+      "engine": "Diesel",
+      "body": "Hatchback",
+      "transmission": "Automatic",
+      "fuel_consumption": "12.2",
+      "seats": 2,
+      "model": "Civic LX"
+  },
+  {
+      "id": 29,
+      "brand": "Toyota",
+      "engine": "Diesel",
+      "body": "Wagon",
+      "transmission": "CVT",
+      "fuel_consumption": "12.6",
+      "seats": 5,
+      "model": "CX-5 Carbon"
+  },
+  {
+      "id": 30,
+      "brand": "BMW",
+      "engine": "Petrol",
+      "body": "Sedan",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "14.4",
+      "seats": 7,
+      "model": "GLA 250"
+  },
+  {
+      "id": 31,
+      "brand": "Volkswagen",
+      "engine": "Petrol",
+      "body": "Convertible",
+      "transmission": "Automatic",
+      "fuel_consumption": "13.6",
+      "seats": 5,
+      "model": "Outlander ES"
+  },
+  {
+      "id": 32,
+      "brand": "Mercedes",
+      "engine": "Diesel",
+      "body": "Van",
+      "transmission": "Automatic",
+      "fuel_consumption": "12.6",
+      "seats": 2,
+      "model": "Highlander Hybrid"
+  },
+  {
+      "id": 33,
+      "brand": "Nissan",
+      "engine": "Petrol",
+      "body": "Wagon",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "15.0",
+      "seats": 8,
+      "model": "X3 M40i"
+  },
+  {
+      "id": 34,
+      "brand": "Ford",
+      "engine": "Diesel",
+      "body": "SUV",
+      "transmission": "CVT",
+      "fuel_consumption": "8.7",
+      "seats": 7,
+      "model": "Impreza Limited"
+  },
+  {
+      "id": 35,
+      "brand": "Toyota",
+      "engine": "Petrol",
+      "body": "SUV",
+      "transmission": "CVT",
+      "fuel_consumption": "13.0",
+      "seats": 5,
+      "model": "Altima SR"
+  },
+  {
+      "id": 36,
+      "brand": "Volkswagen",
+      "engine": "Electric",
+      "body": "Convertible",
+      "transmission": "Automatic",
+      "fuel_consumption": "4.9",
+      "seats": 8,
+      "model": "Corolla SE"
+  },
+  {
+      "id": 37,
+      "brand": "Ford",
+      "engine": "Diesel",
+      "body": "Pickup",
+      "transmission": "Automatic",
+      "fuel_consumption": "6.8",
+      "seats": 5,
+      "model": "C-Class Coupe"
+  },
+  {
+      "id": 38,
+      "brand": "Mercedes",
+      "engine": "Petrol",
+      "body": "Coupe",
+      "transmission": "CVT",
+      "fuel_consumption": "4.7",
+      "seats": 2,
+      "model": "Sentra SV"
+  },
+  {
+      "id": 39,
+      "brand": "Toyota",
+      "engine": "Electric",
+      "body": "Convertible",
+      "transmission": "Automatic",
+      "fuel_consumption": "11.1",
+      "seats": 7,
+      "model": "CX-30 Select"
+  },
+  {
+      "id": 40,
+      "brand": "Chevrolet",
+      "engine": "Electric",
+      "body": "Hatchback",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "6.4",
+      "seats": 7,
+      "model": "Highlander Hybrid"
+  },
+  {
+      "id": 41,
+      "brand": "Kia",
+      "engine": "Petrol",
+      "body": "Coupe",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "12.4",
+      "seats": 5,
+      "model": "RS7"
+  },
+  {
+      "id": 42,
+      "brand": "Volkswagen",
+      "engine": "Petrol",
+      "body": "Coupe",
+      "transmission": "CVT",
+      "fuel_consumption": "4.3",
+      "seats": 4,
+      "model": "Tiguan SE"
+  },
+  {
+      "id": 43,
+      "brand": "Mercedes",
+      "engine": "Petrol",
+      "body": "Pickup",
+      "transmission": "Automatic",
+      "fuel_consumption": "8.1",
+      "seats": 4,
+      "model": "Explorer XLT"
+  },
+  {
+      "id": 44,
+      "brand": "Volkswagen",
+      "engine": "Petrol",
+      "body": "SUV",
+      "transmission": "Manual",
+      "fuel_consumption": "12.0",
+      "seats": 5,
+      "model": "X5 xDrive40i"
+  },
+  {
+      "id": 45,
+      "brand": "Toyota",
+      "engine": "Petrol",
+      "body": "Convertible",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "13.7",
+      "seats": 4,
+      "model": "Ram 1500 Limited"
+  },
+  {
+      "id": 46,
+      "brand": "Mercedes",
+      "engine": "Electric",
+      "body": "Wagon",
+      "transmission": "CVT",
+      "fuel_consumption": "13.8",
+      "seats": 2,
+      "model": "M3 Competition"
+  },
+  {
+      "id": 47,
+      "brand": "Ford",
+      "engine": "Diesel",
+      "body": "Hatchback",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "14.1",
+      "seats": 5,
+      "model": "Outlander ES"
+  },
+  {
+      "id": 48,
+      "brand": "Volkswagen",
+      "engine": "Diesel",
+      "body": "Sedan",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "13.9",
+      "seats": 7,
+      "model": "Rogue SL"
+  },
+  {
+      "id": 49,
+      "brand": "Toyota",
+      "engine": "Diesel",
+      "body": "Coupe",
+      "transmission": "Automatic",
+      "fuel_consumption": "9.6",
+      "seats": 5,
+      "model": "Sentra SV"
+  },
+  {
+      "id": 50,
+      "brand": "Volkswagen",
+      "engine": "Diesel",
+      "body": "Pickup",
+      "transmission": "CVT",
+      "fuel_consumption": "14.4",
+      "seats": 5,
+      "model": "Atlas Cross Sport"
+  },
+  {
+      "id": 51,
+      "brand": "Nissan",
+      "engine": "Petrol",
+      "body": "Hatchback",
+      "transmission": "Manual",
+      "fuel_consumption": "6.5",
+      "seats": 7,
+      "model": "CX-30 Select"
+  },
+  {
+      "id": 52,
+      "brand": "Toyota",
+      "engine": "Petrol",
+      "body": "SUV",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "8.3",
+      "seats": 8,
+      "model": "Escalade ESV"
+  },
+  {
+      "id": 53,
+      "brand": "Ford",
+      "engine": "Petrol",
+      "body": "Wagon",
+      "transmission": "Automatic",
+      "fuel_consumption": "4.6",
+      "seats": 7,
+      "model": "Model 3"
+  },
+  {
+      "id": 54,
+      "brand": "Hyundai",
+      "engine": "Diesel",
+      "body": "Wagon",
+      "transmission": "Automatic",
+      "fuel_consumption": "9.2",
+      "seats": 2,
+      "model": "Taycan 4S"
+  },
+  {
+      "id": 55,
+      "brand": "Mercedes",
+      "engine": "Electric",
+      "body": "Convertible",
+      "transmission": "CVT",
+      "fuel_consumption": "9.3",
+      "seats": 5,
+      "model": "Arteon SEL"
+  },
+  {
+      "id": 56,
+      "brand": "BMW",
+      "engine": "Petrol",
+      "body": "SUV",
+      "transmission": "Manual",
+      "fuel_consumption": "4.2",
+      "seats": 2,
+      "model": "Range Rover Evoque"
+  },
+  {
+      "id": 57,
+      "brand": "Honda",
+      "engine": "Diesel",
+      "body": "Van",
+      "transmission": "Automatic",
+      "fuel_consumption": "14.2",
+      "seats": 4,
+      "model": "S60 T8"
+  },
+  {
+      "id": 58,
+      "brand": "Hyundai",
+      "engine": "Diesel",
+      "body": "Wagon",
+      "transmission": "CVT",
+      "fuel_consumption": "8.7",
+      "seats": 4,
+      "model": "C40 Recharge"
+  },
+  {
+      "id": 59,
+      "brand": "Ford",
+      "engine": "Electric",
+      "body": "Wagon",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "5.0",
+      "seats": 5,
+      "model": "Discovery Sport"
+  },
+  {
+      "id": 60,
+      "brand": "Mercedes",
+      "engine": "Diesel",
+      "body": "Convertible",
+      "transmission": "Automatic",
+      "fuel_consumption": "9.6",
+      "seats": 7,
+      "model": "Explorer XLT"
+  },
+  {
+      "id": 61,
+      "brand": "Chevrolet",
+      "engine": "Diesel",
+      "body": "Pickup",
+      "transmission": "Automatic",
+      "fuel_consumption": "10.9",
+      "seats": 4,
+      "model": "Audi Q5 PHEV"
+  },
+  {
+      "id": 62,
+      "brand": "Kia",
+      "engine": "Electric",
+      "body": "Hatchback",
+      "transmission": "CVT",
+      "fuel_consumption": "12.2",
+      "seats": 7,
+      "model": "F-150 Lariat"
+  },
+  {
+      "id": 63,
+      "brand": "Kia",
+      "engine": "Electric",
+      "body": "Hatchback",
+      "transmission": "CVT",
+      "fuel_consumption": "13.4",
+      "seats": 5,
+      "model": "F-150 Lariat"
+  },
+  {
+      "id": 64,
+      "brand": "Toyota",
+      "engine": "Petrol",
+      "body": "Coupe",
+      "transmission": "Manual",
+      "fuel_consumption": "5.8",
+      "seats": 2,
+      "model": "XC90 Recharge"
+  },
+  {
+      "id": 65,
+      "brand": "Kia",
+      "engine": "Diesel",
+      "body": "Sedan",
+      "transmission": "Automatic",
+      "fuel_consumption": "10.7",
+      "seats": 8,
+      "model": "Ram 1500 Limited"
+  },
+  {
+      "id": 66,
+      "brand": "Honda",
+      "engine": "Diesel",
+      "body": "SUV",
+      "transmission": "Manual",
+      "fuel_consumption": "11.1",
+      "seats": 7,
+      "model": "Silverado LT"
+  },
+  {
+      "id": 67,
+      "brand": "Volkswagen",
+      "engine": "Diesel",
+      "body": "Coupe",
+      "transmission": "Automatic",
+      "fuel_consumption": "5.1",
+      "seats": 8,
+      "model": "Camry XLE"
+  },
+  {
+      "id": 68,
+      "brand": "Volkswagen",
+      "engine": "Electric",
+      "body": "Wagon",
+      "transmission": "Automatic",
+      "fuel_consumption": "5.7",
+      "seats": 7,
+      "model": "Arteon SEL"
+  },
+  {
+      "id": 69,
+      "brand": "Chevrolet",
+      "engine": "Electric",
+      "body": "Convertible",
+      "transmission": "Automatic",
+      "fuel_consumption": "8.2",
+      "seats": 7,
+      "model": "Model 3"
+  },
+  {
+      "id": 70,
+      "brand": "Kia",
+      "engine": "Electric",
+      "body": "SUV",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "9.0",
+      "seats": 5,
+      "model": "Outlander ES"
+  },
+  {
+      "id": 71,
+      "brand": "Chevrolet",
+      "engine": "Diesel",
+      "body": "SUV",
+      "transmission": "Manual",
+      "fuel_consumption": "4.8",
+      "seats": 4,
+      "model": "Range Rover Evoque"
+  },
+  {
+      "id": 72,
+      "brand": "Mercedes",
+      "engine": "Petrol",
+      "body": "Pickup",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "12.8",
+      "seats": 2,
+      "model": "Corolla SE"
+  },
+  {
+      "id": 73,
+      "brand": "Mercedes",
+      "engine": "Electric",
+      "body": "SUV",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "12.3",
+      "seats": 5,
+      "model": "Corolla SE"
+  },
+  {
+      "id": 74,
+      "brand": "Nissan",
+      "engine": "Petrol",
+      "body": "Convertible",
+      "transmission": "Manual",
+      "fuel_consumption": "7.6",
+      "seats": 5,
+      "model": "Forester Sport"
+  },
+  {
+      "id": 75,
+      "brand": "Kia",
+      "engine": "Diesel",
+      "body": "Convertible",
+      "transmission": "CVT",
+      "fuel_consumption": "4.2",
+      "seats": 4,
+      "model": "CX-30 Select"
+  },
+  {
+      "id": 76,
+      "brand": "Ford",
+      "engine": "Petrol",
+      "body": "Pickup",
+      "transmission": "Manual",
+      "fuel_consumption": "8.3",
+      "seats": 2,
+      "model": "Macan GTS"
+  },
+  {
+      "id": 77,
+      "brand": "Toyota",
+      "engine": "Diesel",
+      "body": "Convertible",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "6.1",
+      "seats": 2,
+      "model": "A6 Allroad"
+  },
+  {
+      "id": 78,
+      "brand": "BMW",
+      "engine": "Petrol",
+      "body": "SUV",
+      "transmission": "Manual",
+      "fuel_consumption": "6.2",
+      "seats": 8,
+      "model": "Pilot Touring"
+  },
+  {
+      "id": 79,
+      "brand": "Honda",
+      "engine": "Diesel",
+      "body": "Pickup",
+      "transmission": "Automatic",
+      "fuel_consumption": "12.4",
+      "seats": 5,
+      "model": "RS7"
+  },
+  {
+      "id": 80,
+      "brand": "Honda",
+      "engine": "Electric",
+      "body": "SUV",
+      "transmission": "Automatic",
+      "fuel_consumption": "8.4",
+      "seats": 4,
+      "model": "Corolla SE"
+  },
+  {
+      "id": 81,
+      "brand": "Chevrolet",
+      "engine": "Electric",
+      "body": "Pickup",
+      "transmission": "CVT",
+      "fuel_consumption": "12.3",
+      "seats": 4,
+      "model": "S60 T8"
+  },
+  {
+      "id": 82,
+      "brand": "Mercedes",
+      "engine": "Diesel",
+      "body": "Coupe",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "13.4",
+      "seats": 7,
+      "model": "S60 T8"
+  },
+  {
+      "id": 83,
+      "brand": "Hyundai",
+      "engine": "Diesel",
+      "body": "Sedan",
+      "transmission": "Automatic",
+      "fuel_consumption": "14.7",
+      "seats": 4,
+      "model": "Model 3"
+  },
+  {
+      "id": 84,
+      "brand": "Mercedes",
+      "engine": "Diesel",
+      "body": "Van",
+      "transmission": "Automatic",
+      "fuel_consumption": "9.7",
+      "seats": 7,
+      "model": "Escalade ESV"
+  },
+  {
+      "id": 85,
+      "brand": "BMW",
+      "engine": "Diesel",
+      "body": "Wagon",
+      "transmission": "CVT",
+      "fuel_consumption": "6.3",
+      "seats": 5,
+      "model": "Polestar 2"
+  },
+  {
+      "id": 86,
+      "brand": "Ford",
+      "engine": "Petrol",
+      "body": "Coupe",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "10.0",
+      "seats": 7,
+      "model": "Civic LX"
+  },
+  {
+      "id": 87,
+      "brand": "Nissan",
+      "engine": "Electric",
+      "body": "SUV",
+      "transmission": "Manual",
+      "fuel_consumption": "4.3",
+      "seats": 7,
+      "model": "CX-30 Select"
+  },
+  {
+      "id": 88,
+      "brand": "Toyota",
+      "engine": "Electric",
+      "body": "Convertible",
+      "transmission": "CVT",
+      "fuel_consumption": "7.1",
+      "seats": 8,
+      "model": "Explorer XLT"
+  },
+  {
+      "id": 89,
+      "brand": "Honda",
+      "engine": "Petrol",
+      "body": "Sedan",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "12.9",
+      "seats": 2,
+      "model": "Ram 1500 Limited"
+  },
+  {
+      "id": 90,
+      "brand": "Honda",
+      "engine": "Diesel",
+      "body": "Hatchback",
+      "transmission": "Manual",
+      "fuel_consumption": "10.8",
+      "seats": 4,
+      "model": "X5 xDrive40i"
+  },
+  {
+      "id": 91,
+      "brand": "Hyundai",
+      "engine": "Diesel",
+      "body": "Pickup",
+      "transmission": "CVT",
+      "fuel_consumption": "5.3",
+      "seats": 8,
+      "model": "Tahoe Premier"
+  },
+  {
+      "id": 92,
+      "brand": "Volkswagen",
+      "engine": "Electric",
+      "body": "Pickup",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "10.1",
+      "seats": 8,
+      "model": "Silverado LT"
+  },
+  {
+      "id": 93,
+      "brand": "Toyota",
+      "engine": "Electric",
+      "body": "Sedan",
+      "transmission": "CVT",
+      "fuel_consumption": "9.8",
+      "seats": 2,
+      "model": "E-Class Wagon"
+  },
+  {
+      "id": 94,
+      "brand": "Kia",
+      "engine": "Diesel",
+      "body": "Sedan",
+      "transmission": "Manual",
+      "fuel_consumption": "5.0",
+      "seats": 2,
+      "model": "Sentra SV"
+  },
+  {
+      "id": 95,
+      "brand": "Kia",
+      "engine": "Petrol",
+      "body": "Coupe",
+      "transmission": "Automatic",
+      "fuel_consumption": "11.4",
+      "seats": 5,
+      "model": "CX-30 Select"
+  },
+  {
+      "id": 96,
+      "brand": "Honda",
+      "engine": "Diesel",
+      "body": "Hatchback",
+      "transmission": "Automatic",
+      "fuel_consumption": "4.5",
+      "seats": 2,
+      "model": "Corolla SE"
+  },
+  {
+      "id": 97,
+      "brand": "Ford",
+      "engine": "Diesel",
+      "body": "Van",
+      "transmission": "CVT",
+      "fuel_consumption": "5.0",
+      "seats": 5,
+      "model": "A6 Allroad"
+  },
+  {
+      "id": 98,
+      "brand": "Nissan",
+      "engine": "Petrol",
+      "body": "Coupe",
+      "transmission": "Automatic",
+      "fuel_consumption": "14.9",
+      "seats": 7,
+      "model": "A6 Allroad"
+  },
+  {
+      "id": 99,
+      "brand": "Hyundai",
+      "engine": "Diesel",
+      "body": "Pickup",
+      "transmission": "Automatic",
+      "fuel_consumption": "12.7",
+      "seats": 8,
+      "model": "CX-30 Select"
+  },
+  {
+      "id": 100,
+      "brand": "Volkswagen",
+      "engine": "Petrol",
+      "body": "Convertible",
+      "transmission": "Manual",
+      "fuel_consumption": "4.1",
+      "seats": 7,
+      "model": "Range Rover Evoque"
+  },
+  {
+      "id": 101,
+      "brand": "BMW",
+      "engine": "Petrol",
+      "body": "Convertible",
+      "transmission": "Manual",
+      "fuel_consumption": "14.2",
+      "seats": 5,
+      "model": "CLA 250"
+  },
+  {
+      "id": 102,
+      "brand": "Toyota",
+      "engine": "Electric",
+      "body": "Hatchback",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "10.5",
+      "seats": 2,
+      "model": "Altima SR"
+  },
+  {
+      "id": 103,
+      "brand": "Hyundai",
+      "engine": "Diesel",
+      "body": "Convertible",
+      "transmission": "CVT",
+      "fuel_consumption": "8.6",
+      "seats": 7,
+      "model": "Forester Sport"
+  },
+  {
+      "id": 104,
+      "brand": "BMW",
+      "engine": "Electric",
+      "body": "Sedan",
+      "transmission": "CVT",
+      "fuel_consumption": "4.7",
+      "seats": 4,
+      "model": "Corolla SE"
+  },
+  {
+      "id": 105,
+      "brand": "Volkswagen",
+      "engine": "Electric",
+      "body": "Hatchback",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "13.8",
+      "seats": 5,
+      "model": "Q7 Prestige"
+  },
+  {
+      "id": 106,
+      "brand": "Ford",
+      "engine": "Electric",
+      "body": "Wagon",
+      "transmission": "Automatic",
+      "fuel_consumption": "7.1",
+      "seats": 8,
+      "model": "RS7"
+  },
+  {
+      "id": 107,
+      "brand": "Toyota",
+      "engine": "Petrol",
+      "body": "Van",
+      "transmission": "Manual",
+      "fuel_consumption": "13.1",
+      "seats": 7,
+      "model": "Highlander Hybrid"
+  },
+  {
+      "id": 108,
+      "brand": "Chevrolet",
+      "engine": "Electric",
+      "body": "Coupe",
+      "transmission": "Automatic",
+      "fuel_consumption": "10.0",
+      "seats": 5,
+      "model": "Rogue SL"
+  },
+  {
+      "id": 109,
+      "brand": "Chevrolet",
+      "engine": "Electric",
+      "body": "Pickup",
+      "transmission": "CVT",
+      "fuel_consumption": "13.2",
+      "seats": 5,
+      "model": "Polestar 2"
+  },
+  {
+      "id": 110,
+      "brand": "Volkswagen",
+      "engine": "Diesel",
+      "body": "Hatchback",
+      "transmission": "CVT",
+      "fuel_consumption": "13.2",
+      "seats": 7,
+      "model": "Polestar 2"
+  },
+  {
+      "id": 111,
+      "brand": "Hyundai",
+      "engine": "Diesel",
+      "body": "Van",
+      "transmission": "Manual",
+      "fuel_consumption": "9.3",
+      "seats": 4,
+      "model": "Mustang GT"
+  },
+  {
+      "id": 112,
+      "brand": "Mercedes",
+      "engine": "Diesel",
+      "body": "Wagon",
+      "transmission": "Manual",
+      "fuel_consumption": "14.7",
+      "seats": 7,
+      "model": "Panamera 4"
+  },
+  {
+      "id": 113,
+      "brand": "Ford",
+      "engine": "Diesel",
+      "body": "Hatchback",
+      "transmission": "Automatic",
+      "fuel_consumption": "14.7",
+      "seats": 2,
+      "model": "Altima SR"
+  },
+  {
+      "id": 114,
+      "brand": "Hyundai",
+      "engine": "Petrol",
+      "body": "Hatchback",
+      "transmission": "CVT",
+      "fuel_consumption": "5.4",
+      "seats": 4,
+      "model": "Highlander Hybrid"
+  },
+  {
+      "id": 115,
+      "brand": "Chevrolet",
+      "engine": "Petrol",
+      "body": "Wagon",
+      "transmission": "CVT",
+      "fuel_consumption": "12.7",
+      "seats": 8,
+      "model": "Arteon SEL"
+  },
+  {
+      "id": 116,
+      "brand": "Toyota",
+      "engine": "Petrol",
+      "body": "Van",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "5.0",
+      "seats": 7,
+      "model": "Tiguan SE"
+  },
+  {
+      "id": 117,
+      "brand": "Toyota",
+      "engine": "Petrol",
+      "body": "Sedan",
+      "transmission": "Automatic",
+      "fuel_consumption": "5.4",
+      "seats": 5,
+      "model": "A6 Allroad"
+  },
+  {
+      "id": 118,
+      "brand": "Volkswagen",
+      "engine": "Petrol",
+      "body": "Van",
+      "transmission": "Manual",
+      "fuel_consumption": "13.9",
+      "seats": 4,
+      "model": "S60 T8"
+  },
+  {
+      "id": 119,
+      "brand": "Honda",
+      "engine": "Diesel",
+      "body": "Van",
+      "transmission": "CVT",
+      "fuel_consumption": "7.9",
+      "seats": 4,
+      "model": "X3 M40i"
+  },
+  {
+      "id": 120,
+      "brand": "Chevrolet",
+      "engine": "Electric",
+      "body": "Van",
+      "transmission": "CVT",
+      "fuel_consumption": "10.6",
+      "seats": 4,
+      "model": "Tahoe Premier"
+  },
+  {
+      "id": 121,
+      "brand": "Hyundai",
+      "engine": "Electric",
+      "body": "SUV",
+      "transmission": "Automatic",
+      "fuel_consumption": "12.6",
+      "seats": 8,
+      "model": "GLA 250"
+  },
+  {
+      "id": 122,
+      "brand": "Hyundai",
+      "engine": "Electric",
+      "body": "SUV",
+      "transmission": "Automatic",
+      "fuel_consumption": "5.7",
+      "seats": 8,
+      "model": "Tahoe Premier"
+  },
+  {
+      "id": 123,
+      "brand": "Chevrolet",
+      "engine": "Petrol",
+      "body": "Hatchback",
+      "transmission": "Automatic",
+      "fuel_consumption": "5.4",
+      "seats": 4,
+      "model": "Outlander ES"
+  },
+  {
+      "id": 124,
+      "brand": "Nissan",
+      "engine": "Diesel",
+      "body": "Sedan",
+      "transmission": "CVT",
+      "fuel_consumption": "8.4",
+      "seats": 4,
+      "model": "C-Class Coupe"
+  },
+  {
+      "id": 125,
+      "brand": "BMW",
+      "engine": "Electric",
+      "body": "SUV",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "8.8",
+      "seats": 5,
+      "model": "Explorer XLT"
+  },
+  {
+      "id": 126,
+      "brand": "Honda",
+      "engine": "Diesel",
+      "body": "Van",
+      "transmission": "Automatic",
+      "fuel_consumption": "8.2",
+      "seats": 7,
+      "model": "S60 T8"
+  },
+  {
+      "id": 127,
+      "brand": "Chevrolet",
+      "engine": "Electric",
+      "body": "Pickup",
+      "transmission": "Manual",
+      "fuel_consumption": "14.9",
+      "seats": 8,
+      "model": "CX-5 Carbon"
+  },
+  {
+      "id": 128,
+      "brand": "Kia",
+      "engine": "Electric",
+      "body": "Sedan",
+      "transmission": "Manual",
+      "fuel_consumption": "4.3",
+      "seats": 7,
+      "model": "Accord Sport"
+  },
+  {
+      "id": 129,
+      "brand": "Ford",
+      "engine": "Diesel",
+      "body": "Wagon",
+      "transmission": "Manual",
+      "fuel_consumption": "5.7",
+      "seats": 4,
+      "model": "Arteon SEL"
+  },
+  {
+      "id": 130,
+      "brand": "Hyundai",
+      "engine": "Electric",
+      "body": "Wagon",
+      "transmission": "Manual",
+      "fuel_consumption": "11.1",
+      "seats": 7,
+      "model": "Mustang GT"
+  },
+  {
+      "id": 131,
+      "brand": "Nissan",
+      "engine": "Diesel",
+      "body": "Convertible",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "11.5",
+      "seats": 8,
+      "model": "Panamera 4"
+  },
+  {
+      "id": 132,
+      "brand": "Toyota",
+      "engine": "Electric",
+      "body": "Convertible",
+      "transmission": "Manual",
+      "fuel_consumption": "4.7",
+      "seats": 8,
+      "model": "Atlas Cross Sport"
+  },
+  {
+      "id": 133,
+      "brand": "Chevrolet",
+      "engine": "Diesel",
+      "body": "Pickup",
+      "transmission": "Manual",
+      "fuel_consumption": "9.1",
+      "seats": 2,
+      "model": "Arteon SEL"
+  },
+  {
+      "id": 134,
+      "brand": "Chevrolet",
+      "engine": "Petrol",
+      "body": "Coupe",
+      "transmission": "CVT",
+      "fuel_consumption": "8.9",
+      "seats": 8,
+      "model": "M3 Competition"
+  },
+  {
+      "id": 135,
+      "brand": "Kia",
+      "engine": "Diesel",
+      "body": "Pickup",
+      "transmission": "Manual",
+      "fuel_consumption": "12.2",
+      "seats": 4,
+      "model": "GLA 250"
+  },
+  {
+      "id": 136,
+      "brand": "Hyundai",
+      "engine": "Petrol",
+      "body": "Van",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "13.6",
+      "seats": 4,
+      "model": "S60 T8"
+  },
+  {
+      "id": 137,
+      "brand": "Toyota",
+      "engine": "Diesel",
+      "body": "Coupe",
+      "transmission": "Manual",
+      "fuel_consumption": "12.6",
+      "seats": 7,
+      "model": "Mazda3 Turbo"
+  },
+  {
+      "id": 138,
+      "brand": "BMW",
+      "engine": "Electric",
+      "body": "Convertible",
+      "transmission": "Manual",
+      "fuel_consumption": "14.9",
+      "seats": 5,
+      "model": "Macan GTS"
+  },
+  {
+      "id": 139,
+      "brand": "Honda",
+      "engine": "Petrol",
+      "body": "Hatchback",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "6.7",
+      "seats": 2,
+      "model": "Pilot Touring"
+  },
+  {
+      "id": 140,
+      "brand": "Honda",
+      "engine": "Petrol",
+      "body": "Coupe",
+      "transmission": "Manual",
+      "fuel_consumption": "10.8",
+      "seats": 2,
+      "model": "CX-5 Carbon"
+  },
+  {
+      "id": 141,
+      "brand": "Hyundai",
+      "engine": "Diesel",
+      "body": "Convertible",
+      "transmission": "CVT",
+      "fuel_consumption": "10.4",
+      "seats": 8,
+      "model": "M3 Competition"
+  },
+  {
+      "id": 142,
+      "brand": "Volkswagen",
+      "engine": "Diesel",
+      "body": "Van",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "9.3",
+      "seats": 8,
+      "model": "Audi Q5 PHEV"
+  },
+  {
+      "id": 143,
+      "brand": "Mercedes",
+      "engine": "Petrol",
+      "body": "Van",
+      "transmission": "Manual",
+      "fuel_consumption": "5.7",
+      "seats": 7,
+      "model": "Tahoe Premier"
+  },
+  {
+      "id": 144,
+      "brand": "Ford",
+      "engine": "Diesel",
+      "body": "Hatchback",
+      "transmission": "Semi-Automatic",
+      "fuel_consumption": "14.0",
+      "seats": 7,
+      "model": "Corolla SE"
+  },
+  {
+      "id": 145,
+      "brand": "BMW",
+      "engine": "Electric",
+      "body": "Coupe",
+      "transmission": "CVT",
+      "fuel_consumption": "4.2",
+      "seats": 8,
+      "model": "Jetta GLI"
+  },
+  {
+      "id": 146,
+      "brand": "Toyota",
+      "engine": "Petrol",
+      "body": "Coupe",
+      "transmission": "Automatic",
+      "fuel_consumption": "8.0",
+      "seats": 8,
+      "model": "RS7"
+  },
+  {
+      "id": 147,
+      "brand": "Kia",
+      "engine": "Diesel",
+      "body": "Van",
+      "transmission": "Automatic",
+      "fuel_consumption": "7.6",
+      "seats": 8,
+      "model": "Macan GTS"
+  },
+  {
+      "id": 148,
+      "brand": "Honda",
+      "engine": "Electric",
+      "body": "Coupe",
+      "transmission": "Automatic",
+      "fuel_consumption": "4.4",
+      "seats": 7,
+      "model": "Outlander ES"
+  },
+  {
+      "id": 149,
+      "brand": "Ford",
+      "engine": "Petrol",
+      "body": "Pickup",
+      "transmission": "Automatic",
+      "fuel_consumption": "13.0",
+      "seats": 7,
+      "model": "X5 xDrive40i"
+  },
+  {
+      "id": 150,
+      "brand": "Volkswagen",
+      "engine": "Electric",
+      "body": "Hatchback",
+      "transmission": "CVT",
+      "fuel_consumption": "13.6",
+      "seats": 2,
+      "model": "Panamera 4"
+  }
+]

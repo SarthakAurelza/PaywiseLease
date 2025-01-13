@@ -1,0 +1,151 @@
+id,brand,engine,body,transmission,fuel_consumption,model,seats
+1,Volkswagen,Electric,Hatchback,Automatic,12.1,Civic LX,4
+2,BMW,Electric,Coupe,CVT,7.9,CLA 250,7
+3,Toyota,Diesel,Van,Manual,8.1,Escalade ESV,4
+4,Honda,Diesel,SUV,Semi-Automatic,11.1,Rogue SL,7
+5,Ford,Petrol,Sedan,CVT,13.8,Arteon SEL,5
+6,Nissan,Electric,Coupe,CVT,6.5,Panamera 4,7
+7,Nissan,Diesel,Hatchback,Manual,8.5,XC90 Recharge,5
+8,Hyundai,Electric,Convertible,CVT,13.3,Q7 Prestige,4
+9,Mercedes,Petrol,SUV,Automatic,13.2,Rogue SL,7
+10,BMW,Electric,Coupe,Automatic,7.2,Ram 1500 Limited,5
+11,Hyundai,Electric,SUV,Manual,14.1,Tiguan SE,5
+12,Hyundai,Petrol,Hatchback,Manual,11.5,Highlander Hybrid,5
+13,BMW,Diesel,Van,Manual,9.6,Taycan 4S,2
+14,Nissan,Diesel,Sedan,Automatic,8.0,Mazda3 Turbo,2
+15,Toyota,Electric,SUV,Automatic,11.3,RS7,5
+16,Volkswagen,Petrol,Convertible,CVT,12.7,S60 T8,5
+17,Nissan,Petrol,Sedan,Semi-Automatic,10.6,Model 3,8
+18,Nissan,Petrol,Hatchback,Automatic,11.7,Silverado LT,4
+19,BMW,Diesel,Coupe,Automatic,5.0,A6 Allroad,2
+20,Hyundai,Petrol,Hatchback,Semi-Automatic,4.5,C-Class Coupe,7
+21,Hyundai,Diesel,Coupe,Semi-Automatic,4.1,M3 Competition,5
+22,Volkswagen,Diesel,Convertible,Semi-Automatic,11.4,Corolla SE,8
+23,BMW,Diesel,Van,CVT,14.8,Range Rover Evoque,8
+24,Toyota,Petrol,SUV,Semi-Automatic,11.9,F-150 Lariat,4
+25,Ford,Petrol,Convertible,CVT,10.8,E-Class Wagon,7
+26,Volkswagen,Electric,Van,Automatic,13.2,S60 T8,5
+27,Honda,Petrol,Hatchback,CVT,11.7,Highlander Hybrid,5
+28,Toyota,Diesel,Hatchback,Automatic,12.2,Civic LX,2
+29,Toyota,Diesel,Wagon,CVT,12.6,CX-5 Carbon,5
+30,BMW,Petrol,Sedan,Semi-Automatic,14.4,GLA 250,7
+31,Volkswagen,Petrol,Convertible,Automatic,13.6,Outlander ES,5
+32,Mercedes,Diesel,Van,Automatic,12.6,Highlander Hybrid,2
+33,Nissan,Petrol,Wagon,Semi-Automatic,15.0,X3 M40i,8
+34,Ford,Diesel,SUV,CVT,8.7,Impreza Limited,7
+35,Toyota,Petrol,SUV,CVT,13.0,Altima SR,5
+36,Volkswagen,Electric,Convertible,Automatic,4.9,Corolla SE,8
+37,Ford,Diesel,Pickup,Automatic,6.8,C-Class Coupe,5
+38,Mercedes,Petrol,Coupe,CVT,4.7,Sentra SV,2
+39,Toyota,Electric,Convertible,Automatic,11.1,CX-30 Select,7
+40,Chevrolet,Electric,Hatchback,Semi-Automatic,6.4,Highlander Hybrid,7
+41,Kia,Petrol,Coupe,Semi-Automatic,12.4,RS7,5
+42,Volkswagen,Petrol,Coupe,CVT,4.3,Tiguan SE,4
+43,Mercedes,Petrol,Pickup,Automatic,8.1,Explorer XLT,4
+44,Volkswagen,Petrol,SUV,Manual,12.0,X5 xDrive40i,5
+45,Toyota,Petrol,Convertible,Semi-Automatic,13.7,Ram 1500 Limited,4
+46,Mercedes,Electric,Wagon,CVT,13.8,M3 Competition,2
+47,Ford,Diesel,Hatchback,Semi-Automatic,14.1,Outlander ES,5
+48,Volkswagen,Diesel,Sedan,Semi-Automatic,13.9,Rogue SL,7
+49,Toyota,Diesel,Coupe,Automatic,9.6,Sentra SV,5
+50,Volkswagen,Diesel,Pickup,CVT,14.4,Atlas Cross Sport,5
+51,Nissan,Petrol,Hatchback,Manual,6.5,CX-30 Select,7
+52,Toyota,Petrol,SUV,Semi-Automatic,8.3,Escalade ESV,8
+53,Ford,Petrol,Wagon,Automatic,4.6,Model 3,7
+54,Hyundai,Diesel,Wagon,Automatic,9.2,Taycan 4S,2
+55,Mercedes,Electric,Convertible,CVT,9.3,Arteon SEL,5
+56,BMW,Petrol,SUV,Manual,4.2,Range Rover Evoque,2
+57,Honda,Diesel,Van,Automatic,14.2,S60 T8,4
+58,Hyundai,Diesel,Wagon,CVT,8.7,C40 Recharge,4
+59,Ford,Electric,Wagon,Semi-Automatic,5.0,Discovery Sport,5
+60,Mercedes,Diesel,Convertible,Automatic,9.6,Explorer XLT,7
+61,Chevrolet,Diesel,Pickup,Automatic,10.9,Audi Q5 PHEV,4
+62,Kia,Electric,Hatchback,CVT,12.2,F-150 Lariat,7
+63,Kia,Electric,Hatchback,CVT,13.4,F-150 Lariat,5
+64,Toyota,Petrol,Coupe,Manual,5.8,XC90 Recharge,2
+65,Kia,Diesel,Sedan,Automatic,10.7,Ram 1500 Limited,8
+66,Honda,Diesel,SUV,Manual,11.1,Silverado LT,7
+67,Volkswagen,Diesel,Coupe,Automatic,5.1,Camry XLE,8
+68,Volkswagen,Electric,Wagon,Automatic,5.7,Arteon SEL,7
+69,Chevrolet,Electric,Convertible,Automatic,8.2,Model 3,7
+70,Kia,Electric,SUV,Semi-Automatic,9.0,Outlander ES,5
+71,Chevrolet,Diesel,SUV,Manual,4.8,Range Rover Evoque,4
+72,Mercedes,Petrol,Pickup,Semi-Automatic,12.8,Corolla SE,2
+73,Mercedes,Electric,SUV,Semi-Automatic,12.3,Corolla SE,5
+74,Nissan,Petrol,Convertible,Manual,7.6,Forester Sport,5
+75,Kia,Diesel,Convertible,CVT,4.2,CX-30 Select,4
+76,Ford,Petrol,Pickup,Manual,8.3,Macan GTS,2
+77,Toyota,Diesel,Convertible,Semi-Automatic,6.1,A6 Allroad,2
+78,BMW,Petrol,SUV,Manual,6.2,Pilot Touring,8
+79,Honda,Diesel,Pickup,Automatic,12.4,RS7,5
+80,Honda,Electric,SUV,Automatic,8.4,Corolla SE,4
+81,Chevrolet,Electric,Pickup,CVT,12.3,S60 T8,4
+82,Mercedes,Diesel,Coupe,Semi-Automatic,13.4,S60 T8,7
+83,Hyundai,Diesel,Sedan,Automatic,14.7,Model 3,4
+84,Mercedes,Diesel,Van,Automatic,9.7,Escalade ESV,7
+85,BMW,Diesel,Wagon,CVT,6.3,Polestar 2,5
+86,Ford,Petrol,Coupe,Semi-Automatic,10.0,Civic LX,7
+87,Nissan,Electric,SUV,Manual,4.3,CX-30 Select,7
+88,Toyota,Electric,Convertible,CVT,7.1,Explorer XLT,8
+89,Honda,Petrol,Sedan,Semi-Automatic,12.9,Ram 1500 Limited,2
+90,Honda,Diesel,Hatchback,Manual,10.8,X5 xDrive40i,4
+91,Hyundai,Diesel,Pickup,CVT,5.3,Tahoe Premier,8
+92,Volkswagen,Electric,Pickup,Semi-Automatic,10.1,Silverado LT,8
+93,Toyota,Electric,Sedan,CVT,9.8,E-Class Wagon,2
+94,Kia,Diesel,Sedan,Manual,5.0,Sentra SV,2
+95,Kia,Petrol,Coupe,Automatic,11.4,CX-30 Select,5
+96,Honda,Diesel,Hatchback,Automatic,4.5,Corolla SE,2
+97,Ford,Diesel,Van,CVT,5.0,A6 Allroad,5
+98,Nissan,Petrol,Coupe,Automatic,14.9,A6 Allroad,7
+99,Hyundai,Diesel,Pickup,Automatic,12.7,CX-30 Select,8
+100,Volkswagen,Petrol,Convertible,Manual,4.1,Range Rover Evoque,7
+101,BMW,Petrol,Convertible,Manual,14.2,CLA 250,5
+102,Toyota,Electric,Hatchback,Semi-Automatic,10.5,Altima SR,2
+103,Hyundai,Diesel,Convertible,CVT,8.6,Forester Sport,7
+104,BMW,Electric,Sedan,CVT,4.7,Corolla SE,4
+105,Volkswagen,Electric,Hatchback,Semi-Automatic,13.8,Q7 Prestige,5
+106,Ford,Electric,Wagon,Automatic,7.1,RS7,8
+107,Toyota,Petrol,Van,Manual,13.1,Highlander Hybrid,7
+108,Chevrolet,Electric,Coupe,Automatic,10.0,Rogue SL,5
+109,Chevrolet,Electric,Pickup,CVT,13.2,Polestar 2,5
+110,Volkswagen,Diesel,Hatchback,CVT,13.2,Polestar 2,7
+111,Hyundai,Diesel,Van,Manual,9.3,Mustang GT,4
+112,Mercedes,Diesel,Wagon,Manual,14.7,Panamera 4,7
+113,Ford,Diesel,Hatchback,Automatic,14.7,Altima SR,2
+114,Hyundai,Petrol,Hatchback,CVT,5.4,Highlander Hybrid,4
+115,Chevrolet,Petrol,Wagon,CVT,12.7,Arteon SEL,8
+116,Toyota,Petrol,Van,Semi-Automatic,5.0,Tiguan SE,7
+117,Toyota,Petrol,Sedan,Automatic,5.4,A6 Allroad,5
+118,Volkswagen,Petrol,Van,Manual,13.9,S60 T8,4
+119,Honda,Diesel,Van,CVT,7.9,X3 M40i,4
+120,Chevrolet,Electric,Van,CVT,10.6,Tahoe Premier,4
+121,Hyundai,Electric,SUV,Automatic,12.6,GLA 250,8
+122,Hyundai,Electric,SUV,Automatic,5.7,Tahoe Premier,8
+123,Chevrolet,Petrol,Hatchback,Automatic,5.4,Outlander ES,4
+124,Nissan,Diesel,Sedan,CVT,8.4,C-Class Coupe,4
+125,BMW,Electric,SUV,Semi-Automatic,8.8,Explorer XLT,5
+126,Honda,Diesel,Van,Automatic,8.2,S60 T8,7
+127,Chevrolet,Electric,Pickup,Manual,14.9,CX-5 Carbon,8
+128,Kia,Electric,Sedan,Manual,4.3,Accord Sport,7
+129,Ford,Diesel,Wagon,Manual,5.7,Arteon SEL,4
+130,Hyundai,Electric,Wagon,Manual,11.1,Mustang GT,7
+131,Nissan,Diesel,Convertible,Semi-Automatic,11.5,Panamera 4,8
+132,Toyota,Electric,Convertible,Manual,4.7,Atlas Cross Sport,8
+133,Chevrolet,Diesel,Pickup,Manual,9.1,Arteon SEL,2
+134,Chevrolet,Petrol,Coupe,CVT,8.9,M3 Competition,8
+135,Kia,Diesel,Pickup,Manual,12.2,GLA 250,4
+136,Hyundai,Petrol,Van,Semi-Automatic,13.6,S60 T8,4
+137,Toyota,Diesel,Coupe,Manual,12.6,Mazda3 Turbo,7
+138,BMW,Electric,Convertible,Manual,14.9,Macan GTS,5
+139,Honda,Petrol,Hatchback,Semi-Automatic,6.7,Pilot Touring,2
+140,Honda,Petrol,Coupe,Manual,10.8,CX-5 Carbon,2
+141,Hyundai,Diesel,Convertible,CVT,10.4,M3 Competition,8
+142,Volkswagen,Diesel,Van,Semi-Automatic,9.3,Audi Q5 PHEV,8
+143,Mercedes,Petrol,Van,Manual,5.7,Tahoe Premier,7
+144,Ford,Diesel,Hatchback,Semi-Automatic,14.0,Corolla SE,7
+145,BMW,Electric,Coupe,CVT,4.2,Jetta GLI,8
+146,Toyota,Petrol,Coupe,Automatic,8.0,RS7,8
+147,Kia,Diesel,Van,Automatic,7.6,Macan GTS,8
+148,Honda,Electric,Coupe,Automatic,4.4,Outlander ES,7
+149,Ford,Petrol,Pickup,Automatic,13.0,X5 xDrive40i,7
+150,Volkswagen,Electric,Hatchback,CVT,13.6,Panamera 4,2
