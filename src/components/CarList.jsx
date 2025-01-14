@@ -20,6 +20,12 @@ const CarList = () => {
   const [selectedCar, setSelectedCar] = useState(null);
   const pageSize = 4;
 
+  // Dropdown options
+  const salaryOptions = ['0-50,000', '50,000-100,000', '100,000+'];
+  const leaseTermOptions = ['0-5yrs', '5-10yrs', '10+ yrs'];
+  const stateOptions = ['Choose State', 'Sydney', 'Melbourne', 'Adelaide'];
+  const yearlyKmOptions = ['0-2,000Km', '2,000-10,000Km', '10,000+Km'];
+
   // Fetch all cars once and cache them
   const fetchAllCars = async () => {
     setLoading(true);
@@ -96,72 +102,115 @@ const CarList = () => {
   const randomCar = filteredCars.length > 0 ? filteredCars[0] : null;
 
   return (
-    <div className="bg-background sm:p-16 xs:p-6 w-full flex sm:flex-row flex-col sm:items-start items-center justify-between">
-      {/* Main Content */}
-      <div className="bg-white sm:p-12 xs:p-4 pt-14 rounded-lg sm:w-[65%] w-full border flex flex-col items-center sm:items-center">
-        
+    <>
+      <h2 className='w-full pt-16 pl-16 pr-16 pb-8 text-xl'>About You</h2>
+      <div className='w-full h-auto flex flex-row items-center justify-between pl-16 pr-16'>
+        <div className='w-full flex flex-col'>
+          <p className='text-primary'>Salary</p>
+          <select className='border border-gray-300 rounded-md p-2 w-[90%]'>
+            {salaryOptions.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className='w-full flex flex-col'>
+          <p className='text-primary'>Lease Term</p>
+          <select className='border border-gray-300 rounded-md p-2 w-[90%]'>
+            {leaseTermOptions.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className='w-full flex flex-col'>
+          <p className='text-primary'>State</p>
+          <select className='border border-gray-300 rounded-md p-2 w-[90%]'>
+            {stateOptions.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className='w-full flex flex-col'>
+          <p className='text-primary'>Yearly Km</p>
+          <select className='border border-gray-300 rounded-md p-2 w-[90%]'>
+            {yearlyKmOptions.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+      <div className="bg-background sm:p-16 xs:p-6 w-full flex sm:flex-row flex-col sm:items-start items-center justify-between">
+        {/* Main Content */}
+        <div className="bg-white sm:p-12 xs:p-4 pt-14 rounded-lg sm:w-[65%] w-full border flex flex-col items-center sm:items-center">
           <h2 className="text-xl font-bold mb-4">Available Cars</h2>
-        
-        <div className="grid sm:grid-cols-2 grid-cols-1 sm:gap-12 gap-6">
-          {paginatedCars.length > 0 ? (
-            paginatedCars.map((car) => (
-              <CarCard
-                {...car}
-                key={car.id}
-                onViewCalculation={() => setSelectedCar(car)}
-              />
-            ))
-          ) : (
-            <p>No cars available for the selected filters.</p>
+          <div className="grid sm:grid-cols-2 grid-cols-1 sm:gap-12 gap-6">
+            {paginatedCars.length > 0 ? (
+              paginatedCars.map((car) => (
+                <CarCard
+                  {...car}
+                  key={car.id}
+                  onViewCalculation={() => setSelectedCar(car)}
+                />
+              ))
+            ) : (
+              <p>No cars available for the selected filters.</p>
+            )}
+          </div>
+          {/* Pagination Component */}
+          {totalPages > 1 && (
+            <Pagination className="w-full">
+              <PaginationContent className="w-full flex justify-between">
+                <PaginationItem>
+                  <PaginationPrevious
+                    href="#"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className={`${
+                      currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                  >
+                    Previous
+                  </PaginationPrevious>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext
+                    href="#"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className={`${
+                      currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                  >
+                    Next
+                  </PaginationNext>
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
           )}
         </div>
-        {/* Pagination Component */}
-        {totalPages > 1 && (
-          <Pagination className="w-full">
-            <PaginationContent className="w-full flex justify-between">
-              <PaginationItem>
-                <PaginationPrevious
-                  href="#"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  className={`${
-                    currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''
-                  }`}
-                >
-                  Previous
-                </PaginationPrevious>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationNext
-                  href="#"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  className={`${
-                    currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''
-                  }`}
-                >
-                  Next
-                </PaginationNext>
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-        )}
-      </div>
 
-      {/* Side Component */}
-      <div className="sm:w-[33%] w-full">
-        {selectedCar ? (
-          <CalculationSide
-            car={selectedCar} // Use selected car or random fallback
-            onClose={() => setSelectedCar(null)}
-          />
-        ) : (
-          <div className="hidden sm:block text-center blur-sm">
+        {/* Side Component */}
+        <div className="sm:w-[33%] w-full">
+          {selectedCar ? (
+            <CalculationSide
+              car={selectedCar} // Use selected car or random fallback
+              onClose={() => setSelectedCar(null)}
+            />
+          ) : (
+            <div className="hidden sm:block text-center blur-sm">
               <CalculationSide car={randomCar} />
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
