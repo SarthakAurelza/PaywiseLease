@@ -86,7 +86,8 @@ const CarList = () => {
   }, [filters, allCars]);
 
   // Handle pagination change
-  const handlePageChange = (page) => {
+  const handlePageChange = (page, event) => {
+    event.preventDefault(); // Prevent default anchor behavior
     setCurrentPage(page);
   };
 
@@ -103,7 +104,7 @@ const CarList = () => {
 
   return (
     <>
-      <h2 className='w-full pt-16 pl-16 pr-16 pb-8 text-xl'>About You</h2>
+      <h2 className='w-full pt-16 pl-16 pr-16 pb-4 text-xl'>About You</h2>
       <div className='w-full h-auto flex flex-row items-center justify-between pl-16 pr-16'>
         <div className='w-full flex flex-col'>
           <p className='text-primary'>Salary</p>
@@ -170,7 +171,7 @@ const CarList = () => {
                 <PaginationItem>
                   <PaginationPrevious
                     href="#"
-                    onClick={() => handlePageChange(currentPage - 1)}
+                    onClick={(e) => handlePageChange(currentPage - 1, e)}
                     disabled={currentPage === 1}
                     className={`${
                       currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''
@@ -182,7 +183,7 @@ const CarList = () => {
                 <PaginationItem>
                   <PaginationNext
                     href="#"
-                    onClick={() => handlePageChange(currentPage + 1)}
+                    onClick={(e) => handlePageChange(currentPage + 1, e)}
                     disabled={currentPage === totalPages}
                     className={`${
                       currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''
