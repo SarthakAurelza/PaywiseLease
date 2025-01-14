@@ -16,6 +16,7 @@ const CompareButton = ({ compareCarsRef }) => {
     search: "",
     expandedBrand: null,
   });
+  const [suggestions, setSuggestions] = useState([]);
 
   const fetchAllCars = async () => {
     try {
@@ -52,6 +53,27 @@ const CompareButton = ({ compareCarsRef }) => {
       ...prevFilters,
       [name]: value,
     }));
+
+    // Live search suggestions
+    if (name === "search") {
+      const searchValue = value.toLowerCase();
+      if (searchValue) {
+        const filteredSuggestions = allCars
+          .filter(
+            (car) =>
+              `${car.brand} ${car.model} ${car.variant}`
+                .toLowerCase()
+                .includes(searchValue)
+          )
+          .map((car) => ({
+            id: car.id,
+            name: `${car.brand} ${car.model} ${car.variant}`,
+          }));
+        setSuggestions(filteredSuggestions);
+      } else {
+        setSuggestions([]);
+      }
+    }
   };
 
   const handleAccordionToggle = (brand) => {
@@ -197,12 +219,26 @@ const CompareButton = ({ compareCarsRef }) => {
                 name="search"
                 placeholder="Search cars..."
                 className="w-full border rounded-lg px-3 py-2"
-                onChange={(e) => {
-                  handleFilterChange(e);
-                }}
+                onChange={handleFilterChange}
                 value={filters.search}
-                readOnly // Makes the search bar non-functional
               />
+              {/* Suggestions Dropdown */}
+              {suggestions.length > 0 && (
+                <div className="absolute bg-white border rounded-lg shadow-lg max-h-40 overflow-y-auto w-full z-10">
+                  {suggestions.map((suggestion, index) => (
+                    <div
+                      key={index}
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => {
+                        const selectedCar = allCars.find((car) => `${car.brand} ${car.model} ${car.variant}` === suggestion.name);
+                        if (selectedCar) handleAddCar(selectedCar);
+                      }}
+                    >
+                      {suggestion.name}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Brand Accordions */}

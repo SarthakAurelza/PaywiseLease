@@ -12,6 +12,7 @@ const CompareCars = () => {
   const [brands, setBrands] = useState([]); // Unique car brands
   const [filters, setFilters] = useState({ search: "", expandedBrand: null }); // Filters for search and accordions
   const [filteredCars, setFilteredCars] = useState([]); // Cars filtered by brand and search
+  const [suggestions, setSuggestions] = useState([]); // Suggestions for live search
 
   const totalSlots = 3; // Total comparison slots (e.g., Select Car placeholders)
 
@@ -70,8 +71,18 @@ const CompareCars = () => {
 
     if (filters.search) {
       cars = cars.filter((car) =>
-        car.model.toLowerCase().includes(filters.search.toLowerCase())
+        `${car.brand} ${car.model} ${car.variant}`
+          .toLowerCase()
+          .includes(filters.search.toLowerCase())
       );
+
+      // Generate suggestions
+      const liveSuggestions = cars.map(
+        (car) => `${car.brand} ${car.model} ${car.variant}`
+      );
+      setSuggestions([...new Set(liveSuggestions)]);
+    } else {
+      setSuggestions([]);
     }
 
     if (filters.expandedBrand) {
@@ -164,8 +175,7 @@ const CompareCars = () => {
                                 alt={car.model}
                               />
                               <div className="w-full flex flex-col text-lg">
-                                {car.brand.toUpperCase()}{" "}
-                                {car.model.toUpperCase()} <br />
+                                {car.brand.toUpperCase()} {car.model.toUpperCase()} <br />
                                 <span className="font-medium text-sm text-muted">
                                   {car.variant.toUpperCase()}
                                 </span>
@@ -234,7 +244,7 @@ const CompareCars = () => {
             <h2 className="text-2xl text-primary mb-4">Select a Car</h2>
 
             {/* Search Bar */}
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <input
                 type="text"
                 name="search"
@@ -246,7 +256,28 @@ const CompareCars = () => {
                     search: e.target.value,
                   }))
                 }
+                value={filters.search}
               />
+              {/* Suggestions Dropdown */}
+              {suggestions.length > 0 && (
+                <div className="absolute bg-white border rounded-lg shadow-lg max-h-40 overflow-y-auto w-full z-10">
+                  {suggestions.map((suggestion, index) => (
+                    <div
+                      key={index}
+                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => {
+                        setFilters((prevFilters) => ({
+                          ...prevFilters,
+                          search: suggestion,
+                        }));
+                        setSuggestions([]); // Clear suggestions after selection
+                      }}
+                    >
+                      {suggestion}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Brand Accordions */}
@@ -280,7 +311,7 @@ const CompareCars = () => {
                             onClick={() => handleAddCar(car)}
                           >
                             <span>
-                              {car.model} - {car.variant}
+                              {car.brand} {car.model} - {car.variant}
                             </span>
                           </div>
                         ))}
