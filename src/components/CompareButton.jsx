@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromComparison, addToComparison } from "@/features/filtersSlice";
+import { useNavigate } from "react-router-dom";
 import supabase from "@/supabase/supabaseClient";
 
 const CompareButton = ({ compareCarsRef }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const comparisonCars = useSelector((state) => state.filters.comparisonCars);
   const totalSlots = 3;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,11 +61,10 @@ const CompareButton = ({ compareCarsRef }) => {
       const searchValue = value.toLowerCase();
       if (searchValue) {
         const filteredSuggestions = allCars
-          .filter(
-            (car) =>
-              `${car.brand} ${car.model} ${car.variant}`
-                .toLowerCase()
-                .includes(searchValue)
+          .filter((car) =>
+            `${car.brand} ${car.model} ${car.variant}`
+              .toLowerCase()
+              .includes(searchValue)
           )
           .map((car) => ({
             id: car.id,
@@ -101,9 +102,10 @@ const CompareButton = ({ compareCarsRef }) => {
   };
 
   const handleCompareClick = () => {
-    setIsModalOpen(false);
-    if (compareCarsRef?.current) {
-      compareCarsRef.current.scrollIntoView({ behavior: "smooth" });
+    if (comparisonCars.length >= 2) {
+      navigate("/compare");
+    } else {
+      alert("You need at least two cars to compare.");
     }
   };
 

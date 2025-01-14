@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromComparison, addToComparison } from "@/features/filtersSlice";
 import supabase from "../supabase/supabaseClient";
+import Disclaimer from "./Disclaimer";
+import Info from "./Info";
 
 const CompareCars = () => {
   const dispatch = useDispatch();
@@ -114,6 +116,7 @@ const CompareCars = () => {
   ];
 
   return (
+    <>
     <div className="w-full h-full pl-16 pr-16 pb-16 flex flex-col">
       <div className="w-full h-full rounded-xl bg-white p-16">
         <h2 className="text-3xl mb-8">Compare Cars</h2>
@@ -324,6 +327,9 @@ const CompareCars = () => {
         </div>
       )}
     </div>
+    <Disclaimer />
+    <Info />
+    </>
   );
 };
 
