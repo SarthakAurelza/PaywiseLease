@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
   :root {
     --background: #F3F6F7;
@@ -63,17 +66,4 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-@font-face {
-  font-family: 'Quicksand';
-  src: url('/public/fonts/static/Quicksand-Regular.ttf') format('ttf');
-  font-weight: 400; /* Normal weight */
-  font-style: normal; /* Regular style */
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('/public/fonts/static/Inter_18pt-Regular.ttf') format('ttf');
-  font-weight: 400; /* Normal weight */
-  font-style: normal; /* Regular style */
 }

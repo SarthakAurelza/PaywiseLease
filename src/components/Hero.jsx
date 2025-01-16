@@ -119,9 +119,9 @@ const Hero = () => {
         </div>
 
         {/* Toggle Buttons */}
-        <div className="flex sm:space-x-4 space-x-2 mb-8 bg-muted p-4 rounded-lg w-full sm:w-auto">
+        <div className="flex sm:space-x-4 space-x-2 mb-8 bg-muted p-6 rounded-lg w-full sm:w-auto">
           <button
-            className={`sm:w-36 flex-1 sm:p-4 p-2 rounded-md font-medium ${
+            className={`sm:w-48 flex-1 sm:p-4 p-2 rounded-md font-medium ${
               selectedOption === 'browse'
                 ? 'bg-secondary text-[#013243]'
                 : 'bg-white text-[#013243]'
@@ -132,9 +132,10 @@ const Hero = () => {
               setSelectedOption('browse');
             }}
           >
-            <span className="flex items-center justify-center space-x-2 sm:text-xl text-xs">
+            <div className="flex flex-col items-center justify-center space-y-2 sm:text-xl text-xs">
+              <img className='w-6' src="/images/search-icon.png" alt="" />
               <span>I want to browse for cars</span>
-            </span>
+            </div>
           </button>
 
           <button
@@ -149,16 +150,17 @@ const Hero = () => {
               setSelectedOption('know');
             }}
           >
-            <span className="flex items-center justify-center space-x-2 sm:text-xl text-xs">
+            <div className="flex flex-col items-center justify-center space-y-2 sm:text-xl text-xs">
+              <img className='w-6' src="/images/car-icon.png" alt="" />
               <span>I know the car type</span>
-            </span>
+            </div>
           </button>
         </div>
       </div>
 
       {/* Dynamic Content */}
       {selectedOption === 'browse' ? (
-        <div className="p-5 rounded-md bg-muted">
+        <div className="p-5 rounded-xl bg-muted">
           <h2 className="sm:text-lg text-[16px] sm:font-semibold mb-2">Select Preference</h2>
           <div className="flex flex-col gap-3 sm:grid sm:grid-cols-3 sm:gap-6">
             <button
@@ -166,33 +168,66 @@ const Hero = () => {
                 handleChange('engine', 'Petrol/Diesel');
                 setActiveButton('Petrol/Diesel');
               }}
-              className={`p-4 sm:text-md text-sm rounded-md font-medium ${
+              className={` sm:text-md text-sm rounded-xl font-medium ${
                 activeButton === 'Petrol/Diesel' ? 'bg-secondary' : 'bg-white'
               } text-[#013243]`}
             >
-              Petrol/Diesel
+              <div className={'flex items-center justify-start w-full h-full'}>
+                <div className={`${
+                  activeButton === 'Petrol/Diesel' ? 'bg-secondary h-full flex items-center justify-center rounded-bl-xl rounded-tl-xl w-16' : 'bg-[#41B6E7] h-full flex items-center justify-center rounded-bl-xl rounded-tl-xl w-16'
+                }`}>
+                  <img className={`px-2 ${
+                    activeButton === 'Petrol/Diesel' ? '' : 'filter invert sepia saturate-[500%] hue-rotate-[180deg]'
+                  }`} src="/images/petroldiesel.png" alt="" />
+                </div>
+                <span className={`px-2 ${
+                  activeButton === 'Petrol/Diesel' ? 'font-bold' : ''
+                }`}>Petrol/Diesel</span>
+              </div>
             </button>
             <button
               onClick={() => {
                 handleChange('engine', 'Electric');
                 setActiveButton('Electric');
               }}
-              className={`p-4 sm:text-md text-sm rounded-md font-medium ${
+              className={` sm:text-md text-sm rounded-xl font-medium ${
                 activeButton === 'Electric' ? 'bg-secondary' : 'bg-white'
               } text-[#013243]`}
             >
-              Electric/PHEV
+              <div className={'flex items-center justify-start w-full h-full'}>
+                <div className={`${
+                  activeButton === 'Electric' ? 'bg-secondary h-full flex items-center justify-center rounded-bl-xl rounded-tl-xl w-16' : 'bg-[#41B6E7] h-full flex items-center justify-center rounded-bl-xl rounded-tl-xl w-16'
+                }`}>
+                  <img className={`px-2 ${
+                    activeButton === 'Electric' ? 'filter invert sepia saturate-[500%] hue-rotate-[180deg]' : ''
+                  }`} src="/images/electric.png" alt="" />
+                </div>
+                <span className={`px-2 ${
+                  activeButton === 'Electric' ? 'font-bold' : ''
+                }`}>Electric</span>
+              </div>
             </button>
             <button
               onClick={() => {
                 handleChange('engine', 'Hybrid');
                 setActiveButton('Hybrid');
               }}
-              className={`p-4 sm:text-md text-sm rounded-md font-medium ${
+              className={`h-[54px] sm:text-md text-sm rounded-xl font-medium ${
                 activeButton === 'Hybrid' ? 'bg-secondary' : 'bg-white'
               } text-[#013243]`}
             >
-              Hybrid
+              <div className={'flex items-center justify-start w-full h-full'}>
+                <div className={`${
+                  activeButton === 'Hybrid' ? 'bg-secondary h-full flex items-center justify-center rounded-bl-xl rounded-tl-xl w-16' : 'bg-[#41B6E7] h-full flex items-center justify-center rounded-bl-xl rounded-tl-xl w-16'
+                }`}>
+                  <img className={`px-2 ${
+                    activeButton === 'Hybrid' ? 'filter invert sepia saturate-[500%] hue-rotate-[180deg]' : ''
+                  }`} src="/images/hybrid.png" alt="" />
+                </div>
+                <span className={`px-2 ${
+                  activeButton === 'Hybrid' ? 'font-bold' : ''
+                }`}>Hybrid</span>
+              </div>
             </button>
           </div>
         </div>
