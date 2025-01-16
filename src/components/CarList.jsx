@@ -222,7 +222,7 @@ const CarList = () => {
       </div>
       {/* Message over the blurred background */}
       <div className="absolute inset-0 flex items-center justify-center z-10">
-        <p className="text-center text-lg font-semibold text-primary bg-[#F3F6F7] p-8 w-[90%] border border-muted rounded-xl">
+        <p className="text-center text-lg font-semibold text-primary bg-[#F3F6F7] p-8 w-[70%] border border-muted rounded-xl">
           Select a car to check Calculation
         </p>
       </div>

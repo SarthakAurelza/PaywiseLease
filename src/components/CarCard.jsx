@@ -62,24 +62,24 @@ const CarCard = ({
       <div className="w-full grid grid-cols-2 gap-4">
         <div>
           <p className="text-[#808080] font-light text-[12px]">Engine</p>
-          <p className="text-[14px]">{engine}</p>
+          <p className="text-[14px] font-semibold">{engine}</p>
         </div>
 
         <div>
           <p className="text-[12px] font-light text-[#808080]">Body/Seats</p>
-          <p className="text-[14px]">
+          <p className="text-[14px] font-semibold">
             {body} - {seats}
           </p>
         </div>
 
         <div>
           <p className="text-[12px] font-light text-[#808080]">Transmission</p>
-          <p className="text-[14px]">{transmission}</p>
+          <p className="text-[14px] font-semibold">{transmission}</p>
         </div>
 
         <div>
           <p className="text-[12px] font-light text-[#808080]">Consumption</p>
-          <p className="text-[14px]">{fuel_consumption}L/100Km</p>
+          <p className="text-[14px] font-semibold">{fuel_consumption}L/100Km</p>
         </div>
       </div>
       <div className="w-full bg-white h-12 p-2 pt-4 pb-4 rounded-md flex flex-row items-center justify-between">

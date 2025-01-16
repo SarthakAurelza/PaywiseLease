@@ -41,22 +41,22 @@ const CalculationSide = ({ car, onClose }) => {
         <div className="w-full flex justify-between items-center">
           <div>
             <p className="text-[#808080] text-[12px]">Engine</p>
-            <p className="text-[14px]">{car.engine}</p>
+            <p className="text-[14px] font-semibold text-primary">{car.engine}</p>
           </div>
           <div className="h-6 border-l border-gray-300"></div>
           <div>
             <p className="text-[12px] text-[#808080]">Body/Seats</p>
-            <p className="text-[14px]">{car.body} - {car.seats}</p>
+            <p className="text-[14px] font-semibold text-primary">{car.body} - {car.seats}</p>
           </div>
           <div className="h-6 border-l border-gray-300"></div>
           <div>
             <p className="text-[12px] text-[#808080]">Transmission</p>
-            <p className="text-[14px]">{car.transmission}</p>
+            <p className="text-[14px] font-semibold text-primary">{car.transmission}</p>
           </div>
           <div className="h-6 border-l border-gray-300"></div>
           <div>
             <p className="text-[12px] text-[#808080]">Consumption</p>
-            <p className="text-[14px]">{car.fuel_consumption}L/100Km</p>
+            <p className="text-[14px] font-semibold text-primary">{car.fuel_consumption}L/100Km</p>
           </div>
         </div>
       </div>
@@ -128,7 +128,7 @@ const CalculationSide = ({ car, onClose }) => {
         </div>
 
         <div className="flex flex-col gap-3 w-full sm:mb-6 mb-2">
-          <p className="w-full text-[14px] flex justify-between font-semibold text-primary">
+          <p className="w-full text-[16px] flex justify-between font-semibold text-muted">
             Total Amount <span className='text-black'>$30,000</span>
           </p>
         </div>
