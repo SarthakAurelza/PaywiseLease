@@ -271,7 +271,7 @@ const Hero = () => {
 
             {/* Brand Dropdown */}
             <select
-              className="sm:p-4 p-2 sm:text-md text-sm border border-gray-300 rounded-md focus:ring focus:outline-none text-black"
+              className="sm:p-2 p-2 sm:text-lg text-sm border border-gray-300 rounded-md focus:ring focus:outline-none text-black"
               onChange={(e) => {
                 const selectedBrand = e.target.value;
                 fetchModels(selectedBrand); // Load models dynamically
@@ -291,7 +291,7 @@ const Hero = () => {
 
             {/* Model Dropdown */}
             <select
-              className="sm:p-4 p-2 sm:text-md text-sm border border-gray-300 rounded-md focus:ring focus:outline-none text-black"
+              className="sm:p-2 p-2 sm:text-lg text-sm border border-gray-300 rounded-md focus:ring focus:outline-none text-black"
               onChange={(e) => {
                 const selectedModel = e.target.value;
                 fetchVariants(filters.brand, selectedModel); // Load variants dynamically
@@ -310,7 +310,7 @@ const Hero = () => {
 
             {/* Variant Dropdown */}
             <select
-              className="sm:p-4 p-2 sm:text-md text-sm border border-gray-300 rounded-md focus:ring focus:outline-none text-black"
+              className="sm:p-2 p-2 sm:text-lg text-sm border border-gray-300 rounded-md focus:ring focus:outline-none text-black"
               onChange={(e) => handleChange('variant', e.target.value)}
             >
               <option className="text-black" value="">

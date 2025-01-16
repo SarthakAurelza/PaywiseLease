@@ -107,7 +107,7 @@ const CarList = () => {
       <h2 className='w-full pt-16 pl-16 pr-16 pb-4 text-xl'>About You</h2>
       <div className='w-full h-auto flex flex-row items-center justify-between pl-16 pr-16'>
         <div className='w-full flex flex-col'>
-          <p className='text-primary'>Salary</p>
+          <p className='text-primary font-semibold'>Salary</p>
           <select className='rounded-md p-3 w-[90%]'>
             {salaryOptions.map((option, index) => (
               <option key={index} value={option}>
@@ -117,7 +117,7 @@ const CarList = () => {
           </select>
         </div>
         <div className='w-full flex flex-col'>
-          <p className='text-primary'>Lease Term</p>
+          <p className='text-primary font-semibold'>Lease Term</p>
           <select className='rounded-md p-3 w-[90%]'>
             {leaseTermOptions.map((option, index) => (
               <option key={index} value={option}>
@@ -127,7 +127,7 @@ const CarList = () => {
           </select>
         </div>
         <div className='w-full flex flex-col'>
-          <p className='text-primary'>State</p>
+          <p className='text-primary font-semibold'>State</p>
           <select className='rounded-md p-3 w-[90%]'>
             {stateOptions.map((option, index) => (
               <option key={index} value={option}>
@@ -137,7 +137,7 @@ const CarList = () => {
           </select>
         </div>
         <div className='w-full flex flex-col'>
-          <p className='text-primary'>Yearly Km</p>
+          <p className='text-primary font-semibold'>Yearly Km</p>
           <select className='rounded-md p-3 w-[90%]'>
             {yearlyKmOptions.map((option, index) => (
               <option key={index} value={option}>
@@ -206,18 +206,31 @@ const CarList = () => {
         </div>
 
         {/* Side Component */}
-        <div className="sm:w-[33%] w-full">
-          {selectedCar ? (
-            <CalculationSide
-              car={selectedCar} // Use selected car or random fallback
-              onClose={() => setSelectedCar(null)}
-            />
-          ) : (
-            <div className="hidden sm:block text-center blur-sm">
-              <CalculationSide car={randomCar} />
-            </div>
-          )}
-        </div>
+        {/* Side Component */}
+          {/* Side Component */}
+<div className="sm:w-[33%] w-full">
+  {selectedCar ? (
+    <CalculationSide
+      car={selectedCar} // Use selected car or random fallback
+      onClose={() => setSelectedCar(null)}
+    />
+  ) : (
+    <div className="relative w-full h-full">
+      {/* Blurred background */}
+      <div className="blur-md">
+        <CalculationSide car={randomCar} />
+      </div>
+      {/* Message over the blurred background */}
+      <div className="absolute inset-0 flex items-center justify-center z-10">
+        <p className="text-center text-lg font-semibold text-primary bg-[#F3F6F7] p-8 w-[90%] border border-muted rounded-xl">
+          Select a car to check Calculation
+        </p>
+      </div>
+    </div>
+  )}
+</div>
+
+
       </div>
     </>
   );

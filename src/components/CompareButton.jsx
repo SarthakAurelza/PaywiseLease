@@ -124,10 +124,10 @@ const CompareButton = ({ compareCarsRef }) => {
       {/* Compare Button */}
       <div
         onClick={handleButtonClick}
-        className="fixed bottom-4 left-4 bg-green-500 text-white px-4 py-1 rounded-full flex items-center gap-2 shadow-lg cursor-pointer hover:bg-green-600"
+        className="fixed bottom-4 left-4 bg-secondary text-primary px-4 py-2 rounded-xl flex items-center gap-2 shadow-lg cursor-pointer hover:bg-secondary"
       >
         <span className="font-semibold">Compare Cars</span>
-        <div className="bg-white text-green-500 w-8 h-8 rounded-full flex items-center justify-center font-bold">
+        <div className="bg-white text-primary w-8 h-8 rounded-full flex items-center justify-center font-bold">
           {comparisonCars.length}
         </div>
       </div>

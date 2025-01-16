@@ -20,7 +20,7 @@ const CarCard = ({
   const isInComparison = comparisonCars.some((car) => car.id === id); // Check if the car is already in the comparison list
 
   return (
-    <div className="w-[290px] sm:h-[372px] p-3 pb-4 flex flex-col items-center rounded-xl bg-[#F3F6F7] justify-between gap-4">
+    <div className="aspect-w-[290px] sm:aspect-h-[372px] p-3 pb-4 flex flex-col items-center rounded-xl bg-[#F3F6F7] justify-between gap-4">
       <div className="h-[40%] rounded-sm w-full">
         <img src={imageUrl} alt="" />
       </div>

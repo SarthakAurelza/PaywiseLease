@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const CalculationSide = ({ car, onClose }) => {
-  const [activeButton, setActiveButton] = useState('Weekly'); // Default active button
+  const [activeButton, setActiveButton] = useState('Weekly');
 
   const handleButtonClick = (button) => {
     setActiveButton(button);
@@ -27,7 +27,7 @@ const CalculationSide = ({ car, onClose }) => {
         <button onClick={onClose} className="text-red-500 font-bold">X</button>
       </div>
       <div className="sm:mb-4 mb-2 flex flex-col gap-4">
-        <div className='flex flex-row bg-gray-200 items-center justify-start gap-4 rounded-lg p-1 pt-2 pb-2'>
+        <div className='flex flex-row bg-gray-200 items-center justify-start gap-3 rounded-lg p-1 pt-2 pb-2'>
           <img
             src={car.imageUrl}
             alt={car.model}
