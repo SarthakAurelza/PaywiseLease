@@ -61,34 +61,34 @@ const CarCard = ({
       </div>
       <div className="w-full grid grid-cols-2 gap-4">
         <div>
-          <p className="text-[#808080] text-[12px]">Engine</p>
-          <p className="text-[12px]">{engine}</p>
+          <p className="text-[#808080] font-light text-[12px]">Engine</p>
+          <p className="text-[14px]">{engine}</p>
         </div>
 
         <div>
-          <p className="text-[12px] text-[#808080]">Body/Seats</p>
-          <p className="text-[12px]">
+          <p className="text-[12px] font-light text-[#808080]">Body/Seats</p>
+          <p className="text-[14px]">
             {body} - {seats}
           </p>
         </div>
 
         <div>
-          <p className="text-[12px] text-[#808080]">Transmission</p>
-          <p className="text-[12px]">{transmission}</p>
+          <p className="text-[12px] font-light text-[#808080]">Transmission</p>
+          <p className="text-[14px]">{transmission}</p>
         </div>
 
         <div>
-          <p className="text-[12px] text-[#808080]">Consumption</p>
-          <p className="text-[12px]">{fuel_consumption}L/100Km</p>
+          <p className="text-[12px] font-light text-[#808080]">Consumption</p>
+          <p className="text-[14px]">{fuel_consumption}L/100Km</p>
         </div>
       </div>
-      <div className="w-full bg-white h-12 p-2 rounded-md flex flex-row items-center justify-between">
-        <p className="font-bold text-2xl">
+      <div className="w-full bg-white h-12 p-2 pt-4 pb-4 rounded-md flex flex-row items-center justify-between">
+        <p className="font-bold text-3xl text-primary">
           <span className="sm:text-[8px] text-xs sm:font-semibold">FROM </span>$370
           <span className="sm:text-[10px] text-xs">/week</span>
         </p>
         <button
-          className="bg-primary text-white text-xs rounded-md p-1 sm:pl-3 sm:pr-3"
+          className="bg-primary text-white text-xs rounded-md p-1 pt-2 pb-2 sm:pl-3 sm:pr-3"
           onClick={onViewCalculation}
         >
           View Calculation

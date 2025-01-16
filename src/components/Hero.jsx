@@ -180,7 +180,7 @@ const Hero = () => {
                     activeButton === 'Petrol/Diesel' ? '' : 'filter invert sepia saturate-[500%] hue-rotate-[180deg]'
                   }`} src="/images/petroldiesel.png" alt="" />
                 </div>
-                <span className={`px-2 ${
+                <span className={`px-4 text-lg ${
                   activeButton === 'Petrol/Diesel' ? 'font-bold' : ''
                 }`}>Petrol/Diesel</span>
               </div>
@@ -202,7 +202,7 @@ const Hero = () => {
                     activeButton === 'Electric' ? 'filter invert sepia saturate-[500%] hue-rotate-[180deg]' : ''
                   }`} src="/images/electric.png" alt="" />
                 </div>
-                <span className={`px-2 ${
+                <span className={`px-4 text-lg ${
                   activeButton === 'Electric' ? 'font-bold' : ''
                 }`}>Electric</span>
               </div>
@@ -224,7 +224,7 @@ const Hero = () => {
                     activeButton === 'Hybrid' ? 'filter invert sepia saturate-[500%] hue-rotate-[180deg]' : ''
                   }`} src="/images/hybrid.png" alt="" />
                 </div>
-                <span className={`px-2 ${
+                <span className={`px-4 text-lg ${
                   activeButton === 'Hybrid' ? 'font-bold' : ''
                 }`}>Hybrid</span>
               </div>

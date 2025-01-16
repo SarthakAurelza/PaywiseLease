@@ -108,7 +108,7 @@ const CarList = () => {
       <div className='w-full h-auto flex flex-row items-center justify-between pl-16 pr-16'>
         <div className='w-full flex flex-col'>
           <p className='text-primary'>Salary</p>
-          <select className='border border-gray-300 rounded-md p-2 w-[90%]'>
+          <select className='rounded-md p-3 w-[90%]'>
             {salaryOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -118,7 +118,7 @@ const CarList = () => {
         </div>
         <div className='w-full flex flex-col'>
           <p className='text-primary'>Lease Term</p>
-          <select className='border border-gray-300 rounded-md p-2 w-[90%]'>
+          <select className='rounded-md p-3 w-[90%]'>
             {leaseTermOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -128,7 +128,7 @@ const CarList = () => {
         </div>
         <div className='w-full flex flex-col'>
           <p className='text-primary'>State</p>
-          <select className='border border-gray-300 rounded-md p-2 w-[90%]'>
+          <select className='rounded-md p-3 w-[90%]'>
             {stateOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -138,7 +138,7 @@ const CarList = () => {
         </div>
         <div className='w-full flex flex-col'>
           <p className='text-primary'>Yearly Km</p>
-          <select className='border border-gray-300 rounded-md p-2 w-[90%]'>
+          <select className='rounded-md p-3 w-[90%]'>
             {yearlyKmOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -150,7 +150,14 @@ const CarList = () => {
       <div className="bg-background sm:p-16 xs:p-6 w-full flex sm:flex-row flex-col sm:items-start items-center justify-between">
         {/* Main Content */}
         <div className="bg-white sm:p-12 xs:p-4 pt-14 rounded-lg sm:w-[65%] w-full border flex flex-col items-center sm:items-center">
-          <h2 className="text-xl font-bold mb-4">Available Cars</h2>
+          <div>
+          <div className='flex items-center justify-between'>
+            <h2 className="text-xl font-bold mb-4">Available Cars</h2>
+            <div className='flex items-center gap-4'>
+              <img className='cursor-pointer' src="/images/filter.png" alt="" />
+              <img className='cursor-pointer' src="/images/sort.png" alt="" />
+            </div>
+          </div>
           <div className="grid sm:grid-cols-2 grid-cols-1 sm:gap-12 gap-6">
             {paginatedCars.length > 0 ? (
               paginatedCars.map((car) => (
@@ -164,9 +171,10 @@ const CarList = () => {
               <p>No cars available for the selected filters.</p>
             )}
           </div>
+          </div>
           {/* Pagination Component */}
           {totalPages > 1 && (
-            <Pagination className="w-full">
+            <Pagination className="w-full pt-8">
               <PaginationContent className="w-full flex justify-between">
                 <PaginationItem>
                   <PaginationPrevious
