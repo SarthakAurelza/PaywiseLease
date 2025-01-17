@@ -119,7 +119,16 @@ const CompareCars = () => {
     <>
     <div className="w-full h-full pl-16 pr-16 pb-16 flex flex-col">
       <div className="w-full h-full rounded-xl bg-white p-16">
-        <h2 className="text-3xl mb-8">Compare Cars</h2>
+        <div className="flex items-center justify-start mb-8 mt-8">
+          {comparisonCars.map((car, index) => (
+            <span key={car.id} className="font-bold text-primary text-5xl">
+              {car.brand.toUpperCase()} {car.model.toUpperCase()}
+              {index < comparisonCars.length - 1 && (
+                <span className="mx-4 text-gray-500 text-3xl">VS</span>
+              )}
+            </span>
+          ))}
+        </div>
         <p className="text-primary font-light">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..
         </p>
@@ -149,7 +158,7 @@ const CompareCars = () => {
             >
               <thead>
                 <tr>
-                  <th className="border border-gray-300 px-4 py-2 w-1/4">
+                  <th className="border border-gray-300 font-normal px-4 py-2 w-1/4">
                     Finances
                   </th>
                   {Array.from({ length: totalSlots }).map((_, index) => {
@@ -157,7 +166,7 @@ const CompareCars = () => {
                     return (
                       <th
                         key={index}
-                        className="border border-gray-300 px-1 py-2 text-center w-1/4 relative"
+                        className="border border-gray-300 px-1 py-4 text-center w-1/4 relative"
                       >
                         {car ? (
                           <div className="relative">
@@ -177,7 +186,7 @@ const CompareCars = () => {
                                 src={car.imageUrl}
                                 alt={car.model}
                               />
-                              <div className="w-full flex flex-col text-lg">
+                              <div className="w-full flex flex-col text-xl">
                                 {car.brand.toUpperCase()} {car.model.toUpperCase()} <br />
                                 <span className="font-medium text-sm text-muted">
                                   {car.variant.toUpperCase()}
@@ -209,7 +218,7 @@ const CompareCars = () => {
               <tbody>
                 {featureKeys.map((feature) => (
                   <tr key={feature.key}>
-                    <td className="border border-gray-300 px-4 py-2 font-semibold w-1/4">
+                    <td className="border border-gray-300 px-4 py-4 w-1/4">
                       {feature.label}
                     </td>
                     {Array.from({ length: totalSlots }).map((_, index) => {
@@ -217,7 +226,7 @@ const CompareCars = () => {
                       return (
                         <td
                           key={`${index}-${feature.key}`}
-                          className="border border-gray-300 px-4 py-2 text-center w-1/4"
+                          className="border border-gray-300 px-4 py-2 text-center text-[#808080] w-1/4"
                         >
                           {car && car[feature.key] !== undefined
                             ? car[feature.key]
