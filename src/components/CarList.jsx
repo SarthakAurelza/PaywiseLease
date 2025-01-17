@@ -18,7 +18,28 @@ const CarList = () => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCar, setSelectedCar] = useState(null);
-  const pageSize = 4;
+  const [pageSize, setPageSize] = useState(4); // Default page size
+
+  // Tailwind's `xl` breakpoint in pixels (default: 1280px)
+  const xxlBreakpoint = 1820;
+
+  // Update page size based on screen size
+  const updatePageSize = () => {
+    if (window.innerWidth >= xxlBreakpoint) {
+      setPageSize(6); // Use 6 for xl screens
+    } else {
+      setPageSize(4); // Default to 4 for smaller screens
+    }
+  };
+
+  // Add event listener for window resize
+  useEffect(() => {
+    updatePageSize(); // Set initial page size
+    window.addEventListener('resize', updatePageSize);
+    return () => {
+      window.removeEventListener('resize', updatePageSize);
+    };
+  }, []);
 
   // Dropdown options
   const salaryOptions = ['0-50,000', '50,000-100,000', '100,000+'];
@@ -149,28 +170,28 @@ const CarList = () => {
       </div>
       <div className="bg-background sm:p-16 xs:p-6 w-full flex sm:flex-row flex-col sm:items-start items-center justify-between">
         {/* Main Content */}
-        <div className="bg-white sm:p-12 xs:p-4 pt-14 rounded-lg sm:w-[65%] w-full border flex flex-col items-center sm:items-center">
-          <div>
-          <div className='flex items-center justify-between'>
-            <h2 className="text-xl font-bold mb-4">Available Cars</h2>
-            <div className='flex items-center gap-4'>
-              <img className='cursor-pointer' src="/images/filter.png" alt="" />
-              <img className='cursor-pointer' src="/images/sort.png" alt="" />
+        <div className="bg-white sm:p-12 xs:p-4 pt-14 rounded-lg sm:w-[65%] xl:w-[75%]  w-full flex flex-col items-center sm:items-center">
+          <div className='w-full flex flex-col'>
+            <div className='flex items-center justify-between'>
+              <h2 className="text-xl font-bold mb-4">Available Cars</h2>
+              <div className='flex items-center gap-4'>
+                <img className='cursor-pointer' src="/images/filter.png" alt="" />
+                <img className='cursor-pointer' src="/images/sort.png" alt="" />
+              </div>
             </div>
-          </div>
-          <div className="grid sm:grid-cols-2 grid-cols-1 sm:gap-12 gap-6">
-            {paginatedCars.length > 0 ? (
-              paginatedCars.map((car) => (
-                <CarCard
-                  {...car}
-                  key={car.id}
-                  onViewCalculation={() => setSelectedCar(car)}
-                />
-              ))
-            ) : (
-              <p>No cars available for the selected filters.</p>
-            )}
-          </div>
+            <div className="grid sm:grid-cols-2 grid-cols-1 xxl:grid-cols-3 sm:gap-4 lg:gap-8 xl:gap-12 xxl:gap-12 justify-stretch justify-items-center w-[100%]">
+              {paginatedCars.length > 0 ? (
+                paginatedCars.map((car) => (
+                  <CarCard
+                    {...car}
+                    key={car.id}
+                    onViewCalculation={() => setSelectedCar(car)}
+                  />
+                ))
+              ) : (
+                <p>No cars available for the selected filters.</p>
+              )}
+            </div>
           </div>
           {/* Pagination Component */}
           {totalPages > 1 && (
@@ -208,7 +229,7 @@ const CarList = () => {
         {/* Side Component */}
         {/* Side Component */}
           {/* Side Component */}
-<div className="sm:w-[33%] w-full">
+<div className="sm:w-[33%] xxl:w-[27%] w-full">
   {selectedCar ? (
     <CalculationSide
       car={selectedCar} // Use selected car or random fallback
