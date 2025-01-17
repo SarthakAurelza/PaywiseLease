@@ -121,10 +121,10 @@ const CompareCars = () => {
       <div className="w-full h-full rounded-xl bg-white p-16">
         <div className="flex items-center justify-start mb-8 mt-8">
           {comparisonCars.map((car, index) => (
-            <span key={car.id} className="font-bold text-primary text-5xl">
+            <span key={car.id} className="font-bold text-primary text-4xl">
               {car.brand.toUpperCase()} {car.model.toUpperCase()}
               {index < comparisonCars.length - 1 && (
-                <span className="mx-4 text-gray-500 text-3xl">VS</span>
+                <span className="mx-8 text-gray-500 text-3xl">VS</span>
               )}
             </span>
           ))}
