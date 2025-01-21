@@ -125,7 +125,7 @@ const CarList = () => {
 
   return (
     <>
-      <h2 className='w-full pt-16 pl-16 pr-16 pb-4 text-xl'>About You</h2>
+      <h2 className='w-full pt-16 px-16 pb-4 text-xl'>About You</h2>
       <div className='w-full h-auto flex flex-row items-center justify-between pl-16 pr-16'>
         <div className='w-full flex flex-col'>
           <p className='text-primary font-semibold'>Salary</p>

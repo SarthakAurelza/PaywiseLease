@@ -9,7 +9,7 @@ export default {
   	extend: {
 			screens: {
         // Custom breakpoints
-        'xs': '380px', 
+        'xs': '430px', 
 				 'xl': '1400px',
 				 'lg':'1200px',
 				 '2xl':'1640px',
