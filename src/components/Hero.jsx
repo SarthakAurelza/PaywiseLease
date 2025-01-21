@@ -103,12 +103,12 @@ const Hero = () => {
   }, [selectedOption]);
 
   return (
-    <div className="bg-primary p-4 sm:p-8 md:pt-10 md:pb-10 lg:pt-14 xl:pt-20 xs:p-8 md:p-6 lg:p-16 text-white flex flex-col sm:gap-6 xl:gap-8 2xl:gap-12 xxl:gap-16">
+    <div className="bg-primary p-4 sm:p-8 md:pt-10 md:pb-10 lg:pt-14 xl:pt-20 xs:p-8 md:p-5 lg:p-16 text-white flex flex-col sm:gap-6 xl:gap-8 2xl:gap-12 xxl:gap-16">
       {/* Header Section */}
       <div className="flex md:flex-row flex-col items-center sm:items-center md:items-center justify-between md:gap-0 sm:gap-8">
-        <div className="flex flex-col gap-4 xs:w-[395px] sm:w-[91%] md:w-[50%] lg:w-[522px] 2xl:w-[660px] xxl:w-[790px] md:items-start items-center">
-          <h1 className="lg:text-5xl sm:text-5xl xs:text-4xl text-2xl font-bold mb-2 md:text-3xl 2xl:text-6xl xxl:text-7xl md:text-start text-center ">Lease your car with us</h1>
-          <p className="lg:text-lg sm:text-lg md:text-sm text-[13px] xxl:text-2xl 2xl:text-xl mb-4 md:text-start text-center md:w-full sm:w-[500px] xs:w-[350px]">
+        <div className="flex flex-col gap-4 xs:w-[395px] sm:w-[91%] md:w-[59%] lg:w-[522px] 2xl:w-[660px] xxl:w-[790px] md:items-start items-center">
+          <h1 className="lg:text-5xl sm:text-5xl xs:text-4xl text-2xl font-bold mb-2 md:text-4xl 2xl:text-6xl xxl:text-7xl md:text-start text-center ">Lease your car with us</h1>
+          <p className="lg:text-lg sm:text-lg md:text-sm text-[13px] xxl:text-2xl 2xl:text-xl mb-4 md:text-start text-center md:w-[400px] lg:w-full sm:w-[500px] xs:w-[350px]">
             <span className="font-semibold">Did you know?</span> Electric/PHEV
             cars have additional tax benefits as some are paid in your pre-tax
             dollars.
@@ -120,7 +120,7 @@ const Hero = () => {
 
         {/* Toggle Buttons */}
         <div className="flex sm:space-x-4 xxl:space-x-8 space-x-2 mb-8 bg-muted
-        p-3 xs:p-4 sm:p-6 md:p-4 lg:p-6 2xl:p-8 rounded-lg md:w-[49%] lg:w-auto sm:w-[520px] xs:w-[300px] w-[260px] ">
+        p-3 xs:p-4 sm:p-6 md:p-4 lg:p-6 2xl:p-8 rounded-lg md:w-[350px] lg:w-auto sm:w-[520px] xs:w-[300px] w-[260px] ">
           <button
             className={`sm:w-[200px] lg:w-48 2xl:w-60 xxl:w-[320px] flex-1 p-2 xs:p-4 lg:p-4 xxl:p-8 md:p-2 sm:p-6 rounded-md font-medium ${
               selectedOption === 'browse'
@@ -133,7 +133,7 @@ const Hero = () => {
               setSelectedOption('browse');
             }}
           >
-            <div className="flex flex-col items-center justify-center space-y-2 xxl:space-y-4 xs:text-md sm:text-2xl md:text-lg  2xl:text-2xl xxl:text-3xl text-xs">
+            <div className="flex flex-col items-center justify-center space-y-2 xxl:space-y-4 xs:text-md sm:text-2xl md:text-[16px] lg:text-lg  2xl:text-2xl xxl:text-3xl text-xs">
               <img className='md:w-4 lg:w-6 2xl:w-10 xxl:w-12' src="/images/search-icon.png" alt="" />
               <span>I want to browse for cars</span>
             </div>
@@ -151,7 +151,7 @@ const Hero = () => {
               setSelectedOption('know');
             }}
           >
-            <div className="flex flex-col items-center justify-center space-y-2 xs:text-md sm:text-2xl md:text-lg 2xl:text-2xl xxl:text-3xl text-xs">
+            <div className="flex flex-col items-center justify-center space-y-2 xs:text-md sm:text-2xl md:text-[16px] lg:text-lg 2xl:text-2xl xxl:text-3xl text-xs">
               <img className='md:w-4 lg:w-6 2xl:w-10 xxl:w-12' src="/images/car-icon.png" alt="" />
               <span>I know the car type</span>
             </div>
