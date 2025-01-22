@@ -19,13 +19,14 @@ const CarList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCar, setSelectedCar] = useState(null);
   const [pageSize, setPageSize] = useState(4); // Default page size
+  const [showPopup, setShowPopup] = useState(false);
 
   // Tailwind's `xl` breakpoint in pixels (default: 1280px)
   const xxlBreakpoint = 1820;
 
   // Update page size based on screen size
   const updatePageSize = () => {
-    if (window.innerWidth >= xxlBreakpoint || window.innerWidth>=768 && window.innerWidth < 1200) {
+    if (window.innerWidth >= xxlBreakpoint || (window.innerWidth >= 768 && window.innerWidth < 1200)) {
       setPageSize(6); // Use 6 for xl screens
     } else {
       setPageSize(4); // Default to 4 for smaller screens
@@ -185,7 +186,12 @@ const CarList = () => {
                   <CarCard
                     {...car}
                     key={car.id}
-                    onViewCalculation={() => setSelectedCar(car)}
+                    onViewCalculation={() => {
+                      setSelectedCar(car);
+                      if (window.innerWidth < 1200) {
+                        setShowPopup(true);
+                      }
+                    }}
                   />
                 ))
               ) : (
@@ -226,28 +232,44 @@ const CarList = () => {
           )}
         </div>
 
-<div className="hidden lg:block lg:w-[35%] xxl:w-[27%] w-full">
-  {selectedCar ? (
-    <CalculationSide
-      car={selectedCar}
-      onClose={() => setSelectedCar(null)}
-    />
-  ) : (
-    <div className="relative w-full h-full">
-      <div className="blur-md">
-        <CalculationSide car={randomCar} />
-      </div>
-      {/* Message over the blurred background */}
-      <div className="absolute inset-0 flex items-center justify-center z-10">
-        <p className="text-center text-lg font-semibold text-primary bg-[#F3F6F7] p-8 w-[70%] border border-muted rounded-xl">
-          Select a car to check Calculation
-        </p>
-      </div>
-    </div>
-  )}
-</div>
+        <div className="hidden lg:block lg:w-[35%] xxl:w-[27%] w-full">
+          {selectedCar ? (
+            <CalculationSide
+              car={selectedCar}
+              onClose={() => setSelectedCar(null)}
+            />
+          ) : (
+            <div className="relative w-full h-full">
+              <div className="blur-md">
+                <CalculationSide car={randomCar} />
+              </div>
+              {/* Message over the blurred background */}
+              <div className="absolute inset-0 flex items-center justify-center z-10">
+                <p className="text-center text-lg font-semibold text-primary bg-[#F3F6F7] p-8 w-[70%] border border-muted rounded-xl">
+                  Select a car to check Calculation
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
 
-
+        {/* Popup for small screens */}
+        {showPopup && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center h-[100%]">
+            <div className="bg-white rounded-lg md:p-2 lg:p-6 w-[90%] max-w-lg">
+              <button
+                className="absolute top-2 right-2 text-gray-500 hover:text-black"
+                onClick={() => setShowPopup(false)}
+              >
+                &times;
+              </button>
+              <CalculationSide
+                car={selectedCar}
+                onClose={() => setShowPopup(false)}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

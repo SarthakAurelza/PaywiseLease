@@ -3,12 +3,12 @@ import React from 'react';
 const Request = () => {
   return (
     <div className="w-full lg:p-16 md:p-8 sm:p-6 p-4">
-      <div className="bg-primary rounded-tl-xl rounded-tr-xl w-full h-full flex items-center justify-between p-8 overflow-hidden">
+      <div className="bg-primary rounded-tl-xl rounded-tr-xl w-full h-full flex items-center justify-between p-2 py-6 sm:p-4 md:p-8 overflow-hidden">
         {/* Text Content */}
         <div className="md:w-[60%] flex flex-col items-start gap-8 md:gap-16 z-10">
           <div className="flex flex-col gap-8">
-            <h2 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold">Lease your car today</h2>
-            <p className="sm:text-lg sm:text-xl text-white">
+            <h2 className="text-white text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold">Lease your car today</h2>
+            <p className="sm:text-lg md:text-xl text-white">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
             </p>
           </div>
