@@ -25,7 +25,7 @@ const CarList = () => {
 
   // Update page size based on screen size
   const updatePageSize = () => {
-    if (window.innerWidth >= xxlBreakpoint) {
+    if (window.innerWidth >= xxlBreakpoint || window.innerWidth>=768 && window.innerWidth < 1200) {
       setPageSize(6); // Use 6 for xl screens
     } else {
       setPageSize(4); // Default to 4 for smaller screens
@@ -125,11 +125,11 @@ const CarList = () => {
 
   return (
     <>
-      <h2 className='w-full pt-16 px-16 pb-4 text-xl'>About You</h2>
-      <div className='w-full h-auto flex flex-row items-center justify-between pl-16 pr-16'>
+      <h2 className='w-full lg:pr-16 lg:pl-16 lg:pt-16 pb-4 pr-4 pl-4 pt-8 xs:pr-6 xs:pl-6 xs:pt-10 xs:text-lg sm:text-md md:text-lg lg:text-xl xl:text-2xl'>About You</h2>
+      <div className='w-full h-auto gap-3 xs:gap-3 grid justify-items-center xs:grid-cols-2 sm:flex sm:flex-row sm:items-center sm:justify-between lg:px-16 xs:px-6 px-4  pb-8'>
         <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold'>Salary</p>
-          <select className='rounded-md p-3 w-[90%]'>
+          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl'>Salary</p>
+          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 w-[100%] xs:w-[100%] sm:w-[95%] lg:w-[90%]'>
             {salaryOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -138,8 +138,8 @@ const CarList = () => {
           </select>
         </div>
         <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold'>Lease Term</p>
-          <select className='rounded-md p-3 w-[90%]'>
+          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl'>Lease Term</p>
+          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%]'>
             {leaseTermOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -148,8 +148,8 @@ const CarList = () => {
           </select>
         </div>
         <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold'>State</p>
-          <select className='rounded-md p-3 w-[90%]'>
+          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl'>State</p>
+          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%]'>
             {stateOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -158,8 +158,8 @@ const CarList = () => {
           </select>
         </div>
         <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold'>Yearly Km</p>
-          <select className='rounded-md p-3 w-[90%]'>
+          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl'>Yearly Km</p>
+          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%]'>
             {yearlyKmOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -168,18 +168,18 @@ const CarList = () => {
           </select>
         </div>
       </div>
-      <div className="bg-background sm:p-16 xs:p-6 w-full flex sm:flex-row flex-col sm:items-start items-center justify-between">
+      <div className="bg-background md:p-6 lg:p-16 xs:p-6 w-full flex sm:flex-row flex-col sm:items-start items-center justify-between">
         {/* Main Content */}
-        <div className="bg-white sm:p-12 xs:p-4 pt-14 rounded-lg sm:w-[65%] xl:w-[75%]  w-full flex flex-col items-center sm:items-center">
+        <div className="bg-white md:p-5 p-4 sm:p-6 lg:p-12 xs:p-8 pt-8 xs:pt-14 rounded-lg w-full lg:w-[65%] xl:w-[75%] flex flex-col items-center sm:items-center">
           <div className='w-full flex flex-col'>
-            <div className='flex items-center justify-between'>
-              <h2 className="text-xl font-bold mb-4">Available Cars</h2>
+            <div className='flex items-center justify-between mb-6 xs:mb-10'>
+              <h2 className=" xs:text-lg lg:text-xl font-bold mb-4 xl:text-2xl 2xl:text-3xl xxl:text-4xl">Available Cars</h2>
               <div className='flex items-center gap-4'>
                 <img className='cursor-pointer' src="/images/filter.png" alt="" />
                 <img className='cursor-pointer' src="/images/sort.png" alt="" />
               </div>
             </div>
-            <div className="grid sm:grid-cols-2 grid-cols-1 xxl:grid-cols-3 sm:gap-4 lg:gap-8 xl:gap-12 xxl:gap-12 justify-stretch justify-items-center w-[100%]">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 grid-cols-1 xxl:grid-cols-3 gap-10 xs:gap-8 sm:gap-8 md:gap-1 lg:gap-8 xl:gap-12 xxl:gap-12 justify-stretch justify-items-center w-[100%]">
               {paginatedCars.length > 0 ? (
                 paginatedCars.map((car) => (
                   <CarCard
@@ -226,18 +226,14 @@ const CarList = () => {
           )}
         </div>
 
-        {/* Side Component */}
-        {/* Side Component */}
-          {/* Side Component */}
-<div className="sm:w-[33%] xxl:w-[27%] w-full">
+<div className="hidden lg:block lg:w-[35%] xxl:w-[27%] w-full">
   {selectedCar ? (
     <CalculationSide
-      car={selectedCar} // Use selected car or random fallback
+      car={selectedCar}
       onClose={() => setSelectedCar(null)}
     />
   ) : (
     <div className="relative w-full h-full">
-      {/* Blurred background */}
       <div className="blur-md">
         <CalculationSide car={randomCar} />
       </div>

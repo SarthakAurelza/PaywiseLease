@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 const CalculationSide = ({ car, onClose }) => {
   const [activeButton, setActiveButton] = useState('Weekly');
+  
 
   const handleButtonClick = (button) => {
     setActiveButton(button);
@@ -21,53 +22,53 @@ const CalculationSide = ({ car, onClose }) => {
   }
 
   return (
-    <div className="bg-white flex flex-col sm:p-7 sm:pt-12 sm:pb-12 p-3 w-full rounded-lg shadow-md sm:gap-4">
+    <div className="bg-white flex flex-col sm:p-7 lg:p-4 sm:pt-12 sm:pb-12 p-3 w-full rounded-lg shadow-md sm:gap-4 2xl:gap-8">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="font-bold sm:text-[30px]">Your Calculation</h2>
+        <h2 className="font-bold lg:text-[30px] 2xl:text-3xl">Your Calculation</h2>
         <button onClick={onClose} className="text-red-500 font-bold">X</button>
       </div>
       <div className="sm:mb-4 mb-2 flex flex-col gap-4">
-        <div className='flex flex-row bg-gray-200 items-center justify-start gap-3 rounded-lg p-1 pt-2 pb-2'>
+        <div className='flex flex-row bg-gray-200 items-center justify-start gap-3 rounded-lg lg:p-1 lg:pt-2 lg:pb-2 2xl:p-4'>
           <img
             src={car.imageUrl}
             alt={car.model}
             className="w-[130px] h-full object-cover rounded-md bg-white"
           />
-          <p className="sm:text-lg sm:text-[15px] font-semibold text-primary">
-            {car.brand.toUpperCase()} {car.model.toUpperCase()} <br /> <span className='font-normal text-[13px]'>{car.variant.toUpperCase()}</span>
+          <p className="2xl:text-xl sm:text-lg sm:text-[15px] font-semibold text-primary">
+            {car.brand.toUpperCase()} {car.model.toUpperCase()} <br /> <span className='font-normal lg:text-[13px] xl:text-lg'>{car.variant.toUpperCase()}</span>
           </p>
         </div>
 
         <div className="w-full flex justify-between items-center">
           <div>
-            <p className="text-[#808080] text-[12px]">Engine</p>
-            <p className="text-[14px] font-semibold text-primary">{car.engine}</p>
+            <p className="text-[#808080] text-[12px] 2xl:text-[14px]">Engine</p>
+            <p className="text-[14px] font-semibold text-primary 2xl:text-[16px]">{car.engine}</p>
           </div>
           <div className="h-6 border-l border-gray-300"></div>
           <div>
-            <p className="text-[12px] text-[#808080]">Body/Seats</p>
-            <p className="text-[14px] font-semibold text-primary">{car.body} - {car.seats}</p>
+            <p className="text-[12px] text-[#808080] 2xl:text-[14px]">Body/Seats</p>
+            <p className="text-[14px] font-semibold text-primary 2xl:text-[16px]">{car.body} - {car.seats}</p>
           </div>
           <div className="h-6 border-l border-gray-300"></div>
           <div>
-            <p className="text-[12px] text-[#808080]">Transmission</p>
-            <p className="text-[14px] font-semibold text-primary">{car.transmission}</p>
+            <p className="text-[12px] text-[#808080] 2xl:text-[14px]">Transmission</p>
+            <p className="text-[14px] font-semibold text-primary 2xl:text-[16px]">{car.transmission}</p>
           </div>
           <div className="h-6 border-l border-gray-300"></div>
           <div>
-            <p className="text-[12px] text-[#808080]">Consumption</p>
-            <p className="text-[14px] font-semibold text-primary">{car.fuel_consumption}L/100Km</p>
+            <p className="text-[12px] text-[#808080] 2xl:text-[14px]">Consumption</p>
+            <p className="text-[14px] font-semibold text-primary 2xl:text-[16px]">{car.fuel_consumption}L/100Km</p>
           </div>
         </div>
       </div>
       <div className="sm:mb-4 mb-2 flex flex-col gap-4">
-        <h3 className="sm:text-5xl text-3xl text-[#00445B] font-semibold">$500<span className="text-[16px] text-[#666666]">/week</span></h3>
+        <h3 className="sm:text-5xl text-3xl text-[#00445B] font-semibold 2xl:text-6xl">$500<span className="text-[16px] text-[#666666] 2xl:text-lg">/week</span></h3>
         <div className="flex justify-between">
           {['Weekly', 'Fortnightly', 'Monthly'].map((button) => (
             <button
               key={button}
               onClick={() => handleButtonClick(button)}
-              className={`border text-[11px] sm:pt-2 pr-6 sm:pb-2 pl-6 p-2 rounded-lg font-semibold ${
+              className={`border text-[11px] 2xl:text-[16px] px-6 sm:py-2 p-2 rounded-lg font-semibold ${
                 activeButton === button ? 'bg-[#41B6E7] text-white' : 'bg-white'
               }`}
             >
@@ -78,30 +79,30 @@ const CalculationSide = ({ car, onClose }) => {
       </div>
       <div className="flex flex-col gap-2 sm:mb-6 mb-3">
         <div className="flex gap-4 items-center">
-          <h2 className="text-[#1D5E5E] font-semibold">INCLUDED</h2>
+          <h2 className="text-[#1D5E5E] font-semibold text-md 2xl:text-xl">INCLUDED</h2>
           <hr className="h-[1px] w-full" />
         </div>
 
         <div className="flex flex-col sm:gap-4 gap-1">
           <div className="flex justify-between">
-            <p className="pt-[6px] pb-[6px] pl-[12px] pr-[12px] rounded border font-semibold text-[12px] text-center text-[#00445B]">
+            <p className="pt-[6px] pb-[6px] pl-[12px] pr-[12px] rounded border font-semibold text-[12px] text-center text-[#00445B] 2xl:text-[16px]">
               Fuel
             </p>
-            <p className="pt-[6px] pb-[6px] pl-[12px] pr-[12px] rounded border font-semibold text-[12px] text-center text-[#00445B]">
+            <p className="pt-[6px] pb-[6px] pl-[12px] pr-[12px] rounded border font-semibold text-[12px] text-center text-[#00445B] 2xl:text-[16px]">
               Finance
             </p>
-            <p className="pt-[6px] pb-[6px] pl-[12px] pr-[12px] rounded border font-semibold text-[12px] text-center text-[#00445B]">
+            <p className="pt-[6px] pb-[6px] pl-[12px] pr-[12px] rounded border font-semibold text-[12px] text-center text-[#00445B] 2xl:text-[16px]">
               Insurance
             </p>
-            <p className="pt-[6px] pb-[6px] pl-[12px] pr-[12px] rounded border font-semibold text-[12px] text-center text-[#00445B]">
+            <p className="pt-[6px] pb-[6px] pl-[12px] pr-[12px] rounded border font-semibold text-[12px] text-center text-[#00445B] 2xl:text-[16px]">
               Maintenance
             </p>
           </div>
           <div className="flex justify-start gap-4">
-            <p className="pt-[6px] pb-[6px] pl-[12px] pr-[12px] rounded border font-semibold text-[12px] text-center text-[#00445B]">
+            <p className="pt-[6px] pb-[6px] pl-[12px] pr-[12px] rounded border font-semibold text-[12px] text-center text-[#00445B] 2xl:text-[16px]">
               Tyres
             </p>
-            <p className="pt-[6px] pb-[6px] pl-[12px] pr-[12px] rounded border font-semibold text-[12px] text-center text-[#00445B]">
+            <p className="pt-[6px] pb-[6px] pl-[12px] pr-[12px] rounded border font-semibold text-[12px] text-center text-[#00445B] 2xl:text-[16px]">
               Registration & CTP
             </p>
           </div>
@@ -109,15 +110,15 @@ const CalculationSide = ({ car, onClose }) => {
       </div>
       <div className="flex flex-col sm:gap-5 gap-2">
         <div className="flex gap-4 items-center">
-          <h2 className="text-[#1D5E5E] font-semibold">SAVINGS</h2>
+          <h2 className="text-[#1D5E5E] font-semibold text-md 2xl:text-xl">SAVINGS</h2>
           <hr className="h-[1px] w-full" />
         </div>
 
         <div className="flex flex-col sm:gap-3 gap-1 w-full sm:mb-6 mb-3">
-          <p className="w-full text-[14px] flex justify-between">
+          <p className="w-full text-[14px] 2xl:text-lg flex justify-between">
             GST <span className="text-[#666666]">$10,000</span>
           </p>
-          <p className="w-full text-[14px] flex justify-between">
+          <p className="w-full text-[14px] flex justify-between 2xl:text-lg">
             Income Tax <span className="text-[#666666]">$20,000</span>
           </p>
         </div>
@@ -128,13 +129,13 @@ const CalculationSide = ({ car, onClose }) => {
         </div>
 
         <div className="flex flex-col gap-3 w-full sm:mb-6 mb-2">
-          <p className="w-full text-[16px] flex justify-between font-semibold text-muted">
+          <p className="w-full text-[16px] flex justify-between font-semibold text-muted 2xl:text-xl">
             Total Amount <span className='text-black'>$30,000</span>
           </p>
         </div>
       </div>
 
-      <button className="bg-[#F0EF4F] text-[18px] w-full py-2 rounded">
+      <button className="bg-[#F0EF4F] text-[18px] w-full py-2 2xl:py-4 2xl:text-2xl rounded">
         Request a Quote
       </button>
     </div>
