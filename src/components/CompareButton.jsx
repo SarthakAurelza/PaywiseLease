@@ -138,7 +138,7 @@ const CompareButton = ({ compareCarsRef }) => {
           <div className="bg-white w-[90%] max-w-4xl rounded-lg p-6 shadow-lg relative">
             <button
               onClick={handleCloseModal}
-              className="absolute top-4 right-4 bg-gray-100 hover:bg-gray-300 px-3 py-1 rounded-full font-bold"
+              className="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded-full font-bold"
             >
               X
             </button>
@@ -151,21 +151,21 @@ const CompareButton = ({ compareCarsRef }) => {
                 return (
                   <div
                     key={index}
-                    className="border p-4 rounded-lg shadow-md bg-gray-50 flex flex-col items-center justify-center"
+                    className="border rounded-lg shadow-md bg-gray-50 flex flex-col items-center justify-center"
                   >
                     {car ? (
                       <>
                         <div className="flex flex-row items-start">
                           <img
-                            className="w-[92%] h-32 object-cover rounded-lg mb-2"
+                            className="w-[91%] h-32 object-cover rounded-lg mb-2"
                             src={car.imageUrl}
                             alt={car.model}
                           />
                           <button
-                            className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-full"
+                            className="px-2 py-0 bg-gray-100 hover:bg-gray-200 rounded-full border"
                             onClick={() => dispatch(removeFromComparison(car.id))}
                           >
-                            X
+                            x
                           </button>
                         </div>
                         <h3 className="text-lg font-semibold mb-2">
