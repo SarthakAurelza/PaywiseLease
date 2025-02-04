@@ -152,13 +152,13 @@ const CompareButton = ({ compareCarsRef }) => {
                 return (
                   <div
                     key={index}
-                    className="border rounded-lg shadow-md bg-gray-50 flex flex-col items-center justify-center p-4"
+                    className="border rounded-lg shadow-md bg-gray-50 flex flex-col items-center justify-center p-3"
                   >
                     {car ? (
                       <>
                         <div className="flex flex-row items-start">
                           <img
-                            className="w-[91%] h-28 object-cover rounded-lg mb-2"
+                            className="w-[100%] h-28 object-cover rounded-lg mb-2"
                             src={car.imageUrl}
                             alt={car.model}
                           />
@@ -171,12 +171,12 @@ const CompareButton = ({ compareCarsRef }) => {
                         </div>
                         {console.log(car)}
                         <h3 className="text-lg font-semibold mb-2">
-                          {car.brand} {car.model} <br/> <span className="font-normal text-primary text-sm">{car.variant  || "BASE MODEL"}</span>
+                          {car.brand.toUpperCase()} {car.model.toUpperCase()} <br/> <span className="font-normal text-primary text-sm">{car.variant  || "BASE MODEL"}</span>
                         </h3>
 
                         <div className="w-full rounded-xl h-14 bg-gray-200 flex flex-row items-center justify-between text-xs p-1">
                           <p>From <span className="text-lg font-semibold">$370</span>/week</p>
-                          <button className="bg-primary text-white py-1 px-2 rounded-lg text-xs h-8">View Calculation</button>
+                          <button className="bg-primary text-white py-1 px-[10px] rounded-lg text-xs h-8">View Calculation</button>
                         </div>
                       </>
                     ) : (
@@ -198,7 +198,7 @@ const CompareButton = ({ compareCarsRef }) => {
             <div className="mt-6 flex justify-end">
               <button
                 onClick={handleCompareClick}
-                className="bg-secondary text-primary px-4 py-2 rounded-2xl shadow"
+                className="bg-secondary text-primary px-4 py-2 rounded-2xl shadow font-semibold"
               >
                 Compare
               </button>
