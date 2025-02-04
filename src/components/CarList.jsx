@@ -129,7 +129,7 @@ const CarList = () => {
       <h2 className='w-full lg:pr-16 lg:pl-16 lg:pt-16 pb-4 pr-4 pl-4 pt-8 xs:pr-6 xs:pl-6 xs:pt-10 xs:text-lg sm:text-md md:text-lg lg:text-xl xl:text-2xl'>About You</h2>
       <div className='w-full h-auto gap-3 xs:gap-3 grid justify-items-center xs:grid-cols-2 sm:flex sm:flex-row sm:items-center sm:justify-between lg:px-16 xs:px-6 px-4  pb-8'>
         <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl'>Salary</p>
+          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2'>Salary</p>
           <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 w-[100%] xs:w-[100%] sm:w-[95%] lg:w-[90%]'>
             {salaryOptions.map((option, index) => (
               <option key={index} value={option}>
@@ -139,7 +139,7 @@ const CarList = () => {
           </select>
         </div>
         <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl'>Lease Term</p>
+          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2'>Lease Term</p>
           <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%]'>
             {leaseTermOptions.map((option, index) => (
               <option key={index} value={option}>
@@ -149,7 +149,7 @@ const CarList = () => {
           </select>
         </div>
         <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl'>State</p>
+          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2'>State</p>
           <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%]'>
             {stateOptions.map((option, index) => (
               <option key={index} value={option}>
@@ -159,7 +159,7 @@ const CarList = () => {
           </select>
         </div>
         <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl'>Yearly Km</p>
+          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2'>Yearly Km</p>
           <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%]'>
             {yearlyKmOptions.map((option, index) => (
               <option key={index} value={option}>
@@ -256,7 +256,7 @@ const CarList = () => {
         {/* Popup for small screens */}
         {showPopup && (
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center h-[100%]">
-            <div className="bg-white rounded-lg md:p-2 lg:p-6 w-[90%] max-w-lg">
+            <div className="bg-white rounded-lg md:p-2 lg:p-6 w-[90%] max-w-lg md:h-[95%] sm:h-[90%] h-[99%]">
               <button
                 className="absolute top-2 right-2 text-gray-500 hover:text-black"
                 onClick={() => setShowPopup(false)}

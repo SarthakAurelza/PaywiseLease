@@ -172,7 +172,7 @@ const CompareCars = () => {
                           <div className="relative">
                             {/* Close (X) button */}
                             <button
-                              className="absolute top-1 right-1 text-red-500 text-xl font-bold hover:text-red-700"
+                              className="absolute top-1 right-1 rounded-full border border-muted text-muted text-xl hover:text-primary hover:bg-gray-100 py-0 px-2"
                               onClick={() =>
                                 dispatch(removeFromComparison(car.id))
                               }
@@ -191,6 +191,11 @@ const CompareCars = () => {
                                 <span className="font-medium text-sm text-muted">
                                   {car.variant.toUpperCase()}
                                 </span>
+                              </div>
+
+                              <div className="w-full rounded-xl h-14 bg-gray-100 flex flex-row items-center justify-between text-xs p-1">
+                                <p>From <span className="text-xl font-semibold">$370</span>/week</p>
+                                <button className="bg-primary text-white py-1 px-2 rounded-lg text-xs h-8 font-normal">View Calculation</button>
                               </div>
                             </div>
                           </div>
@@ -230,7 +235,7 @@ const CompareCars = () => {
                         >
                           {car && car[feature.key] !== undefined
                             ? car[feature.key]
-                            : "N/A"}
+                            : "---"}
                         </td>
                       );
                     })}

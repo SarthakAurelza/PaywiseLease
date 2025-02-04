@@ -8,8 +8,8 @@ const filtersSlice = createSlice({
     model: '',
     body: '',
     seats: 0, // Numeric value for seats
-    comparisonCars: [], // New state to hold cars selected for comparison
-    allCars: [], // New state to cache all cars data from Supabase
+    comparisonCars: [],
+    allCars: [],
   },
   reducers: {
     setFilter: (state, action) => {
@@ -31,7 +31,7 @@ const filtersSlice = createSlice({
       state.seats = 0;
     },
     setAllCars: (state, action) => {
-      state.allCars = action.payload; // Caching all car data from Supabase
+      state.allCars = action.payload;
     },
     addToComparison: (state, action) => {
       if (state.comparisonCars.length < 3) {

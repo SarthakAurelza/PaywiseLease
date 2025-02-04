@@ -109,11 +109,11 @@ const Hero = () => {
         <div className="flex flex-col gap-4 xs:w-[395px] sm:w-[91%] md:w-[59%] lg:w-[522px] 2xl:w-[660px] xxl:w-[790px] md:items-start items-center">
           <h1 className="lg:text-5xl sm:text-[42px] xs:text-4xl text-2xl font-bold mb-2 md:text-4xl 2xl:text-6xl xxl:text-7xl md:text-start text-center ">Lease your car with us</h1>
           <p className="lg:text-lg sm:text-[14px] md:text-sm text-[13px] xxl:text-2xl 2xl:text-xl mb-4 md:text-start text-center md:w-[400px] lg:w-full sm:w-[420px] xs:w-[350px]">
-            <span className="font-semibold">Did you know?</span> Electric/PHEV
+            <span className="font-semibold font-Inter">Did you know?</span> Electric/PHEV
             cars have additional tax benefits as some are paid in your pre-tax
             dollars.
           </p>
-          <a href="#" className="text-secondary sm:text-lg text-[13px] 2xl:text-2xl xxl:text-3xl underline mb-4 block">
+          <a href="#" className="text-secondary sm:text-lg text-[13px] 2xl:text-2xl xxl:text-3xl underline mb-4 block font-Inter">
             Have questions? Get in touch.
           </a>
         </div>

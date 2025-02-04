@@ -22,7 +22,7 @@ const CalculationSide = ({ car, onClose }) => {
   }
 
   return (
-    <div className="bg-white flex flex-col lg:p-4 lg:pt-12 lg:pb-12 p-4 w-full rounded-lg shadow-md lg:gap-4 2xl:gap-8">
+    <div className="bg-white flex flex-col lg:p-4 lg:pt-12 lg:pb-12 p-2 sm:p-6 md:p-4 w-full rounded-lg shadow-md lg:gap-4 2xl:gap-8 h-full lg:h-auto justify-between">
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-bold md:text-2xl lg:text-[30px] 2xl:text-3xl">Your Calculation</h2>
         <button onClick={onClose} className="rounded-full bg-gray-100 px-3 py-1 font-bold hover:bg-gray-200">X</button>
@@ -61,14 +61,14 @@ const CalculationSide = ({ car, onClose }) => {
           </div>
         </div>
       </div>
-      <div className="lg:mb-4 mb-2 flex flex-col lg:gap-4">
+      <div className="lg:mb-4 mb-2 flex flex-col md:gap-4 gap-2 lg:gap-4">
         <h3 className="md:text-4xl lg:text-5xl xs:text-3xl text-xl text-[#00445B] font-semibold 2xl:text-6xl">$500<span className="text-xs xs:text-[16px] text-[#666666] 2xl:text-lg">/week</span></h3>
         <div className="flex justify-between">
           {['Weekly', 'Fortnightly', 'Monthly'].map((button) => (
             <button
               key={button}
               onClick={() => handleButtonClick(button)}
-              className={`border text-[9px] xs:text-[11px] 2xl:text-[16px] px-3 xs:px-6 xs:py-2 p-1 rounded-lg font-semibold ${
+              className={`border text-[9px] xs:text-[11px] md:text-[14px] 2xl:text-[16px] px-3 xs:px-6 xs:py-2 p-1 rounded-lg font-semibold ${
                 activeButton === button ? 'bg-[#41B6E7] text-white' : 'bg-white'
               }`}
             >
@@ -129,13 +129,13 @@ const CalculationSide = ({ car, onClose }) => {
         </div>
 
         <div className="flex flex-col gap-3 w-full lg:mb-6 mb-2">
-          <p className="w-full text-xs xs:text-[16px] flex justify-between font-semibold text-muted 2xl:text-xl">
+          <p className="w-full text-[14px] xs:text-[16px] flex justify-between font-semibold text-muted 2xl:text-xl">
             Total Amount <span className='text-black'>$30,000</span>
           </p>
         </div>
       </div>
 
-      <button className="bg-[#F0EF4F] text-sm font-semibold sm:text-[18px] w-full py-4 2xl:py-4 2xl:text-2xl rounded">
+      <button className="bg-[#F0EF4F] text-sm font-semibold sm:text-[18px] w-full py-3 md:py-4 2xl:py-4 2xl:text-2xl rounded">
         Request a Quote
       </button>
     </div>

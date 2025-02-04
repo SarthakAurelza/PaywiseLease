@@ -85,6 +85,7 @@ const CompareButton = ({ compareCarsRef }) => {
   };
 
   const handleAddCar = (car) => {
+    console.log(car);
     dispatch(addToComparison(car));
     setIsSelectCarModalOpen(false);
   };
@@ -151,26 +152,32 @@ const CompareButton = ({ compareCarsRef }) => {
                 return (
                   <div
                     key={index}
-                    className="border rounded-lg shadow-md bg-gray-50 flex flex-col items-center justify-center"
+                    className="border rounded-lg shadow-md bg-gray-50 flex flex-col items-center justify-center p-4"
                   >
                     {car ? (
                       <>
                         <div className="flex flex-row items-start">
                           <img
-                            className="w-[91%] h-32 object-cover rounded-lg mb-2"
+                            className="w-[91%] h-28 object-cover rounded-lg mb-2"
                             src={car.imageUrl}
                             alt={car.model}
                           />
                           <button
-                            className="px-2 py-0 bg-gray-100 hover:bg-gray-200 rounded-full border"
+                            className="px-2 py-0 text-muted border-muted font-bold hover:bg-gray-100 rounded-full border"
                             onClick={() => dispatch(removeFromComparison(car.id))}
                           >
                             x
                           </button>
                         </div>
+                        {console.log(car)}
                         <h3 className="text-lg font-semibold mb-2">
-                          {car.brand} {car.model}
+                          {car.brand} {car.model} <br/> <span className="font-normal text-primary text-sm">{car.variant  || "BASE MODEL"}</span>
                         </h3>
+
+                        <div className="w-full rounded-xl h-14 bg-gray-200 flex flex-row items-center justify-between text-xs p-1">
+                          <p>From <span className="text-lg font-semibold">$370</span>/week</p>
+                          <button className="bg-primary text-white py-1 px-2 rounded-lg text-xs h-8">View Calculation</button>
+                        </div>
                       </>
                     ) : (
                       <div
