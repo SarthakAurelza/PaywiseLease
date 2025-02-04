@@ -7,7 +7,9 @@ const filtersSlice = createSlice({
     brand: '',
     model: '',
     body: '',
-    seats: 0, // Numeric value for seats
+    seats: 0,
+    price: { min: 0, max: Infinity }, // Default to a wide range
+    fuel_consumption: '', // Default empty string
     comparisonCars: [],
     allCars: [],
   },
@@ -19,6 +21,8 @@ const filtersSlice = createSlice({
         } else {
           state.engine = [action.payload.value];
         }
+      } else if (action.payload.key === 'price') {
+        state.price = action.payload.value; // Expecting { min, max }
       } else {
         state[action.payload.key] = action.payload.value;
       }
@@ -29,6 +33,8 @@ const filtersSlice = createSlice({
       state.model = '';
       state.body = '';
       state.seats = 0;
+      state.price = { min: 0, max: Infinity };
+      state.fuel_consumption = '';
     },
     setAllCars: (state, action) => {
       state.allCars = action.payload;

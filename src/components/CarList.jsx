@@ -20,6 +20,10 @@ const CarList = () => {
   const [selectedCar, setSelectedCar] = useState(null);
   const [pageSize, setPageSize] = useState(4); // Default page size
   const [showPopup, setShowPopup] = useState(false);
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+  const [sortCriteria, setSortCriteria] = useState(null);
+const [sortOrder, setSortOrder] = useState('asc'); // Default: Ascending
+
 
   // Tailwind's `xl` breakpoint in pixels (default: 1280px)
   const xxlBreakpoint = 1820;
@@ -93,6 +97,27 @@ const CarList = () => {
     if (filters.seats > 0) {
       filtered = filtered.filter((car) => car.seats === filters.seats);
     }
+    if (filters.price.min !== undefined && filters.price.max !== undefined) {
+      filtered = filtered.filter(
+        (car) => car.price >= filters.price.min && car.price <= filters.price.max
+      );
+    }
+
+    if (filters.fuel_consumption) {
+      filtered = filtered.filter((car) =>
+        car.fuel_consumption.toLowerCase().includes(filters.fuel_consumption.toLowerCase())
+      );
+    }
+
+    if (sortCriteria === 'price') {
+      filtered.sort((a, b) => (sortOrder === 'asc' ? a.price - b.price : b.price - a.price));
+    } else if (sortCriteria === 'fuel_consumption') {
+      filtered.sort((a, b) => {
+        const fuelA = parseFloat(a.fuel_consumption.replace(/[^\d.]/g, '')) || 0;
+        const fuelB = parseFloat(b.fuel_consumption.replace(/[^\d.]/g, '')) || 0;
+        return sortOrder === 'asc' ? fuelA - fuelB : fuelB - fuelA;
+      });
+    }
 
     setFilteredCars(filtered);
   };
@@ -105,7 +130,7 @@ const CarList = () => {
   // Apply filters whenever they change
   useEffect(() => {
     applyFilters();
-  }, [filters, allCars]);
+  }, [filters, allCars, sortCriteria,sortOrder]);
 
   // Handle pagination change
   const handlePageChange = (page, event) => {
@@ -176,8 +201,49 @@ const CarList = () => {
             <div className='flex items-center justify-between mb-6 xs:mb-10'>
               <h2 className=" xs:text-lg lg:text-xl font-bold mb-4 xl:text-2xl 2xl:text-3xl xxl:text-4xl">Available Cars</h2>
               <div className='flex items-center gap-4'>
-                <img className='cursor-pointer' src="/images/filter.png" alt="" />
-                <img className='cursor-pointer' src="/images/sort.png" alt="" />
+              <div className='relative'>
+                <img
+                  className='cursor-pointer'
+                  src="/images/filter.png"
+                  alt="Filter"
+                  onClick={() => setShowFilterDropdown(!showFilterDropdown)}
+                />
+                {showFilterDropdown && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-md">
+                    <ul>
+                      <li
+                        className="cursor-pointer px-4 py-2 hover:bg-gray-100"
+                        onClick={() => {
+                          setSortCriteria('price');
+                          setShowFilterDropdown(false);
+                        }}
+                      >
+                        Price (Ascending)
+                      </li>
+                      <li
+                        className="cursor-pointer px-4 py-2 hover:bg-gray-100"
+                        onClick={() => {
+                          setSortCriteria('fuel_consumption');
+                          setShowFilterDropdown(false);
+                        }}
+                      >
+                        Fuel Consumption (Ascending)
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+
+              <img
+                className='cursor-pointer'
+                src="/images/sort.png"
+                alt="Sort"
+                onClick={() => {
+                  sortCriteria && setSortOrder((prevOrder) => (prevOrder === 'asc' ? 'desc' : 'asc'));
+                }}
+              />
+
               </div>
             </div>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 grid-cols-1 xxl:grid-cols-3 gap-10 xs:gap-8 sm:gap-8 md:gap-1 lg:gap-8 xl:gap-12 xxl:gap-12 justify-stretch justify-items-center w-[100%]">
