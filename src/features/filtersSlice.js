@@ -12,6 +12,7 @@ const filtersSlice = createSlice({
     fuel_consumption: '', // Default empty string
     comparisonCars: [],
     allCars: [],
+    selectedOption: 'browse',
   },
   reducers: {
     setFilter: (state, action) => {
@@ -27,6 +28,9 @@ const filtersSlice = createSlice({
         state[action.payload.key] = action.payload.value;
       }
     },
+    setSelectedOption: (state, action) => {
+      state.selectedOption = action.payload;
+    },
     resetFilters: (state) => {
       state.engine = '';
       state.brand = '';
@@ -37,6 +41,7 @@ const filtersSlice = createSlice({
       state.fuel_consumption = '';
     },
     setAllCars: (state, action) => {
+      console.log("Redux state updating: ",action.payload);
       state.allCars = action.payload;
     },
     addToComparison: (state, action) => {
@@ -61,6 +66,7 @@ export const {
   setAllCars,
   addToComparison,
   removeFromComparison,
+  setSelectedOption,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

@@ -13,6 +13,8 @@ import CalculationSide from './CalculationSide';
 
 const CarList = () => {
   const filters = useSelector((state) => state.filters); // Use only filters from Redux
+  const selectedOption = useSelector((state)=>state.filters.selectedOption);
+  const [selectedTable, setSelectedTable] = useState(null);
   const [allCars, setAllCars] = useState([]);
   const [filteredCars, setFilteredCars] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -22,10 +24,11 @@ const CarList = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [sortCriteria, setSortCriteria] = useState(null);
-const [sortOrder, setSortOrder] = useState('asc'); // Default: Ascending
+const [sortOrder, setSortOrder] = useState('asc'); 
+console.log("Redux selectedOption:", selectedOption);
+const entireState = useSelector((state)=>state);
+console.log(entireState);
 
-
-  // Tailwind's `xl` breakpoint in pixels (default: 1280px)
   const xxlBreakpoint = 1820;
 
   // Update page size based on screen size
@@ -54,13 +57,16 @@ const [sortOrder, setSortOrder] = useState('asc'); // Default: Ascending
 
   // Fetch all cars once and cache them
   const fetchAllCars = async () => {
+
     setLoading(true);
     try {
-      const { data, error } = await supabase.from('Car_Details').select('*');
+      console.log("Fetching from table: ",selectedTable);
+      const { data, error } = await supabase.from(selectedTable).select('*');
       if (error) {
         console.error('Supabase error:', error.message);
         setAllCars([]);
       } else {
+        console.log("Fetched Cars:", data);
         setAllCars(data);
         setFilteredCars(data);
       }
@@ -122,15 +128,29 @@ const [sortOrder, setSortOrder] = useState('asc'); // Default: Ascending
     setFilteredCars(filtered);
   };
 
+  useEffect(() => {
+    if (selectedOption) {
+      const table = selectedOption === 'know' ? 'test_data_dump2': 'Car_Details';
+      console.log("selected table: ",table);
+      setSelectedTable(table);
+    }else{
+      console.log("thenga")
+    }
+  }, [selectedOption]);
+
+
   // Fetch all cars on mount
   useEffect(() => {
-    fetchAllCars();
-  }, []);
+    if(selectedTable){
+      fetchAllCars();
+    }
+    
+  }, [selectedTable]);
 
   // Apply filters whenever they change
   useEffect(() => {
     applyFilters();
-  }, [filters, allCars, sortCriteria,sortOrder]);
+  }, [filters, allCars, sortCriteria,sortOrder,selectedOption]);
 
   // Handle pagination change
   const handlePageChange = (page, event) => {

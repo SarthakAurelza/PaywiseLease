@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import supabase from '../supabase/supabaseClient';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter, resetFilters } from '../features/filtersSlice';
+import { setFilter, resetFilters, setSelectedOption } from '../features/filtersSlice';
 
 const Hero = () => {
-  const [selectedOption, setSelectedOption] = useState('browse');
+  const [Option, setOption] = useState('browse');
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const [activeButton, setActiveButton] = useState(null); // Track the active button
 
   const dispatch = useDispatch();
   const filters = useSelector((state) => state.filters);
+  const selectedOption = useSelector((state) => state.filters.selectedOption)
 
   const [brands, setBrands] = useState([]);
   const [models, setModels] = useState([]);
@@ -34,9 +35,10 @@ const Hero = () => {
   };
 
   // Fetch distinct brands from Supabase
+  const table = selectedOption === 'know' ? 'test_data_dump2': 'Car_Details'
   const fetchBrands = async () => {
     const { data, error } = await supabase
-      .from('Car_Details')
+      .from(table)
       .select('brand', { distinct: true });
     if (error) console.error(error);
     else setBrands([...new Set(data.map((item) => item.brand))]); 
@@ -45,7 +47,7 @@ const Hero = () => {
   // Fetch distinct models based on selected brand
   const fetchModels = async (brand) => {
     const { data, error } = await supabase
-      .from('Car_Details')
+      .from(table)
       .select('model', { distinct: true })
       .eq('brand', brand);
     if (error) console.error(error);
@@ -55,7 +57,7 @@ const Hero = () => {
   // Fetch distinct variants based on selected brand and model
   const fetchVariants = async (brand, model) => {
     const { data, error } = await supabase
-      .from('Car_Details')
+      .from(table)
       .select('variant', { distinct: true })
       .eq('brand', brand)
       .eq('model', model);
@@ -66,7 +68,7 @@ const Hero = () => {
   
   const fetchCarNames = async () => {
     const { data, error } = await supabase
-      .from('Car_Details')
+      .from(table)
       .select('brand, model, variant');
     if (error) console.error(error);
     else setCarNames(data); // Store full car details
@@ -93,7 +95,7 @@ const Hero = () => {
   // Initialize data on component mount
   useEffect(() => {
     fetchCarNames(); 
-  }, []);
+  }, [selectedOption]);
 
   // Load brands dynamically when "I know the car" is selected
   useEffect(() => {
@@ -130,7 +132,7 @@ const Hero = () => {
             onClick={() => {
               handleReset();
               setActiveButton(null);
-              setSelectedOption('browse');
+              dispatch(setSelectedOption('browse'));
             }}
           >
             <div className="flex flex-col items-center justify-center space-y-2 xxl:space-y-4 xs:text-md sm:text-lg md:text-[16px] lg:text-lg  2xl:text-2xl xxl:text-3xl text-xs">
@@ -148,7 +150,7 @@ const Hero = () => {
             onClick={() => {
               handleReset();
               setActiveButton(null);
-              setSelectedOption('know');
+              dispatch(setSelectedOption('know'));
             }}
           >
             <div className="flex flex-col items-center justify-center space-y-2 xs:text-md sm:text-lg md:text-[16px] lg:text-lg 2xl:text-2xl xxl:text-3xl text-xs">
