@@ -342,7 +342,7 @@ console.log(entireState);
         {/* Popup for small screens */}
         {showPopup && (
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center h-[100%]">
-            <div className="bg-white rounded-lg md:p-2 lg:p-6 w-[90%] max-w-lg md:h-[95%] sm:h-[90%] h-[90%]">
+            <div className="bg-white rounded-lg md:p-2 lg:p-6 w-[90%] max-w-lg md:h-[95%] sm:h-[90%] h-[72%]">
               <button
                 className="absolute top-2 right-2 text-gray-500 hover:text-black"
                 onClick={() => setShowPopup(false)}
