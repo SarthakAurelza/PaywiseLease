@@ -24,7 +24,7 @@ const CalculationSide = ({ car, onClose }) => {
   return (
     <div className="bg-white flex flex-col lg:p-4 lg:pt-12 lg:pb-12 p-2 sm:p-6 md:p-4 w-full rounded-lg shadow-md lg:gap-4 2xl:gap-8 h-full lg:h-auto justify-between">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="font-bold md:text-2xl lg:text-[30px] 2xl:text-3xl">Your Calculation</h2>
+        <h2 className="font-bold text-xl md:text-2xl lg:text-[30px] 2xl:text-3xl">Your Calculation</h2>
         <button onClick={onClose} className="rounded-full bg-gray-100 px-3 py-1 font-bold hover:bg-gray-200">X</button>
       </div>
       <div className="lg:mb-4 mb-1 xs:mb-2 flex flex-col gap-4">
