@@ -171,11 +171,11 @@ console.log(entireState);
 
   return (
     <>
-      <h2 className='w-full lg:pr-16 lg:pl-16 lg:pt-16 pb-4 pr-4 pl-4 pt-8 xs:pr-6 xs:pl-6 xs:pt-10 xs:text-lg sm:text-md md:text-lg lg:text-xl xl:text-2xl'>About You</h2>
+      <h2 className='w-full lg:pr-16 lg:pl-16 lg:pt-16 pb-4 pr-4 pl-4 pt-8 xs:pr-6 xs:pl-6 xs:pt-10 xs:text-lg sm:text-md md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl'>About You</h2>
       <div className='w-full h-auto gap-3 xs:gap-3 grid justify-items-center xs:grid-cols-2 sm:flex sm:flex-row sm:items-center sm:justify-between lg:px-16 xs:px-6 px-4  pb-8'>
         <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2'>Salary</p>
-          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 w-[100%] xs:w-[100%] sm:w-[95%] lg:w-[90%]'>
+          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl'>Salary</p>
+          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 w-[100%] xs:w-[100%] sm:w-[95%] lg:w-[90%] 3xl:text-2xl'>
             {salaryOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -184,8 +184,8 @@ console.log(entireState);
           </select>
         </div>
         <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2'>Lease Term</p>
-          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%]'>
+          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl'>Lease Term</p>
+          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%] 3xl:text-2xl'>
             {leaseTermOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -194,8 +194,8 @@ console.log(entireState);
           </select>
         </div>
         <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2'>State</p>
-          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%]'>
+          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl'>State</p>
+          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%] 3xl:text-2xl'>
             {stateOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -204,8 +204,8 @@ console.log(entireState);
           </select>
         </div>
         <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2'>Yearly Km</p>
-          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%]'>
+          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl'>Yearly Km</p>
+          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%] 3xl:text-2xl'>
             {yearlyKmOptions.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -219,11 +219,11 @@ console.log(entireState);
         <div className="bg-white md:p-5 p-4 sm:p-6 lg:p-12 xs:p-8 pt-8 xs:pt-14 rounded-lg w-full lg:w-[65%] xl:w-[75%] flex flex-col items-center sm:items-center">
           <div className='w-full flex flex-col'>
             <div className='flex items-center justify-between mb-6 xs:mb-10'>
-              <h2 className=" xs:text-lg lg:text-xl font-bold mb-4 xl:text-2xl 2xl:text-3xl xxl:text-4xl">Available Cars</h2>
+              <h2 className=" xs:text-lg lg:text-xl font-bold mb-4 xl:text-2xl 2xl:text-3xl xxl:text-4xl 3xl:text-5xl">Available Cars</h2>
               <div className='flex items-center gap-4'>
               <div className='relative'>
                 <img
-                  className='cursor-pointer'
+                  className='cursor-pointer 3xl:w-12'
                   src="/images/filter.png"
                   alt="Filter"
                   onClick={() => setShowFilterDropdown(!showFilterDropdown)}
@@ -256,7 +256,7 @@ console.log(entireState);
 
 
               <img
-                className='cursor-pointer'
+                className='cursor-pointer 3xl:w-12'
                 src="/images/sort.png"
                 alt="Sort"
                 onClick={() => {
