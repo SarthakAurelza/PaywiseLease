@@ -7,7 +7,7 @@ const Request = () => {
         {/* Text Content */}
         <div className="md:w-[60%] flex flex-col items-start gap-8 md:gap-16 3xl:gap-36 z-10">
           <div className="flex flex-col gap-8">
-            <h2 className="text-white text-2xl xs:text-3xl sm:text-4xl md:text-5xl 3xl:text-8xl font-bold">Lease your car today</h2>
+            <h2 className="text-[#41b6e6] text-2xl xs:text-3xl sm:text-4xl md:text-5xl 3xl:text-8xl font-bold">Lease your car today</h2>
             <p className="sm:text-lg md:text-xl text-white 3xl:text-3xl">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.
             </p>

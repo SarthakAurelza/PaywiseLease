@@ -10,6 +10,8 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination';
 import CalculationSide from './CalculationSide';
+import useVehicleData from '@/hooks/useVehicleData';
+import useQuoteData from '@/hooks/useQuoteData';
 
 const CarList = () => {
   const filters = useSelector((state) => state.filters); // Use only filters from Redux
@@ -24,10 +26,13 @@ const CarList = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [sortCriteria, setSortCriteria] = useState(null);
-const [sortOrder, setSortOrder] = useState('asc'); 
-console.log("Redux selectedOption:", selectedOption);
-const entireState = useSelector((state)=>state);
-console.log(entireState);
+  const [sortOrder, setSortOrder] = useState('asc'); 
+  const entireState = useSelector((state)=>state);
+  const [vehicleDataMap, setVehicleDataMap] = useState({});
+  const [quoteDataMap, setQuoteDataMap] = useState({});
+  const { fetchVehicleData } = useVehicleData();
+  const { fetchQuoteData } = useQuoteData();
+  
 
   const xxlBreakpoint = 1820;
 
@@ -158,6 +163,48 @@ console.log(entireState);
     setCurrentPage(page);
   };
 
+  useEffect(() => {
+    const paginatedCars = filteredCars.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+    fetchVehicleDataForPage(paginatedCars);
+  }, [filteredCars, currentPage, pageSize]);
+
+  const fetchVehicleDataForPage = async (cars) => {
+    const vehicleDataPromises = cars.map((car) => fetchVehicleData(car.brand, car.model, car.yearGroup));
+    
+    const vehicleDataResults = await Promise.allSettled(vehicleDataPromises);
+    const updatedVehicleDataMap = {};
+
+    cars.forEach((car, index) => {
+      if (vehicleDataResults[index].status === "fulfilled") {
+        updatedVehicleDataMap[car.id] = vehicleDataResults[index].value;
+      }
+    });
+    
+    setVehicleDataMap((prev) => ({ ...prev, ...updatedVehicleDataMap }));
+    fetchQuoteDataForPage(cars, updatedVehicleDataMap);
+  };
+
+  const fetchQuoteDataForPage = async (cars, vehicleData) => {
+    for (const car of cars) {
+      if (!vehicleData[car.id]) continue;
+      try {
+        const quoteResponse = await fetchQuoteData(vehicleData[car.id], {
+          state: "NSW",
+          annualSalary: 120000,
+          leaseTerm: 48,
+          annualKms: 15000,
+          hasHECS: false,
+          age: 35,
+          includeGAP: true,
+          includeRoadSide: false,
+        });
+        setQuoteDataMap((prev) => ({ ...prev, [car.id]: quoteResponse }));
+      } catch (error) {
+        console.error(`Failed to fetch quote data for car ${car.id}:`, error);
+      }
+    }
+  };
+
   // Paginate the filtered data
   const paginatedCars = filteredCars.slice(
     (currentPage - 1) * pageSize,
@@ -272,6 +319,7 @@ console.log(entireState);
                   <CarCard
                     {...car}
                     key={car.id}
+                    quoteData={quoteDataMap[car.id]}
                     onViewCalculation={() => {
                       setSelectedCar(car);
                       if (window.innerWidth < 1200) {
@@ -322,6 +370,7 @@ console.log(entireState);
           {selectedCar ? (
             <CalculationSide
               car={selectedCar}
+              quoteData = {quoteDataMap[selectedCar.id]}
               onClose={() => setSelectedCar(null)}
             />
           ) : (

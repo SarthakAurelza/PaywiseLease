@@ -125,7 +125,7 @@ const CompareButton = ({ compareCarsRef }) => {
       {/* Compare Button */}
       <div
         onClick={handleButtonClick}
-        className="fixed bottom-1 left-2 bg-secondary text-primary px-4 py-2 rounded-xl flex items-center gap-2 shadow-lg cursor-pointer hover:bg-secondary"
+        className="fixed bottom-1 left-2 bg-[#41b6e6] text-primary px-4 py-2 rounded-xl flex items-center gap-2 shadow-lg cursor-pointer"
       >
         <span className="font-semibold">Compare Cars</span>
         <div className="bg-white text-primary w-8 h-8 rounded-full flex items-center justify-center font-bold">
@@ -158,8 +158,8 @@ const CompareButton = ({ compareCarsRef }) => {
                       <>
                         <div className="flex flex-row items-start">
                           <img
-                            className="w-[100%] h-28 object-cover rounded-lg mb-2"
-                            src={car.imageUrl}
+                            className="w-[94%] object-cover rounded-lg mb-2"
+                            src={`https://liveimages.redbook.com.au/redbook/car/spec/${car.imageUrl}.jpg`}
                             alt={car.model}
                           />
                           <button

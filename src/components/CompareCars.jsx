@@ -15,6 +15,7 @@ const CompareCars = () => {
   const [filters, setFilters] = useState({ search: "", expandedBrand: null }); // Filters for search and accordions
   const [filteredCars, setFilteredCars] = useState([]); // Cars filtered by brand and search
   const [suggestions, setSuggestions] = useState([]); // Suggestions for live search
+  const selectedOption = useSelector((state)=>state.filters.selectedOption);
 
   const totalSlots = 3; // Total comparison slots (e.g., Select Car placeholders)
 
@@ -25,9 +26,10 @@ const CompareCars = () => {
         return;
       }
 
+      const table = selectedOption === 'know' ? 'test_data_dump2': 'Car_Details';
       const carIds = comparisonCars.map((car) => car.id);
       const { data, error } = await supabase
-        .from("Car_Details")
+        .from(table)
         .select("*")
         .in("id", carIds);
 
@@ -46,7 +48,8 @@ const CompareCars = () => {
   useEffect(() => {
     const fetchAllCars = async () => {
       try {
-        const { data, error } = await supabase.from("Car_Details").select("*");
+        const table = selectedOption === 'know' ? 'test_data_dump2': 'Car_Details';
+        const { data, error } = await supabase.from(table).select("*");
         if (error) {
           console.error("Error fetching cars:", error);
           return;
@@ -202,9 +205,7 @@ const CompareCars = () => {
                                 <div className="w-full flex flex-col lg:text-lg md:text-xs">
                                   {car.brand.toUpperCase()} {car.model.toUpperCase()}{" "}
                                   <br />
-                                  <span className="font-medium text-sm text-muted">
-                                    {car.variant.toUpperCase()}
-                                  </span>
+                                  
                                 </div>
 
                                 <div className="w-full rounded-xl h-14 bg-gray-100 flex flex-row items-center justify-between text-xs px-1 py-2">
@@ -310,9 +311,7 @@ const CompareCars = () => {
               {car.brand.toUpperCase()} {car.model.toUpperCase()}
               <br/>
 
-              <span className="font-medium text-[10px] text-muted">
-              {car.variant.toUpperCase()}
-            </span>
+            
             </h3>
           </div>
         </div>

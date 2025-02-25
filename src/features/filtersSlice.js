@@ -8,11 +8,14 @@ const filtersSlice = createSlice({
     model: '',
     body: '',
     seats: 0,
-    price: { min: 0, max: Infinity }, // Default to a wide range
-    fuel_consumption: '', // Default empty string
+    price: { min: 0, max: Infinity },
+    fuel_consumption: '',
     comparisonCars: [],
     allCars: [],
     selectedOption: 'browse',
+    quoteData: null, // ✅ NEW: Store quoteData globally
+    isFetchingQuote: false,
+    quoteTime: 'weekly',
   },
   reducers: {
     setFilter: (state, action) => {
@@ -23,7 +26,7 @@ const filtersSlice = createSlice({
           state.engine = [action.payload.value];
         }
       } else if (action.payload.key === 'price') {
-        state.price = action.payload.value; // Expecting { min, max }
+        state.price = action.payload.value;
       } else {
         state[action.payload.key] = action.payload.value;
       }
@@ -41,7 +44,7 @@ const filtersSlice = createSlice({
       state.fuel_consumption = '';
     },
     setAllCars: (state, action) => {
-      console.log("Redux state updating: ",action.payload);
+      console.log("Redux state updating: ", action.payload);
       state.allCars = action.payload;
     },
     addToComparison: (state, action) => {
@@ -57,6 +60,17 @@ const filtersSlice = createSlice({
     removeFromComparison: (state, action) => {
       state.comparisonCars = state.comparisonCars.filter((car) => car.id !== action.payload);
     },
+    setQuoteData: (state, action) => {
+      console.log("Updating quoteData in Redux:", action.payload); // ✅ Log state update
+      state.quoteData = action.payload;
+      state.isFetchingQuote = false;
+    },
+    setFetchingQuote: (state, action) => {
+      state.isFetchingQuote = action.payload; // ✅ Start/Stop fetching state
+    },
+    setQuoteTime: (state, action) => {
+      state.quoteTime = action.payload;
+    },
   },
 });
 
@@ -67,6 +81,10 @@ export const {
   addToComparison,
   removeFromComparison,
   setSelectedOption,
+  setQuoteTime,
+  setQuoteData, // ✅ NEW: Export setQuoteData action
+  setFetchingQuote,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;
+
