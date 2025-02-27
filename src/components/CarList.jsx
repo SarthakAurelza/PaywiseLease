@@ -263,7 +263,7 @@ const CarList = () => {
       </div>
       <div className="bg-background md:p-6 lg:p-16 xs:p-6 w-full flex sm:flex-row flex-col sm:items-start items-center justify-between">
         {/* Main Content */}
-        <div className="bg-white md:p-5 p-4 sm:p-6 lg:p-12 xs:p-8 pt-8 xs:pt-14 rounded-lg w-full lg:w-[65%] xl:w-[75%] flex flex-col items-center sm:items-center">
+        <div className="bg-white md:p-5 p-4 sm:p-6 lg:p-12 xs:p-8 pt-8 xs:pt-14 rounded-lg w-full lg:w-[65%] xl:w-[68%] flex flex-col items-center sm:items-center">
           <div className='w-full flex flex-col'>
             <div className='flex items-center justify-between mb-6 xs:mb-10'>
               <h2 className=" xs:text-lg lg:text-xl font-bold mb-4 xl:text-2xl 2xl:text-3xl xxl:text-4xl 3xl:text-5xl">Available Cars</h2>
@@ -366,7 +366,7 @@ const CarList = () => {
           )}
         </div>
 
-        <div className="hidden lg:block lg:w-[35%] xxl:w-[27%] w-full">
+        <div className="hidden lg:block lg:w-[33%] xl:w-[31%] xxl:w-[27%] w-full">
           {selectedCar ? (
             <CalculationSide
               car={selectedCar}
@@ -374,8 +374,8 @@ const CarList = () => {
               onClose={() => setSelectedCar(null)}
             />
           ) : (
-            <div className="relative w-full h-full">
-              <div className="blur-md">
+            <div className="relative w-full h-full border">
+              <div className="blur-md border">
                 <CalculationSide car={randomCar} />
               </div>
               {/* Message over the blurred background */}

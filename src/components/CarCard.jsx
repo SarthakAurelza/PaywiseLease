@@ -137,7 +137,7 @@ const CarCard = ({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.3 }}
-              className="w-full bg-white h-12 xl:h-16 p-2 xs:p-3 sm:p-2 md:p-1 lg:p-2 xl:p-3 pt-4 pb-4 rounded-md flex flex-row items-center justify-between blur-sm"
+              className="w-full bg-white/50 h-12 xl:h-16 p-2 xs:p-3 sm:p-2 md:p-1 lg:p-2 xl:p-3 pt-4 pb-4 rounded-md flex flex-row items-center justify-between blur-sm border border-gray-200"
             >
               <p className="font-bold text-xl md:text-lg lg:text-3xl text-primary xl:text-[32px] 2xl:text-5xl xxl:text-4xl">
                 <span className="sm:text-[8px] xl:text-[12px] 2xl:text-[16px] xxl:text-md 3xl:text-lg text-xs sm:font-semibold">FROM </span>$370
