@@ -126,7 +126,7 @@ const Hero = () => {
           <button
             className={`sm:w-[200px] lg:w-48 2xl:w-60 xxl:w-[320px] flex-1 p-2 xs:p-4 lg:p-4 xxl:p-8 md:p-2 sm:p-6 rounded-md font-medium ${
               selectedOption === 'browse'
-                ? 'bg-[#41b6e6] text-[#013243]'
+                ? 'bg-[#41b6e6] text-white'
                 : 'bg-white text-[#013243]'
             }`}
             onClick={() => {
@@ -146,7 +146,7 @@ const Hero = () => {
           <button
             className={`flex-1 xs:p-4 sm:p-4 md:p-2 p-2 xxl:p-8 rounded-md font-medium ${
               selectedOption === 'know'
-                ? 'bg-[#41b6e6] text-[#013243]'
+                ? 'bg-[#41b6e6] text-white'
                 : 'bg-white text-[#013243]'
             }`}
             onClick={() => {
@@ -170,7 +170,7 @@ const Hero = () => {
       {/* Dynamic Content */}
       {selectedOption === 'browse' ? (
         <div className="p-4 xs:p-3 sm:p-4 md:py-5 md:p-5 2xl:p-8 xxl:py-10 3xl:py-12 rounded-xl bg-[#41b6e6]">
-          <h2 className="sm:text-lg md:text-md lg:text-lg 2xl:text-xl xxl:text-2xl 3xl:text-3xl text-[16px] font-semibold mb-2 text-black">Select Preference</h2>
+          <h2 className="sm:text-lg md:text-md lg:text-lg 2xl:text-xl xxl:text-2xl 3xl:text-3xl text-[16px] font-semibold mb-2 text-white">Select Preference</h2>
           <div className="flex flex-col sm:w-auto gap-3
           sm:gap-2 md:gap-3 xxl:gap-12 2xl:gap-8 xs:grid xs:grid-cols-3 lg:gap-6">
             <button
@@ -250,7 +250,7 @@ const Hero = () => {
         </div>
       ) : (
         <div className="bg-[#41b6e6] p-5 2xl:p-8 xxl:p-12 rounded-md">
-          <h2 className="lg:text-lg 2xl:text-xl xxl:text-2xl 3xl:text-3xl sm:font-bold mb-2 text-black">Search for Vehicles</h2>
+          <h2 className="lg:text-lg 2xl:text-xl xxl:text-2xl 3xl:text-3xl sm:font-bold mb-2 text-white">Search for Vehicles</h2>
           <div className="sm:grid sm:grid-cols-4 sm:gap-4 flex flex-col gap-5">
             {/* Search Input */}
             <div className="relative">
