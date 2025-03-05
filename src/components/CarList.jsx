@@ -263,7 +263,7 @@ const CarList = () => {
       </div>
       <div className="bg-background md:p-6 lg:p-16 xs:p-6 w-full flex sm:flex-row flex-col sm:items-start items-center justify-between">
         {/* Main Content */}
-        <div className="bg-white md:p-5 p-4 sm:p-6 lg:p-12 xs:p-8 pt-8 xs:pt-14 rounded-lg w-full lg:w-[65%] xl:w-[68%] flex flex-col items-center sm:items-center">
+        <div className="bg-white md:p-5 p-4 sm:p-6 lg:p-12 xs:p-8 pt-8 xs:pt-14 rounded-lg w-full lg:w-[66%] xl:w-[68%] flex flex-col items-center sm:items-center">
           <div className='w-full flex flex-col'>
             <div className='flex items-center justify-between mb-6 xs:mb-10'>
               <h2 className=" xs:text-lg lg:text-xl font-bold mb-4 xl:text-2xl 2xl:text-3xl xxl:text-4xl 3xl:text-5xl">Available Cars</h2>
@@ -276,7 +276,7 @@ const CarList = () => {
                   onClick={() => setShowFilterDropdown(!showFilterDropdown)}
                 />
                 {showFilterDropdown && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-md">
+                  <div className="absolute right-0 mt-2 w-72 bg-white border border-gray-200 shadow-lg rounded-md">
                     <ul>
                       <li
                         className="cursor-pointer px-4 py-2 hover:bg-gray-100"
@@ -313,7 +313,7 @@ const CarList = () => {
 
               </div>
             </div>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 grid-cols-1 xxl:grid-cols-3 gap-10 xs:gap-8 sm:gap-8 md:gap-1 lg:gap-8 xl:gap-12 xxl:gap-12 justify-stretch justify-items-center w-[100%]">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 grid-cols-1 xxl:grid-cols-3 gap-10 xs:gap-8 sm:gap-8 md:gap-1 lg:gap-4 xl:gap-12 xxl:gap-12 justify-stretch justify-items-center w-[100%]">
               {paginatedCars.length > 0 ? (
                 paginatedCars.map((car) => (
                   <CarCard
@@ -374,8 +374,8 @@ const CarList = () => {
               onClose={() => setSelectedCar(null)}
             />
           ) : (
-            <div className="relative w-full h-full border">
-              <div className="blur-md border">
+            <div className="relative w-full h-full border-4 border-white rounded-md">
+              <div className="blur-md">
                 <CalculationSide car={randomCar} />
               </div>
               {/* Message over the blurred background */}

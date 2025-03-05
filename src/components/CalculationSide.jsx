@@ -9,7 +9,46 @@ const CalculationSide = ({ car, onClose, quoteData }) => {
   const [displayQuote, setDisplayQuote] = useState(null);
   const dispatch = useDispatch();
 
-  
+
+const handleSubmit = async (event) => {
+  event.preventDefault(); // Prevent default form submission
+
+  const formData = new FormData(event.target);
+
+  // Create JSON object from form data
+  const data = {
+    first_name: formData.get("first_name"),
+    last_name: formData.get("last_name"),
+    email: formData.get("email"),
+    phone: formData.get("phone"),
+    ref_source_text: "Website Form Submission", // Static reference text
+    comment: formData.get("comment") || "", // Optional comment field
+  };
+
+  try {
+    const response = await fetch("https://oneboard.fleetnetwork.com.au/api/v1/leads/wp", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer YOUR_API_TOKEN`, // Replace with your actual API token
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      alert("Your quote request has been submitted successfully!");
+      event.target.reset(); // Reset the form
+    } else {
+      const errorData = await response.json();
+      alert(`Submission failed: ${errorData.message || "Unknown error"}`);
+    }
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    alert("An error occurred while submitting your request. Please try again later.");
+  }
+};
+
   
   
   const isFetchingQuote = useSelector((state) => state.filters.isFetchingQuote);
@@ -90,22 +129,22 @@ const CalculationSide = ({ car, onClose, quoteData }) => {
                   >
                     ⬅ Back
                   </button>
-                  <form className="flex flex-col gap-6">
-                  
-                    <input type="text" className="border p-2 rounded-md w-full border-primary" placeholder="First Name*" />
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                    <input type="text" name="first_name" className="border p-2 rounded-md w-full border-primary" placeholder="First Name*" required />
 
-                    <input type="text" className="border p-2 rounded-md w-full border-primary" placeholder="Last Name*" />
+                    <input type="text" name="last_name" className="border p-2 rounded-md w-full border-primary" placeholder="Last Name*" required />
 
-                    <input type="email" className="border p-2 rounded-md w-full border-primary" placeholder="Enter your email" />
+                    <input type="email" name="email" className="border p-2 rounded-md w-full border-primary" placeholder="Enter your email" required />
 
-                    <input type="tel" className="border p-2 rounded-md w-full border-primary" placeholder="Enter your phone number" />
+                    <input type="tel" name="phone" className="border p-2 rounded-md w-full border-primary" placeholder="Enter your phone number" required />
 
-                    <textarea className="border p-2 rounded-md w-full h-24 border-primary" placeholder="Any additional requests"></textarea>
+                    <textarea name="comment" className="border p-2 rounded-md w-full h-24 border-primary" placeholder="Any additional requests"></textarea>
 
-                    <button className="bg-muted text-white p-3 rounded-md text-lg font-semibold mt-4">Submit Quote Request</button>
+                    <button type="submit" className="bg-muted text-white p-3 rounded-md text-lg font-semibold mt-4">Submit Quote Request</button>
 
                     <p>By clicking "submit", you acknowledge our Privacy Policy which contains a description of how we use your personal information.</p>
                   </form>
+
         </motion.div>
           </>
         ) : (
