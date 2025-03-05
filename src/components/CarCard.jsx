@@ -139,7 +139,7 @@ const CarCard = ({
               transition={{ duration: 0.3 }}
               className="w-full bg-primary h-12 xl:h-16 p-2 xs:p-3 sm:p-2 md:p-1 lg:p-2 xl:p-3 pt-4 pb-4 rounded-md flex flex-row items-center justify-between"
             >
-              <p className="font-bold text-xl md:text-lg lg:text-3xl text-white xl:text-[32px] 2xl:text-5xl xxl:text-4xl blur-sm">
+              <p className="font-bold text-xl md:text-lg lg:text-3xl text-white xl:text-[32px] 2xl:text-5xl xxl:text-4xl blur-[8px]">
                 <span className="sm:text-[8px] xl:text-[12px] 2xl:text-[16px] xxl:text-md 3xl:text-lg text-xs sm:font-semibold">FROM </span>$370
                 <span className="sm:text-[10px] xl:text-[14px] 2xl:text-[20px] xxl:text-[16px] text-xs">/week</span>
               </p>

@@ -375,7 +375,7 @@ const CarList = () => {
             />
           ) : (
             <div className="relative w-full h-full border-4 border-white rounded-md">
-              <div className="blur-md">
+              <div className="blur-[22px]">
                 <CalculationSide car={randomCar} />
               </div>
               {/* Message over the blurred background */}
