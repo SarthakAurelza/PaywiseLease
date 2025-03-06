@@ -29,7 +29,7 @@ const handleSubmit = async (event) => {
     const response = await fetch("https://oneboard.fleetnetwork.com.au/api/v1/leads/wp", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer YOUR_API_TOKEN`, // Replace with your actual API token
+        "Authorization": `Bearer ${import.meta.env.VITE_FORM_TOKEN}`, // Replace with your actual API token
         "Content-Type": "application/json",
         "Accept": "application/json",
       },
