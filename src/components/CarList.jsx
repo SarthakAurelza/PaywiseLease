@@ -247,7 +247,7 @@ const CarList = () => {
       />
 
       {/* Salary Min and Max Labels */}
-      <div className="w-[80%] flex justify-between text-xs md:text-sm text-gray-500 mt-4">
+      <div className="w-[80%] flex justify-between text-xs md:text-sm text-gray-500 mt-2">
         <span>$20,000</span>
         <span>$200,000</span>
       </div>
