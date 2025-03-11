@@ -38,6 +38,7 @@ const handleSubmit = async (event) => {
 
     if (response.ok) {
       alert("Your quote request has been submitted successfully!");
+      console.log(response);
       event.target.reset(); // Reset the form
     } else {
       const errorData = await response.json();

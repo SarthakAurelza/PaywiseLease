@@ -32,6 +32,12 @@ const CarList = () => {
   const [quoteDataMap, setQuoteDataMap] = useState({});
   const { fetchVehicleData } = useVehicleData();
   const { fetchQuoteData } = useQuoteData();
+  const [salary, setSalary] = useState(20000);
+  const min = 20000;
+  const max = 200000;
+
+  // Calculate the percentage of the slider filled
+  const percentage = ((salary - min) / (max - min)) * 100;
   
 
   const xxlBreakpoint = 1820;
@@ -220,16 +226,33 @@ const CarList = () => {
     <>
       <h2 className='w-full lg:pr-16 lg:pl-16 lg:pt-16 pb-4 pr-4 pl-4 pt-8 xs:pr-6 xs:pl-6 xs:pt-10 xs:text-lg sm:text-md md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl'>About You</h2>
       <div className='w-full h-auto gap-3 xs:gap-3 grid justify-items-center xs:grid-cols-2 sm:flex sm:flex-row sm:items-center sm:justify-between lg:px-16 xs:px-6 px-4  pb-8'>
-        <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl'>Salary</p>
-          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 w-[100%] xs:w-[100%] sm:w-[95%] lg:w-[90%] 3xl:text-2xl'>
-            {salaryOptions.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div className="w-full flex flex-col justify-between items-start">
+      {/* Label */}
+      <p className="text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl w-[80%]">
+        Salary: <span className='font-light'>${salary.toLocaleString()}</span>
+      </p>
+
+      {/* Slider Input */}
+      <input
+        type="range"
+        min="20000"
+        max="200000"
+        step="1000"
+        value={salary}
+        onChange={(e) => setSalary(Number(e.target.value))}
+        className="w-[80%] cursor-pointer appearance-none rounded-md h-2 focus:outline-none"
+        style={{
+          background: `linear-gradient(to right, #4A90E2 ${percentage}%, #ddd ${percentage}%)`,
+        }}
+      />
+
+      {/* Salary Min and Max Labels */}
+      <div className="w-[80%] flex justify-between text-xs md:text-sm text-gray-500 mt-4">
+        <span>$20,000</span>
+        <span>$200,000</span>
+      </div>
+    </div>
+    
         <div className='w-full flex flex-col'>
           <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl'>Lease Term</p>
           <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%] 3xl:text-2xl'>
