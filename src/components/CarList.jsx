@@ -32,12 +32,20 @@ const CarList = () => {
   const [quoteDataMap, setQuoteDataMap] = useState({});
   const { fetchVehicleData } = useVehicleData();
   const { fetchQuoteData } = useQuoteData();
+  const [tempSalary, setTempSalary] = useState(20000);
+  const [tempLeaseTerm, setTempLeaseTerm] = useState(1);
+  const [tempYearlyKm, setTempYearlyKm] = useState(5000);
+
   const [salary, setSalary] = useState(20000);
-  const min = 20000;
-  const max = 200000;
+  const [leaseTerm, setLeaseTerm] = useState(1);
+  const [yearlyKm, setYearlyKm] = useState(5000);
+
+  
 
   // Calculate the percentage of the slider filled
-  const percentage = ((salary - min) / (max - min)) * 100;
+  const percentage_salary = ((salary - 20000) / (200000-20000)) * 100;
+  const percentage_lease_term = ((leaseTerm-1)/(5-1))*100;
+  const percentage_yearly_km = ((yearlyKm-5000)/(30000-5000))*100;
   
 
   const xxlBreakpoint = 1820;
@@ -59,6 +67,31 @@ const CarList = () => {
       window.removeEventListener('resize', updatePageSize);
     };
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+        setSalary(tempSalary);
+    }, 500); // 500ms delay before updating
+
+    return () => clearTimeout(timer);
+}, [tempSalary]);
+
+useEffect(() => {
+    const timer = setTimeout(() => {
+        setLeaseTerm(tempLeaseTerm);
+    }, 500);
+
+    return () => clearTimeout(timer);
+}, [tempLeaseTerm]);
+
+useEffect(() => {
+    const timer = setTimeout(() => {
+        setYearlyKm(tempYearlyKm);
+    }, 500);
+
+    return () => clearTimeout(timer);
+}, [tempYearlyKm]);
+
 
   // Dropdown options
   const salaryOptions = ['0-50,000', '50,000-100,000', '100,000+'];
@@ -170,46 +203,83 @@ const CarList = () => {
   };
 
   useEffect(() => {
+    if (loading) return; // Prevent new API calls if data is already being fetched
+
     const paginatedCars = filteredCars.slice((currentPage - 1) * pageSize, currentPage * pageSize);
     fetchVehicleDataForPage(paginatedCars);
-  }, [filteredCars, currentPage, pageSize]);
+}, [filteredCars, currentPage, pageSize, salary, leaseTerm, yearlyKm]);
+
 
   const fetchVehicleDataForPage = async (cars) => {
-    const vehicleDataPromises = cars.map((car) => fetchVehicleData(car.brand, car.model, car.yearGroup));
-    
-    const vehicleDataResults = await Promise.allSettled(vehicleDataPromises);
-    const updatedVehicleDataMap = {};
+    if (!cars.length) return;
 
-    cars.forEach((car, index) => {
-      if (vehicleDataResults[index].status === "fulfilled") {
-        updatedVehicleDataMap[car.id] = vehicleDataResults[index].value;
-      }
-    });
-    
-    setVehicleDataMap((prev) => ({ ...prev, ...updatedVehicleDataMap }));
-    fetchQuoteDataForPage(cars, updatedVehicleDataMap);
-  };
+    // Set loading state before API calls
+    setLoading(true);
 
-  const fetchQuoteDataForPage = async (cars, vehicleData) => {
-    for (const car of cars) {
-      if (!vehicleData[car.id]) continue;
-      try {
-        const quoteResponse = await fetchQuoteData(vehicleData[car.id], {
-          state: "NSW",
-          annualSalary: 120000,
-          leaseTerm: 48,
-          annualKms: 15000,
-          hasHECS: false,
-          age: 35,
-          includeGAP: true,
-          includeRoadSide: false,
-        });
-        setQuoteDataMap((prev) => ({ ...prev, [car.id]: quoteResponse }));
-      } catch (error) {
-        console.error(`Failed to fetch quote data for car ${car.id}:`, error);
-      }
+    // Delay execution to prevent rapid calls
+    if (window.vehicleFetchTimeout) {
+        clearTimeout(window.vehicleFetchTimeout);
     }
-  };
+
+    window.vehicleFetchTimeout = setTimeout(async () => {
+        console.log("Fetching vehicle data for:", cars);
+
+        const vehicleDataPromises = cars.map((car) =>
+            fetchVehicleData(car.brand, car.model, car.yearGroup)
+        );
+
+        const vehicleDataResults = await Promise.allSettled(vehicleDataPromises);
+        const updatedVehicleDataMap = {};
+
+        cars.forEach((car, index) => {
+            if (vehicleDataResults[index].status === "fulfilled") {
+                updatedVehicleDataMap[car.id] = vehicleDataResults[index].value;
+            }
+        });
+
+        setVehicleDataMap((prev) => ({ ...prev, ...updatedVehicleDataMap }));
+        fetchQuoteDataForPage(cars, updatedVehicleDataMap);
+
+        // Set loading state to false after fetching
+        setLoading(false);
+    }, 1000); // Wait 1 second before making API calls
+};
+
+
+const fetchQuoteDataForPage = async (cars, vehicleData) => {
+  if (!cars.length) return;
+
+  // Delay execution to prevent excessive API calls
+  if (window.quoteFetchTimeout) {
+      clearTimeout(window.quoteFetchTimeout);
+  }
+
+  window.quoteFetchTimeout = setTimeout(async () => {
+      console.log("Fetching quote data for:", cars);
+
+      for (const car of cars) {
+          if (!vehicleData[car.id]) continue;
+
+          try {
+              const quoteResponse = await fetchQuoteData(vehicleData[car.id], {
+                  state: "NSW",
+                  annualSalary: salary,
+                  leaseTerm: leaseTerm * 12,
+                  annualKms: yearlyKm,
+                  hasHECS: false,
+                  age: 35,
+                  includeGAP: true,
+                  includeRoadSide: false,
+              });
+
+              setQuoteDataMap((prev) => ({ ...prev, [car.id]: quoteResponse }));
+          } catch (error) {
+              console.error(`Failed to fetch quote data for car ${car.id}:`, error);
+          }
+      }
+  }, 1500); // Wait 1.5 seconds before making quote API calls
+};
+
 
   // Paginate the filtered data
   const paginatedCars = filteredCars.slice(
@@ -225,7 +295,7 @@ const CarList = () => {
   return (
     <>
       <h2 className='w-full lg:pr-16 lg:pl-16 lg:pt-16 pb-4 pr-4 pl-4 pt-8 xs:pr-6 xs:pl-6 xs:pt-10 xs:text-lg sm:text-md md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl'>About You</h2>
-      <div className='w-full h-auto gap-3 xs:gap-3 grid justify-items-center xs:grid-cols-2 sm:flex sm:flex-row sm:items-center sm:justify-between lg:px-16 xs:px-6 px-4  pb-8'>
+      <div className='w-full h-auto gap-3 xs:gap-3 grid justify-items-center xs:grid-cols-2 md:flex md:flex-row md:items-center md:justify-between lg:px-16 xs:px-6 px-4  pb-8'>
       <div className="w-full flex flex-col justify-between items-start">
       {/* Label */}
       <p className="text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl w-[80%]">
@@ -237,32 +307,48 @@ const CarList = () => {
         type="range"
         min="20000"
         max="200000"
-        step="1000"
-        value={salary}
-        onChange={(e) => setSalary(Number(e.target.value))}
-        className="w-[80%] cursor-pointer appearance-none rounded-md h-2 focus:outline-none"
+        step="5000"
+        value={tempSalary}
+        onChange={(e) => setTempSalary(Number(e.target.value))}
+        className="sm:w-[90%] w-full cursor-pointer appearance-none rounded-md h-2 focus:outline-none"
         style={{
-          background: `linear-gradient(to right, #4A90E2 ${percentage}%, #ddd ${percentage}%)`,
+          background: `linear-gradient(to right, #4A90E2 ${percentage_salary}%, #ddd ${percentage_salary}%)`,
         }}
       />
 
       {/* Salary Min and Max Labels */}
-      <div className="w-[80%] flex justify-between text-xs md:text-sm text-gray-500 mt-2">
+      <div className="sm:w-[90%] w-full flex justify-between text-xs md:text-sm text-gray-500 mt-2">
         <span>$20,000</span>
         <span>$200,000</span>
       </div>
     </div>
     
-        <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl'>Lease Term</p>
-          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%] 3xl:text-2xl'>
-            {leaseTermOptions.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
+    <div className="w-full flex flex-col justify-between items-start">
+      {/* Label */}
+      <p className="text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl w-[80%]">
+        Lease Term <span className='font-light'>{leaseTerm.toLocaleString()} year</span>
+      </p>
+
+      {/* Slider Input */}
+      <input
+        type="range"
+        min="1"
+        max="5"
+        step="1"
+        value={tempLeaseTerm}
+        onChange={(e) => setTempLeaseTerm(Number(e.target.value))}
+        className="sm:w-[90%] w-full cursor-pointer appearance-none rounded-md h-2 focus:outline-none"
+        style={{
+          background: `linear-gradient(to right, #4A90E2 ${percentage_lease_term}%, #ddd ${percentage_lease_term}%)`,
+        }}
+      />
+
+      {/* Salary Min and Max Labels */}
+      <div className="sm:w-[90%] w-full flex justify-between text-xs md:text-sm text-gray-500 mt-2">
+        <span>1 year</span>
+        <span>5 years</span>
+      </div>
+    </div>
         <div className='w-full flex flex-col'>
           <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl'>State</p>
           <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%] 3xl:text-2xl'>
@@ -273,16 +359,32 @@ const CarList = () => {
             ))}
           </select>
         </div>
-        <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl'>Yearly Km</p>
-          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%] 3xl:text-2xl'>
-            {yearlyKmOptions.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
+        <div className="w-full flex flex-col justify-between items-start">
+      {/* Label */}
+      <p className="text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl w-[80%]">
+        YearlyKm <span className='font-light'>{yearlyKm.toLocaleString()} Km</span>
+      </p>
+
+      {/* Slider Input */}
+      <input
+        type="range"
+        min="5000"
+        max="30000"
+        step="5000"
+        value={tempYearlyKm}
+        onChange={(e) => setTempYearlyKm(Number(e.target.value))}
+        className="sm:w-[90%] w-full cursor-pointer appearance-none rounded-md h-2 focus:outline-none"
+        style={{
+          background: `linear-gradient(to right, #4A90E2 ${percentage_yearly_km}%, #ddd ${percentage_yearly_km}%)`,
+        }}
+      />
+
+      {/* Salary Min and Max Labels */}
+      <div className="sm:w-[90%] w-full flex justify-between text-xs md:text-sm text-gray-500 mt-2">
+        <span>5,000 Km</span>
+        <span>30,000 Km</span>
+      </div>
+    </div>
       </div>
       <div className="bg-background md:p-6 lg:p-16 xs:p-6 w-full flex sm:flex-row flex-col sm:items-start items-center justify-between">
         {/* Main Content */}
