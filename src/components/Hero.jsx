@@ -108,12 +108,10 @@ const Hero = () => {
     <div className="bg-[#003e51] p-4 sm:p-8 md:pt-10 md:pb-10 lg:pt-14 xl:pt-20 xs:p-8 md:p-5 lg:p-16 text-white flex flex-col sm:gap-6 xl:gap-8 2xl:gap-12 xxl:gap-16 3xl:gap-20">
       {/* Header Section */}
       <div className="flex md:flex-row flex-col items-center sm:items-center md:items-center justify-between md:gap-0 sm:gap-8">
-        <div className="flex flex-col gap-4 xs:w-[395px] sm:w-[91%] md:w-[59%] lg:w-[522px] 2xl:w-[660px] xxl:w-[790px] 3xl:w-[1050px] md:items-start items-center">
-          <h1 className="lg:text-5xl sm:text-[42px] xs:text-4xl text-2xl font-bold mb-2 md:text-4xl 2xl:text-6xl xxl:text-7xl md:text-start text-center 3xl:text-8xl text-[#41b6e6]">Lease your car with us</h1>
-          <p className="lg:text-lg sm:text-[14px] md:text-sm text-[13px] xxl:text-2xl 3xl:text-3xl 2xl:text-xl mb-4 md:text-start text-center md:w-[400px] lg:w-full sm:w-[420px] xs:w-[350px]">
-            <span className="font-semibold font-Inter">Did you know?</span> Electric/PHEV
-            cars have additional tax benefits as some are paid in your pre-tax
-            dollars.
+        <div className="flex flex-col gap-4 xs:w-[395px] sm:w-[91%] md:w-[59%] lg:w-[722px] 2xl:w-[860px] xxl:w-[990px] 3xl:w-[1250px] md:items-start items-center">
+          <h1 className="lg:text-5xl sm:text-[42px] xs:text-4xl text-2xl font-bold mb-2 md:text-4xl 2xl:text-6xl xxl:text-7xl md:text-start text-center 3xl:text-8xl text-[#41b6e6]">Get on the Road to Great Savings</h1>
+          <p className="lg:text-lg sm:text-[14px] md:text-sm text-[13px] xxl:text-2xl 3xl:text-3xl 2xl:text-xl mb-4 md:text-start text-center md:w-[400px] lg:w-[90%] sm:w-[420px] xs:w-[350px]">
+            Take advantage of our simple novated lease calculator to explore your potential savings and find the ideal vehicle for your needs. Whether you know exactly what you’re after or need some guidance, we’re got you covered.
           </p>
           <a href="#" className="text-[#41b6e6] sm:text-lg text-[13px] 2xl:text-2xl xxl:text-3xl 3xl:text-4xl underline mb-4 block font-Inter">
             Have questions? Get in touch.
@@ -139,7 +137,7 @@ const Hero = () => {
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className='w-4 lg:w-6 2xl:w-10 xxl:w-12'>
               <path d="M21.0002 21L16.6572 16.657M16.6572 16.657C17.4001 15.9141 17.9894 15.0322 18.3914 14.0615C18.7935 13.0909 19.0004 12.0506 19.0004 11C19.0004 9.94939 18.7935 8.90908 18.3914 7.93845C17.9894 6.96782 17.4001 6.08588 16.6572 5.34299C15.9143 4.6001 15.0324 4.01081 14.0618 3.60877C13.0911 3.20672 12.0508 2.99979 11.0002 2.99979C9.9496 2.99979 8.90929 3.20672 7.93866 3.60877C6.96803 4.01081 6.08609 4.6001 5.34321 5.34299C3.84288 6.84332 3 8.87821 3 11C3 13.1218 3.84288 15.1567 5.34321 16.657C6.84354 18.1573 8.87842 19.0002 11.0002 19.0002C13.122 19.0002 15.1569 18.1573 16.6572 16.657Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>I want to browse for cars</span>
+              <span>Find Your Ideal Vehicle</span>
             </div>
           </button>
 
@@ -161,7 +159,7 @@ const Hero = () => {
               <path d="M17.0847 14.4919C16.8076 14.1717 15.9048 13.9045 14.7095 13.7255C13.5142 13.5464 13.0783 13.5 12.0095 13.5C10.9408 13.5 10.4547 13.5769 9.30903 13.7255C8.16341 13.8741 7.30325 14.1384 6.93434 14.4919C6.38075 15.0281 7.19169 15.63 7.82825 15.7031C8.44513 15.7734 9.67841 15.7477 12.0147 15.7477C14.3509 15.7477 15.5842 15.7734 16.2011 15.7031C16.8367 15.6258 17.5895 15.0656 17.0847 14.4919ZM20.23 11.393C20.2273 11.3557 20.2111 11.3208 20.1842 11.2948C20.1574 11.2689 20.122 11.2538 20.0847 11.2523C19.5311 11.2327 18.969 11.272 17.972 11.5659C17.4633 11.7145 16.9857 11.9536 16.562 12.2719C16.4551 12.3553 16.4931 12.5808 16.6272 12.6047C17.449 12.7011 18.2757 12.7496 19.1031 12.75C19.5995 12.75 20.1118 12.6094 20.207 12.1669C20.2555 11.9117 20.2633 11.6505 20.23 11.393ZM3.77028 11.393C3.77291 11.3557 3.7892 11.3208 3.81602 11.2948C3.84284 11.2689 3.8783 11.2538 3.91559 11.2523C4.46919 11.2327 5.03122 11.272 6.02825 11.5659C6.53691 11.7145 7.01458 11.9536 7.43825 12.2719C7.54513 12.3553 7.50716 12.5808 7.37309 12.6047C6.5513 12.7011 5.72459 12.7496 4.89716 12.75C4.40075 12.75 3.88841 12.6094 3.79325 12.1669C3.74473 11.9117 3.73698 11.6505 3.77028 11.393Z" fill="#003E51"/>
               <path d="M20.25 9H21M3 9H3.75M3.65625 9.89062C3.65625 9.89062 5.82891 9.32812 12 9.32812C18.1711 9.32812 20.3438 9.89062 20.3438 9.89062" stroke="#003E51" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>I know the car type</span>
+              <span>I Know the Make and Model</span>
             </div>
           </button>
         </div>
