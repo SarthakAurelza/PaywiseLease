@@ -1,21 +1,28 @@
+import Disclaimer from "@/components/Disclaimer";
+import Info from "@/components/Info";
+import { addToComparison, removeFromComparison } from "@/features/filtersSlice";
+import supabase from "@/supabase/supabaseClient";
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { removeFromComparison, addToComparison } from "@/features/filtersSlice";
-import supabase from "../supabase/supabaseClient";
-import Disclaimer from "./Disclaimer";
-import Info from "./Info";
+import { useDispatch, useSelector } from "react-redux";
+import useQuoteData from '@/hooks/useQuoteData'; // assuming this exists
+
 
 const CompareCars = () => {
   const dispatch = useDispatch();
   const comparisonCars = useSelector((state) => state.filters.comparisonCars);
+  const { fetchQuoteData } = useQuoteData();
+
   const [carDetails, setCarDetails] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility state
   const [allCars, setAllCars] = useState([]); // All cars fetched from the database
   const [brands, setBrands] = useState([]); // Unique car brands
   const [filters, setFilters] = useState({ search: "", expandedBrand: null }); // Filters for search and accordions
+  const { salary, leaseTerm, yearlyKm, state } = useSelector((state) => state.filters.userPreferences);
   const [filteredCars, setFilteredCars] = useState([]); // Cars filtered by brand and search
   const [suggestions, setSuggestions] = useState([]); // Suggestions for live search
   const selectedOption = useSelector((state)=>state.filters.selectedOption);
+  const quotes = useSelector((state)=>state.filters.carQuotes);
+  const [loadingQuotes, setLoadingQuotes] = useState({});
 
   const totalSlots = 3; // Total comparison slots (e.g., Select Car placeholders)
 
@@ -106,10 +113,43 @@ const CompareCars = () => {
     }));
   };
 
-  const handleAddCar = (car) => {
-    dispatch(addToComparison(car));
-    setIsModalOpen(false); // Close the modal after selecting a car
-  };
+  const handleAddCar = async (car) => {
+  dispatch(addToComparison(car));
+  setIsModalOpen(false); // Close the modal after selecting a car
+
+  // Immediately fetch the quote after adding to comparison
+  try {
+    const vehiclePayload = {
+      brand: car.brand,
+      model: car.model,
+      yearGroup: car.yearGroup,
+    };
+
+    const quotePayload = {
+      state,
+      annualSalary: salary,
+      leaseTerm: leaseTerm * 12,
+      annualKms: yearlyKm,
+      hasHECS: false,
+      age: 35,
+      includeGAP: true,
+      includeRoadSide: false,
+    };
+    setLoadingQuotes((prev) => ({ ...prev, [car.id]: true }));
+
+    const quote = await fetchQuoteData(vehiclePayload, quotePayload);
+
+    dispatch({
+      type: "filters/setQuoteForCar",
+      payload: { carId: car.id, quoteData: quote },
+    });
+  } catch (err) {
+    console.error("Quote fetch failed on add:", car.id, err);
+  }finally {
+  setLoadingQuotes((prev) => ({ ...prev, [car.id]: false }));
+  }
+};
+
 
   const featureKeys = [
     { key: "engine", label: "Engine" },
@@ -120,11 +160,54 @@ const CompareCars = () => {
     { key: "price", label: "Price" }, // Example field, adjust as needed
   ];
 
+  useEffect(() => {
+  const fetchQuotesForComparisonCars = async () => {
+    for (const car of carDetails) {
+      const existingQuote = quotes[car.id];
+      if (existingQuote) continue;
+
+      try {
+        const vehiclePayload = {
+          brand: car.brand,
+          model: car.model,
+          yearGroup: car.yearGroup,
+        };
+
+        const quotePayload = {
+          state,
+          annualSalary: salary,
+          leaseTerm: leaseTerm * 12, // assuming monthly → annual
+          annualKms: yearlyKm,
+          hasHECS: false,
+          age: 35,
+          includeGAP: true,
+          includeRoadSide: false,
+        };
+
+        const quote = await fetchQuoteData(vehiclePayload, quotePayload);
+
+        dispatch({
+          type: "filters/setQuoteForCar",
+          payload: { carId: car.id, quoteData: quote },
+        });
+      } catch (err) {
+        console.error("Quote fetch failed for", car.id, err);
+      }
+    }
+  };
+
+  if (carDetails.length > 0) {
+    fetchQuotesForComparisonCars();
+  }
+}, [carDetails, quotes, salary, leaseTerm, yearlyKm, state]);
+
+
   return (
     <>
       <div className="w-full h-full md:px-8 lg:px-16 pb-16 flex flex-col">
         <div className="w-full h-full rounded-xl bg-white lg:p-16 p-2 xs:p-4 py-8">
           <div className="flex items-center justify-start mb-8 mt-8">
+            {console.log(comparisonCars)}
             {comparisonCars.map((car, index) => (
               <span
                 key={car.id}
@@ -180,7 +263,9 @@ const CompareCars = () => {
                       Finances
                     </th>
                     {Array.from({ length: totalSlots }).map((_, index) => {
-                      const car = carDetails[index]; // Get the car for this slot if it exists
+                      const comparisonCar = comparisonCars[index];
+const car = carDetails.find(c => c.id === comparisonCar?.id);
+// Get the car for this slot if it exists
                       return (
                         <th
                           key={index}
@@ -199,7 +284,7 @@ const CompareCars = () => {
                               <div className="flex flex-col items-center justify-around p-1 gap-4">
                                 <img
                                   className="w-[80%]"
-                                  src={car.imageUrl}
+                                  src={selectedOption ==='know'?`https://liveimages.redbook.com.au/redbook/car/spec/${car.imageUrl}.jpg` : car.imageUrl}
                                   alt={car.model}
                                 />
                                 <div className="w-full flex flex-col lg:text-lg md:text-xs">
@@ -211,7 +296,15 @@ const CompareCars = () => {
                                 <div className="w-full rounded-xl h-14 bg-gray-100 flex flex-row items-center justify-between text-xs px-1 py-2">
                                   <p>
                                     From{" "}
-                                    <span className="text-xl font-semibold">$370</span>
+                                    <span className="text-xl font-semibold">
+                                      {quotes?.[car.id]?.periodicCalculations?.[0]?.cost?.totalLeaseNet
+  ? `$${Math.round(quotes[car.id].periodicCalculations[0].cost.totalLeaseNet)}`
+  : loadingQuotes[car.id]
+    ? "Loading..."
+    : "Fetching..."}
+
+                                    </span>
+
                                     /week
                                   </p>
                                   <button className="bg-primary text-white py-1 px-2 rounded-lg text-xs h-8 font-normal">
@@ -243,7 +336,8 @@ const CompareCars = () => {
                         {feature.label}
                       </td>
                       {Array.from({ length: totalSlots }).map((_, index) => {
-                        const car = carDetails[index]; // Get the car for this slot if it exists
+                        const comparisonCar = comparisonCars[index];
+                        const car = carDetails.find((c) => c.id === comparisonCar?.id); // Get the car for this slot if it exists
                         return (
                           <td
                             key={`${index}-${feature.key}`}

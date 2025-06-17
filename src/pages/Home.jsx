@@ -1,0 +1,24 @@
+import CarList from '@/components/CarList'
+import CompareButton from '@/components/CompareButton'
+import Disclaimer from '@/components/Disclaimer'
+import Hero from '@/components/Hero'
+import Info from '@/components/Info'
+import Request from '@/components/Request'
+
+import React from 'react'
+
+
+const Home = () => {
+  return (
+    <div className='w-full'>
+      <Hero />
+      <CarList />
+      <Disclaimer />
+      <Info />
+      <Request />
+      <CompareButton />
+    </div>
+  )
+}
+
+export default Home

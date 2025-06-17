@@ -36,7 +36,10 @@ const CarCard = ({
   return (
     <div className="w-[100%] max-w-[300px] xs:max-w-[310px]  md:max-w-72 lg:max-w-[100%] 3xl:w-[95%] xs:h-[440px] sm:h-[372px] md:h-[350px] lg:h-[420px] xl:h-[510px] 2xl:h-[580px] xxl:h-[540px] 3xl:h-[600px] p-3 xs:p-5 sm:p-2 md:p-2 lg:p-3 xl:p-4 pb-4 flex flex-col items-center rounded-xl bg-[#F3F6F7] justify-between gap-2">
       <div className="rounded-sm w-full">
-        <img className="xl:w-[100%]" src={selectedOption ==='know'?`https://liveimages.redbook.com.au/redbook/car/spec/${imageUrl}.jpg` : imageUrl} alt="" />
+        <img className="xl:w-[100%]" src={selectedOption ==='know'?`https://liveimages.redbook.com.au/redbook/car/spec/${imageUrl}.jpg` : imageUrl} onError={(e) => {
+    e.target.onerror = null; // Prevent infinite loop
+    e.target.src = '/images/no-image.jpeg'; // Replace with your fallback image path
+  }} alt="" />
       </div>
       <div className="w-full flex items-center justify-between">
         <div className="flex gap-1">
@@ -103,12 +106,12 @@ const CarCard = ({
               <p className="font-bold text-xl md:text-lg lg:text-3xl text-primary xl:text-[32px] 2xl:text-5xl xxl:text-4xl text-white">
                 <span className="sm:text-[8px] xl:text-[12px] 2xl:text-[16px] xxl:text-md 3xl:text-lg text-xs sm:font-semibold">FROM </span>{quoteData && (
                     quoteTime === 'Weekly' ? (
-                      <span>${Math.round(quoteData.periodicCalculations[0]?.cost?.totalLeaseNet)}</span>
+                      <span>${Math.round(quoteData?.periodicCalculations[0]?.cost?.totalLeaseNet ?? 'N/A')}</span>
                     ) : quoteTime === 'Fortnightly' ? (
-                      <span>${Math.round(quoteData.periodicCalculations[2]?.cost?.totalLeaseNet)}</span>
+                      <span>${Math.round(quoteData?.periodicCalculations[2]?.cost?.totalLeaseNet ?? 'N/A')}</span>
                     ) : quoteTime === 'Monthly' ? (
-                      <span>${Math.round(quoteData.periodicCalculations[1]?.cost?.totalLeaseNet)}</span>
-                    ) : <span>${Math.round(quoteData.periodicCalculations[0]?.cost?.totalLeaseNet)}</span>
+                      <span>${Math.round(quoteData?.periodicCalculations[1]?.cost?.totalLeaseNet ?? 'N/A')}</span>
+                    ) : <span>${Math.round(quoteData?.periodicCalculations[0]?.cost?.totalLeaseNet ?? 'N/A')}</span>
                   )}
                   
 

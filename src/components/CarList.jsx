@@ -12,13 +12,19 @@ import {
 import CalculationSide from './CalculationSide';
 import useVehicleData from '@/hooks/useVehicleData';
 import useQuoteData from '@/hooks/useQuoteData';
+import { setQuoteForCar } from '@/features/filtersSlice';
+import { useDispatch } from 'react-redux';
+import usefetchAllCars from '@/hooks/usefetchAllCars';
+import useFilteredCars from '@/hooks/useFilteredCars';
+import UserPreferences from './UserPreferences';
+import SortFilterMenu from './SortFilterMenu';
 
 const CarList = () => {
+  const dispatch = useDispatch();
   const filters = useSelector((state) => state.filters); // Use only filters from Redux
   const selectedOption = useSelector((state)=>state.filters.selectedOption);
+  const { salary, leaseTerm, yearlyKm, state } = useSelector((state) => state.filters.userPreferences);
   const [selectedTable, setSelectedTable] = useState(null);
-  const [allCars, setAllCars] = useState([]);
-  const [filteredCars, setFilteredCars] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCar, setSelectedCar] = useState(null);
@@ -27,25 +33,11 @@ const CarList = () => {
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [sortCriteria, setSortCriteria] = useState(null);
   const [sortOrder, setSortOrder] = useState('asc'); 
-  const entireState = useSelector((state)=>state);
   const [vehicleDataMap, setVehicleDataMap] = useState({});
   const [quoteDataMap, setQuoteDataMap] = useState({});
   const { fetchVehicleData } = useVehicleData();
   const { fetchQuoteData } = useQuoteData();
-  const [tempSalary, setTempSalary] = useState(20000);
-  const [tempLeaseTerm, setTempLeaseTerm] = useState(1);
-  const [tempYearlyKm, setTempYearlyKm] = useState(5000);
 
-  const [salary, setSalary] = useState(20000);
-  const [leaseTerm, setLeaseTerm] = useState(1);
-  const [yearlyKm, setYearlyKm] = useState(5000);
-
-  
-
-  // Calculate the percentage of the slider filled
-  const percentage_salary = ((salary - 20000) / (200000-20000)) * 100;
-  const percentage_lease_term = ((leaseTerm-1)/(5-1))*100;
-  const percentage_yearly_km = ((yearlyKm-5000)/(30000-5000))*100;
   
 
   const xxlBreakpoint = 1820;
@@ -68,109 +60,9 @@ const CarList = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-        setSalary(tempSalary);
-    }, 500); // 500ms delay before updating
-
-    return () => clearTimeout(timer);
-}, [tempSalary]);
-
-useEffect(() => {
-    const timer = setTimeout(() => {
-        setLeaseTerm(tempLeaseTerm);
-    }, 500);
-
-    return () => clearTimeout(timer);
-}, [tempLeaseTerm]);
-
-useEffect(() => {
-    const timer = setTimeout(() => {
-        setYearlyKm(tempYearlyKm);
-    }, 500);
-
-    return () => clearTimeout(timer);
-}, [tempYearlyKm]);
-
-
-  // Dropdown options
-  const salaryOptions = ['0-50,000', '50,000-100,000', '100,000+'];
-  const leaseTermOptions = ['0-5yrs', '5-10yrs', '10+ yrs'];
-  const stateOptions = ['Choose State', 'Sydney', 'Melbourne', 'Adelaide'];
-  const yearlyKmOptions = ['0-2,000Km', '2,000-10,000Km', '10,000+Km'];
 
   // Fetch all cars once and cache them
-  const fetchAllCars = async () => {
-
-    setLoading(true);
-    try {
-      console.log("Fetching from table: ",selectedTable);
-      const { data, error } = await supabase.from(selectedTable).select('*');
-      if (error) {
-        console.error('Supabase error:', error.message);
-        setAllCars([]);
-      } else {
-        console.log("Fetched Cars:", data);
-        setAllCars(data);
-        setFilteredCars(data);
-      }
-    } catch (err) {
-      console.error('Unexpected error:', err);
-      setAllCars([]);
-    }
-    setLoading(false);
-  };
-
-  // Apply filters on the cached data
-  const applyFilters = () => {
-    let filtered = [...allCars];
-
-    if (filters.engine && Array.isArray(filters.engine)) {
-      filtered = filtered.filter((car) => filters.engine.includes(car.engine));
-    } else if (filters.engine) {
-      filtered = filtered.filter((car) => car.engine === filters.engine);
-    }
-
-    if (filters.brand) {
-      filtered = filtered.filter((car) =>
-        car.brand.toLowerCase().includes(filters.brand.toLowerCase())
-      );
-    }
-    if (filters.model) {
-      filtered = filtered.filter((car) =>
-        car.model.toLowerCase().includes(filters.model.toLowerCase())
-      );
-    }
-    if (filters.body) {
-      filtered = filtered.filter((car) => car.body === filters.body);
-    }
-    if (filters.seats > 0) {
-      filtered = filtered.filter((car) => car.seats === filters.seats);
-    }
-    if (filters.price.min !== undefined && filters.price.max !== undefined) {
-      filtered = filtered.filter(
-        (car) => car.price >= filters.price.min && car.price <= filters.price.max
-      );
-    }
-
-    if (filters.fuel_consumption) {
-      filtered = filtered.filter((car) =>
-        car.fuel_consumption.toLowerCase().includes(filters.fuel_consumption.toLowerCase())
-      );
-    }
-
-    if (sortCriteria === 'price') {
-      filtered.sort((a, b) => (sortOrder === 'asc' ? a.price - b.price : b.price - a.price));
-    } else if (sortCriteria === 'fuel_consumption') {
-      filtered.sort((a, b) => {
-        const fuelA = parseFloat(a.fuel_consumption.replace(/[^\d.]/g, '')) || 0;
-        const fuelB = parseFloat(b.fuel_consumption.replace(/[^\d.]/g, '')) || 0;
-        return sortOrder === 'asc' ? fuelA - fuelB : fuelB - fuelA;
-      });
-    }
-
-    setFilteredCars(filtered);
-  };
+  const { cars: allCars, loading: carsLoading, error: carsError, refresh: refreshCars } = usefetchAllCars();
 
   useEffect(() => {
     if (selectedOption) {
@@ -182,19 +74,7 @@ useEffect(() => {
     }
   }, [selectedOption]);
 
-
-  // Fetch all cars on mount
-  useEffect(() => {
-    if(selectedTable){
-      fetchAllCars();
-    }
-    
-  }, [selectedTable]);
-
-  // Apply filters whenever they change
-  useEffect(() => {
-    applyFilters();
-  }, [filters, allCars, sortCriteria,sortOrder,selectedOption]);
+  const filteredCars = useFilteredCars(allCars, filters, sortCriteria, sortOrder);
 
   // Handle pagination change
   const handlePageChange = (page, event) => {
@@ -209,76 +89,105 @@ useEffect(() => {
     fetchVehicleDataForPage(paginatedCars);
 }, [filteredCars, currentPage, pageSize, salary, leaseTerm, yearlyKm]);
 
+useEffect(() => {
+  setQuoteDataMap({}); // Wipe old quotes
+}, [salary, leaseTerm, yearlyKm, state]);
+
+
+
 
   const fetchVehicleDataForPage = async (cars) => {
-    if (!cars.length) return;
+  if (!cars.length) return;
 
-    // Set loading state before API calls
-    setLoading(true);
+  setLoading(true);
 
-    // Delay execution to prevent rapid calls
-    if (window.vehicleFetchTimeout) {
-        clearTimeout(window.vehicleFetchTimeout);
-    }
+  // Debounce calls
+  if (window.vehicleFetchTimeout) clearTimeout(window.vehicleFetchTimeout);
 
-    window.vehicleFetchTimeout = setTimeout(async () => {
-        console.log("Fetching vehicle data for:", cars);
+  window.vehicleFetchTimeout = setTimeout(async () => {
+    const vehicleDataResults = await Promise.allSettled(
+      cars.map((car) =>
+        fetchVehicleData(car.brand, car.model, car.yearGroup)
+      )
+    );
 
-        const vehicleDataPromises = cars.map((car) =>
-            fetchVehicleData(car.brand, car.model, car.yearGroup)
-        );
+    const updatedVehicleDataMap = {};
+    cars.forEach((car, index) => {
+      if (vehicleDataResults[index].status === "fulfilled") {
+        updatedVehicleDataMap[car.id] = vehicleDataResults[index].value;
+      }
+    });
 
-        const vehicleDataResults = await Promise.allSettled(vehicleDataPromises);
-        const updatedVehicleDataMap = {};
+    setVehicleDataMap((prev) => ({ ...prev, ...updatedVehicleDataMap }));
 
-        cars.forEach((car, index) => {
-            if (vehicleDataResults[index].status === "fulfilled") {
-                updatedVehicleDataMap[car.id] = vehicleDataResults[index].value;
-            }
-        });
+    // 🚀 Only fetch quotes *after* vehicle data is fully loaded
+    fetchQuoteDataForPage(cars, updatedVehicleDataMap);
 
-        setVehicleDataMap((prev) => ({ ...prev, ...updatedVehicleDataMap }));
-        fetchQuoteDataForPage(cars, updatedVehicleDataMap);
-
-        // Set loading state to false after fetching
-        setLoading(false);
-    }, 1000); // Wait 1 second before making API calls
+    setLoading(false);
+  }, 200); // Faster debounce helps prevent skipping
 };
+
 
 
 const fetchQuoteDataForPage = async (cars, vehicleData) => {
   if (!cars.length) return;
 
-  // Delay execution to prevent excessive API calls
   if (window.quoteFetchTimeout) {
-      clearTimeout(window.quoteFetchTimeout);
+    clearTimeout(window.quoteFetchTimeout);
   }
 
   window.quoteFetchTimeout = setTimeout(async () => {
-      console.log("Fetching quote data for:", cars);
+    console.log("Fetching quote data for:", cars);
 
-      for (const car of cars) {
-          if (!vehicleData[car.id]) continue;
+    for (const car of cars) {
+      const vehicle = vehicleData[car.id];
+      if (!vehicle) continue;
 
-          try {
-              const quoteResponse = await fetchQuoteData(vehicleData[car.id], {
-                  state: "NSW",
-                  annualSalary: salary,
-                  leaseTerm: leaseTerm * 12,
-                  annualKms: yearlyKm,
-                  hasHECS: false,
-                  age: 35,
-                  includeGAP: true,
-                  includeRoadSide: false,
-              });
+      const userInput = {
+        salary,
+        leaseTerm,
+        yearlyKm,
+        state,
+      };
 
-              setQuoteDataMap((prev) => ({ ...prev, [car.id]: quoteResponse }));
-          } catch (error) {
-              console.error(`Failed to fetch quote data for car ${car.id}:`, error);
-          }
+      const existingQuote = quoteDataMap[car.id];
+      const existingInput = existingQuote?.userInput;
+
+      const isSameInput =
+        existingInput &&
+        existingInput.salary === userInput.salary &&
+        existingInput.leaseTerm === userInput.leaseTerm &&
+        existingInput.yearlyKm === userInput.yearlyKm &&
+        existingInput.state === userInput.state;
+
+      if (isSameInput) continue; // ✅ Skip if quote is fresh
+
+      try {
+        const quote = await fetchQuoteData(vehicle, {
+          state,
+          annualSalary: salary,
+          leaseTerm: leaseTerm * 12,
+          annualKms: yearlyKm,
+          hasHECS: false,
+          age: 35,
+          includeGAP: true,
+          includeRoadSide: false,
+        });
+
+        const enriched = {
+          ...quote,
+          userInput, // ✅ Embed input for comparison
+        };
+
+        setQuoteDataMap((prev) => ({ ...prev, [car.id]: enriched }));
+        dispatch(setQuoteForCar({ carId: car.id, quoteData: enriched }));
+      } catch (error) {
+        console.error(`❌ Failed for car ${car.id}:`, error);
       }
-  }, 1500); // Wait 1.5 seconds before making quote API calls
+    }
+  }, 500); // Lower delay to make UI more responsive
 };
+
 
 
   // Paginate the filtered data
@@ -292,99 +201,23 @@ const fetchQuoteDataForPage = async (cars, vehicleData) => {
   // Select a random car when no car is selected
   const randomCar = filteredCars.length > 0 ? filteredCars[0] : null;
 
+  useEffect(() => {
+  const retryTimer = setTimeout(() => {
+    const missing = paginatedCars.filter(car => !quoteDataMap[car.id]);
+    if (missing.length > 0) {
+      console.warn("Retrying quote fetch for missing cars:", missing);
+      fetchVehicleDataForPage(missing);
+    }
+  }, 4000); // Retry after 4s if nothing fetched
+
+  return () => clearTimeout(retryTimer);
+}, [paginatedCars, quoteDataMap]);
+
   return (
     <>
       <h2 className='w-full lg:pr-16 lg:pl-16 lg:pt-16 pb-4 pr-4 pl-4 pt-8 xs:pr-6 xs:pl-6 xs:pt-10 xs:text-lg sm:text-md md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl'>About You</h2>
       <div className='w-full h-auto gap-3 xs:gap-3 grid justify-items-center xs:grid-cols-2 md:flex md:flex-row md:items-center md:justify-between lg:px-16 xs:px-6 px-4  pb-8'>
-      <div className="w-full flex flex-col justify-between items-start">
-      {/* Label */}
-      <p className="text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl w-[80%]">
-        Salary: <span className='font-light'>${salary.toLocaleString()}</span>
-      </p>
-
-      {/* Slider Input */}
-      <input
-        type="range"
-        min="20000"
-        max="200000"
-        step="5000"
-        value={tempSalary}
-        onChange={(e) => setTempSalary(Number(e.target.value))}
-        className="sm:w-[90%] w-full cursor-pointer appearance-none rounded-md h-2 focus:outline-none"
-        style={{
-          background: `linear-gradient(to right, #4A90E2 ${percentage_salary}%, #ddd ${percentage_salary}%)`,
-        }}
-      />
-
-      {/* Salary Min and Max Labels */}
-      <div className="sm:w-[90%] w-full flex justify-between text-xs md:text-sm text-gray-500 mt-2">
-        <span>$20,000</span>
-        <span>$200,000</span>
-      </div>
-    </div>
-    
-    <div className="w-full flex flex-col justify-between items-start">
-      {/* Label */}
-      <p className="text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl w-[80%]">
-        Lease Term <span className='font-light'>{leaseTerm.toLocaleString()} year</span>
-      </p>
-
-      {/* Slider Input */}
-      <input
-        type="range"
-        min="1"
-        max="5"
-        step="1"
-        value={tempLeaseTerm}
-        onChange={(e) => setTempLeaseTerm(Number(e.target.value))}
-        className="sm:w-[90%] w-full cursor-pointer appearance-none rounded-md h-2 focus:outline-none"
-        style={{
-          background: `linear-gradient(to right, #4A90E2 ${percentage_lease_term}%, #ddd ${percentage_lease_term}%)`,
-        }}
-      />
-
-      {/* Salary Min and Max Labels */}
-      <div className="sm:w-[90%] w-full flex justify-between text-xs md:text-sm text-gray-500 mt-2">
-        <span>1 year</span>
-        <span>5 years</span>
-      </div>
-    </div>
-        <div className='w-full flex flex-col'>
-          <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl'>State</p>
-          <select className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%] 3xl:text-2xl'>
-            {stateOptions.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="w-full flex flex-col justify-between items-start">
-      {/* Label */}
-      <p className="text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2 3xl:text-2xl w-[80%]">
-        YearlyKm <span className='font-light'>{yearlyKm.toLocaleString()} Km</span>
-      </p>
-
-      {/* Slider Input */}
-      <input
-        type="range"
-        min="5000"
-        max="30000"
-        step="5000"
-        value={tempYearlyKm}
-        onChange={(e) => setTempYearlyKm(Number(e.target.value))}
-        className="sm:w-[90%] w-full cursor-pointer appearance-none rounded-md h-2 focus:outline-none"
-        style={{
-          background: `linear-gradient(to right, #4A90E2 ${percentage_yearly_km}%, #ddd ${percentage_yearly_km}%)`,
-        }}
-      />
-
-      {/* Salary Min and Max Labels */}
-      <div className="sm:w-[90%] w-full flex justify-between text-xs md:text-sm text-gray-500 mt-2">
-        <span>5,000 Km</span>
-        <span>30,000 Km</span>
-      </div>
-    </div>
+        <UserPreferences  />
       </div>
       <div className="bg-background md:p-6 lg:p-16 xs:p-6 w-full flex sm:flex-row flex-col sm:items-start items-center justify-between">
         {/* Main Content */}
@@ -392,51 +225,13 @@ const fetchQuoteDataForPage = async (cars, vehicleData) => {
           <div className='w-full flex flex-col'>
             <div className='flex items-center justify-between mb-6 xs:mb-10'>
               <h2 className=" xs:text-lg lg:text-xl font-bold mb-4 xl:text-2xl 2xl:text-3xl xxl:text-4xl 3xl:text-5xl">Available Cars</h2>
-              <div className='flex items-center gap-4'>
-              <div className='relative'>
-                <img
-                  className='cursor-pointer 3xl:w-12'
-                  src="/images/filter.png"
-                  alt="Filter"
-                  onClick={() => setShowFilterDropdown(!showFilterDropdown)}
-                />
-                {showFilterDropdown && (
-                  <div className="absolute right-0 mt-2 w-72 bg-white border border-gray-200 shadow-lg rounded-md">
-                    <ul>
-                      <li
-                        className="cursor-pointer px-4 py-2 hover:bg-gray-100"
-                        onClick={() => {
-                          setSortCriteria('price');
-                          setShowFilterDropdown(false);
-                        }}
-                      >
-                        Price (Ascending)
-                      </li>
-                      <li
-                        className="cursor-pointer px-4 py-2 hover:bg-gray-100"
-                        onClick={() => {
-                          setSortCriteria('fuel_consumption');
-                          setShowFilterDropdown(false);
-                        }}
-                      >
-                        Fuel Consumption (Ascending)
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
-
-
-              <img
-                className='cursor-pointer 3xl:w-12'
-                src="/images/sort.png"
-                alt="Sort"
-                onClick={() => {
-                  sortCriteria && setSortOrder((prevOrder) => (prevOrder === 'asc' ? 'desc' : 'asc'));
-                }}
+              <SortFilterMenu
+                show={showFilterDropdown}
+                toggle={() => setShowFilterDropdown(!showFilterDropdown)}
+                setSortCriteria={setSortCriteria}
+                toggleSortOrder={() => setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc')}
+                sortCriteria={sortCriteria}
               />
-
-              </div>
             </div>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 grid-cols-1 xxl:grid-cols-3 gap-10 xs:gap-8 sm:gap-8 md:gap-1 lg:gap-4 xl:gap-12 xxl:gap-12 justify-stretch justify-items-center w-[100%]">
               {paginatedCars.length > 0 ? (

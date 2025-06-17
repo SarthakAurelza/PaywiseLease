@@ -13,9 +13,15 @@ const filtersSlice = createSlice({
     comparisonCars: [],
     allCars: [],
     selectedOption: 'browse',
-    quoteData: null, // ✅ NEW: Store quoteData globally
+    carQuotes: {}, // carId => quoteData
     isFetchingQuote: false,
     quoteTime: 'weekly',
+    userPreferences: {
+    salary: 20000,
+    leaseTerm: 1,
+    yearlyKm: 5000,
+    state: "NSW",
+    },
   },
   reducers: {
     setFilter: (state, action) => {
@@ -57,20 +63,27 @@ const filtersSlice = createSlice({
         alert('You can only compare a maximum of 3 cars.');
       }
     },
-    removeFromComparison: (state, action) => {
-      state.comparisonCars = state.comparisonCars.filter((car) => car.id !== action.payload);
-    },
-    setQuoteData: (state, action) => {
-      console.log("Updating quoteData in Redux:", action.payload); // ✅ Log state update
-      state.quoteData = action.payload;
-      state.isFetchingQuote = false;
-    },
+   
+    setQuoteForCar: (state, action) => {
+  const { carId, quoteData } = action.payload;
+  state.carQuotes[carId] = quoteData;
+},
+    setUserPreferences: (state, action) => {
+  state.userPreferences = { ...state.userPreferences, ...action.payload };
+},
+
     setFetchingQuote: (state, action) => {
       state.isFetchingQuote = action.payload; // ✅ Start/Stop fetching state
     },
     setQuoteTime: (state, action) => {
       state.quoteTime = action.payload;
     },
+    removeFromComparison: (state, action) => {
+    const carId = action.payload;
+    state.comparisonCars = state.comparisonCars.filter((car) => car.id !== carId);
+    delete state.carQuotes[carId]; // ✅ also clean quote
+  }
+
   },
 });
 
@@ -84,6 +97,8 @@ export const {
   setQuoteTime,
   setQuoteData, // ✅ NEW: Export setQuoteData action
   setFetchingQuote,
+  setQuoteForCar,
+  setUserPreferences,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

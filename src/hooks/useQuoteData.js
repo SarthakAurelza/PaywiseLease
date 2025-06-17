@@ -6,8 +6,13 @@ const useQuoteData = () => {
   const [error, setError] = useState(null);
 
   const fetchQuoteData = async (vehicleData, userInput) => {
-    if (!vehicleData) {
-      console.error("Vehicle data is required to fetch quote.");
+    if (!vehicleData || typeof vehicleData !== "object") {
+      console.error("🚫 Invalid or missing vehicle data.");
+      return;
+    }
+
+    if (!userInput || typeof userInput !== "object") {
+      console.error("🚫 Invalid or missing user input.");
       return;
     }
 
@@ -15,60 +20,60 @@ const useQuoteData = () => {
     setError(null);
 
     try {
-      const apiUrl = `https://cors-anywhere.herokuapp.com/https://lease-api-test.paywise.com.au/Quote`;
+      const apiUrl = `http://localhost:3001/api/get-lease-data`;
 
-      // ✅ Extract only the required fields from vehicleData
       const requestBody = {
-        calculationPeriods: ["Weekly", "Monthly","Fortnightly"],
+        calculationPeriods: ["Weekly", "Monthly", "Fortnightly"],
         vehicle: {
-          fuelCombined: vehicleData.fuelCombined ?? 0,
-          fuelType: vehicleData.fuelType ?? "Unknown",
-          regServiceMonths: vehicleData.regServiceMonths ?? 12,
-          vFactsSegment: vehicleData.vFactsSegment ?? "Unknown",
-          vFactsClass: vehicleData.vFactsClass ?? "Unknown",
-          vehicleID: vehicleData.vehicleID ?? 0,
-          variant: vehicleData.variant ?? "Unknown",
-          series: vehicleData.series ?? "Unknown",
-          badgeDescription: vehicleData.badgeDescription ?? "",
-          secondaryBadgeDescription: vehicleData.secondaryBadgeDescription ?? "",
-          imageCode: vehicleData.imageCode ?? "",
-          bodyStyle: vehicleData.bodyStyle ?? "Unknown",
-          doors: vehicleData.doors ?? 4,
-          engineDescription: vehicleData.engineDescription ?? "Unknown",
-          engineCylinders: vehicleData.engineCylinders ?? 0,
-          engineTypeDescription: vehicleData.engineTypeDescription ?? "Unknown",
-          gears: vehicleData.gears ?? 0,
-          gearTypeDescription: vehicleData.gearTypeDescription ?? "Unknown",
-          inductionDescription: vehicleData.inductionDescription ?? "Unknown",
-          isCurrentModel: vehicleData.isCurrentModel ?? false,
-          isActive: vehicleData.isActive ?? false,
-          maintenanceProfileType: vehicleData.maintenanceProfileType ?? "Standard",
-          powerPlantType: vehicleData.engineTypeDescription.includes("Electric") ? "EV" : "ICE",
-          make: vehicleData.make ?? "Unknown",
-          model: vehicleData.model ?? "Unknown",
-          yearGroup: vehicleData.yearGroup ?? new Date().getFullYear(),
-          fuelMetro: vehicleData.fuelMetro ?? 0,
-          vehicleOptions: vehicleData.vehicleOptions ?? [],
-          cO2Combined: vehicleData.cO2Combined ?? 0,
-          vehicleType: vehicleData.vehicleType ?? "PassengerVehicle",
-          redBookID: vehicleData.redBookID ?? "",
-          listPrice: vehicleData.listPrice ?? 0,
-          frontTyreSpecification: vehicleData.frontTyreSpecification ?? {
-            size: "Unknown",
-            replacementCost: 0,
-            replacementInterval: 0,
+          fuelCombined: Number(vehicleData.fuelCombined) || 0,
+          fuelType: vehicleData.fuelType || "Unknown",
+          regServiceMonths: Number(vehicleData.regServiceMonths) || 12,
+          vFactsSegment: vehicleData.vFactsSegment || "Unknown",
+          vFactsClass: vehicleData.vFactsClass || "Unknown",
+          vehicleID: Number(vehicleData.vehicleID) || 1,
+          variant: vehicleData.variant || "Unknown",
+          series: vehicleData.series || "Unknown",
+          badgeDescription: vehicleData.badgeDescription || "",
+          secondaryBadgeDescription: vehicleData.secondaryBadgeDescription || "",
+          imageCode: vehicleData.imageCode || "default",
+          bodyStyle: vehicleData.bodyStyle || "Unknown",
+          doors: Number(vehicleData.doors) || 4,
+          engineDescription: vehicleData.engineDescription || "Unknown",
+          engineCylinders: Number(vehicleData.engineCylinders) || 0,
+          engineTypeDescription: vehicleData.engineTypeDescription || "Unknown",
+          gears: Number(vehicleData.gears) || 0,
+          gearTypeDescription: vehicleData.gearTypeDescription || "Unknown",
+          inductionDescription: vehicleData.inductionDescription || "Unknown",
+          isCurrentModel: !!vehicleData.isCurrentModel,
+          isActive: !!vehicleData.isActive,
+          maintenanceProfileType: vehicleData.maintenanceProfileType || "Standard",
+          powerPlantType: typeof vehicleData.engineTypeDescription === "string" &&
+            vehicleData.engineTypeDescription.includes("Electric") ? "EV" : "ICE",
+          make: vehicleData.make || "Unknown",
+          model: vehicleData.model || "Unknown",
+          yearGroup: vehicleData.yearGroup || new Date().getFullYear(),
+          fuelMetro: Number(vehicleData.fuelMetro) || 0,
+          vehicleOptions: Array.isArray(vehicleData.vehicleOptions) ? vehicleData.vehicleOptions : [],
+          cO2Combined: Number(vehicleData.cO2Combined) || 0,
+          vehicleType: vehicleData.vehicleType || "PassengerVehicle",
+          redBookID: vehicleData.redBookID || "",
+          listPrice: Number(vehicleData.listPrice) || 0,
+          frontTyreSpecification: {
+            size: vehicleData.frontTyreSpecification?.size || "Unknown",
+            replacementCost: Number(vehicleData.frontTyreSpecification?.replacementCost) || 0,
+            replacementInterval: Number(vehicleData.frontTyreSpecification?.replacementInterval) || 0,
           },
-          rearTyreSpecification: vehicleData.rearTyreSpecification ?? {
-            size: "Unknown",
-            replacementCost: 0,
-            replacementInterval: 0,
+          rearTyreSpecification: {
+            size: vehicleData.rearTyreSpecification?.size || "Unknown",
+            replacementCost: Number(vehicleData.rearTyreSpecification?.replacementCost) || 0,
+            replacementInterval: Number(vehicleData.rearTyreSpecification?.replacementInterval) || 0,
           },
-          maintenanceProfile: vehicleData.maintenanceProfile ?? {
-            name: "Unknown",
-            majorServicePrice: 0,
+          maintenanceProfile: {
+            name: vehicleData.maintenanceProfile?.name || "Unknown",
+            majorServicePrice: Number(vehicleData.maintenanceProfile?.majorServicePrice) || 0,
           },
-          firstServiceKm: vehicleData.firstServiceKm ?? 5000,
-          regServiceKm: vehicleData.regServiceKm ?? 15000,
+          firstServiceKm: Number(vehicleData.firstServiceKm) || 5000,
+          regServiceKm: Number(vehicleData.regServiceKm) || 15000,
         },
         financier: {
           id: 14,
@@ -79,13 +84,13 @@ const useQuoteData = () => {
           originatorFeeMaximum: 1100,
         },
         originatorFee: 1100,
-        purchasePrice: vehicleData.listPrice ?? 0,
-        salePrice: vehicleData.listPrice ?? 0,
-        state: userInput.state, // User provided
-        annualKms: userInput.annualKms, // User provided
-        leaseTerm: userInput.leaseTerm, // User provided
-        annualSalary: userInput.annualSalary, // User provided
-        hasHECS: userInput.hasHECS, // User provided
+        purchasePrice: Number(vehicleData.listPrice) || 0,
+        salePrice: Number(vehicleData.listPrice) || 0,
+        state: userInput.state || "Unknown",
+        annualKms: Number(userInput.annualKms) || 10000,
+        leaseTerm: Number(userInput.leaseTerm) || 12,
+        annualSalary: Number(userInput.annualSalary) || 50000,
+        hasHECS: !!userInput.hasHECS,
         calculationDate: new Date().toISOString(),
         totalOptionsSale: 0,
         totalOptionsPrice: 0,
@@ -93,12 +98,12 @@ const useQuoteData = () => {
         membershipFee: 0,
         managementFee: 468,
         startingOdometer: 0,
-        budgetOverrides: userInput.budgetOverrides ?? {
-          fuelNet: null,
-          maintenanceNet: null,
-          tyreNet: null,
-          regoNet: null,
-          insuranceNet: null,
+        budgetOverrides: {
+          fuelNet: userInput.budgetOverrides?.fuelNet ?? null,
+          maintenanceNet: userInput.budgetOverrides?.maintenanceNet ?? null,
+          tyreNet: userInput.budgetOverrides?.tyreNet ?? null,
+          regoNet: userInput.budgetOverrides?.regoNet ?? null,
+          insuranceNet: userInput.budgetOverrides?.insuranceNet ?? null,
         },
         commissionPercentage: 0.1,
         deferredPeriods: 2,
@@ -106,7 +111,7 @@ const useQuoteData = () => {
         managementType: "InternallyManaged",
         bureau: "Internal",
         insurance: {
-          age: userInput.age, // User provided
+          age: Number(userInput.age) || 35,
           provider: "Paywise",
           insuranceRate: {
             insuranceType: "Standard1",
@@ -123,17 +128,17 @@ const useQuoteData = () => {
             errorMessage: "",
           },
         },
-        includeGAP: userInput.includeGAP, // User provided
-        includeRoadSide: userInput.includeRoadSide, // User provided
+        includeGAP: !!userInput.includeGAP,
+        includeRoadSide: !!userInput.includeRoadSide,
         includeLuxuryCarCharge: true,
       };
 
+      console.log("📦 Sending request payload to API:", requestBody);
 
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${import.meta.env.VITE_PAYWISE_API_AUTH_TOKEN}`,
         },
         body: JSON.stringify(requestBody),
       });
