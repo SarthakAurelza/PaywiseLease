@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const QuoteForm = ({ handleSubmit }) => (
   <motion.div
     initial={{ opacity: 0 }}
