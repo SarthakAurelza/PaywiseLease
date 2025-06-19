@@ -15,7 +15,7 @@ const useVehicleData = () => {
     setError(null);
 
     try {
-      const apiUrl = `http://localhost:3001/api/get-vehicle-data`;
+      const apiUrl = `${import.meta.env.VITE_BACKEND_URL}/api/get-vehicle-data`;
       const requestBody = { brand, model, yearGroup };
 
       console.log("Fetching data from:", apiUrl);

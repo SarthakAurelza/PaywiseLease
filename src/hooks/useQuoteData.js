@@ -20,7 +20,7 @@ const useQuoteData = () => {
     setError(null);
 
     try {
-      const apiUrl = `http://localhost:3001/api/get-lease-data`;
+      const apiUrl = `${import.meta.env.VITE_BACKEND_URL}/api/get-lease-data`;
 
       const requestBody = {
         calculationPeriods: ["Weekly", "Monthly", "Fortnightly"],

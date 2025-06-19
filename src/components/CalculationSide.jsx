@@ -79,7 +79,7 @@ const CalculationSide = ({ car, onClose, quoteData }) => {
   }
 
   return (
-    <div className="bg-white flex flex-col lg:p-4 lg:pt-12 lg:pb-12 p-2 sm:p-6 md:p-4 w-full rounded-lg shadow-md lg:gap-8 2xl:gap-8 3xl:gap-16 h-full lg:h-auto justify-between">
+    <div className="bg-white flex flex-col lg:p-4 lg:pt-12 lg:pb-12 p-2 sm:p-6 md:p-4 w-full rounded-lg shadow-md lg:gap-8 xl:gap-12 2xl:gap-16 3xl:gap-20 h-full lg:h-auto justify-between">
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-bold text-xl md:text-2xl lg:text-[30px] 2xl:text-3xl 3xl:text-5xl">{showForm ? "Request a Quote" : "Your Calculation"}</h2>
         <button onClick={onClose} className="rounded-full bg-gray-100 px-3 py-1 font-bold hover:bg-gray-200">X</button>
