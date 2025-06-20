@@ -15,40 +15,60 @@ const CalculationSide = ({ car, onClose, quoteData }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = {
-      first_name: formData.get("first_name"),
-      last_name: formData.get("last_name"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      ref_source_text: "Website Form Submission",
-      comment: formData.get("comment") || "",
-    };
+  event.preventDefault();
+  const formData = new FormData(event.target);
 
-    try {
-      const response = await fetch("https://oneboard.fleetnetwork.com.au/api/v1/leads/wp", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${import.meta.env.VITE_FORM_TOKEN}`,
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        alert("Your quote request has been submitted successfully!");
-        event.target.reset();
-      } else {
-        const errorData = await response.json();
-        alert(`Submission failed: ${errorData.message || "Unknown error"}`);
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("An error occurred while submitting your request. Please try again later.");
-    }
+  // Collecting form data
+  const data = {
+    first_name: formData.get("first_name"),
+    last_name: formData.get("last_name"),
+    email: formData.get("email"),
+    phone: formData.get("phone"),
+    ref_source_text: "Website Form Submission", // Static reference text
+    comment: formData.get("comment") || "",
+    
+    // Include car details (quote data)
+    dv_make: car?.brand || "N/A",        // Car brand
+    dv_model: car?.model || "N/A",       // Car model
+    dv_variant: car?.variant || "N/A",   // Car variant (if applicable)
+    dv_price: getLeaseCost() || 0,       // Lease cost (or car price, based on what you need)
+    
+    // Optional fields - include any other details required by your API
+    source_id: 1,                        // Assuming this is static
+    ref_source_id: 45,                   // Static or dynamic (can be adjusted)
+    dv_type: "N/A",                      // Car type (e.g., sedan, SUV, etc.)
+    dv_body_type: "N/A",                 // Car body type
+    dv_fuel_type: "N/A",                 // Car fuel type (e.g., petrol, electric)
+    dv_transmission: "N/A",              // Car transmission type (manual/automatic)
+    dv_tradein: 0,                       // If there's a trade-in, otherwise 0
+    fin_total_price: getLeaseCost() || 0, // Total lease price
+    // Add more fields here as necessary...
   };
+
+  try {
+    const response = await fetch("https://oneboard.fleetnetwork.com.au/api/v1/leads/wp", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${import.meta.env.VITE_FORM_TOKEN}`, // Use the token from your environment
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      alert("Your quote request has been submitted successfully!");
+      event.target.reset();  // Reset the form after successful submission
+    } else {
+      const errorData = await response.json();
+      alert(`Submission failed: ${errorData.message || "Unknown error"}`);
+    }
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    alert("An error occurred while submitting your request. Please try again later.");
+  }
+};
+
 
   const handleButtonClick = (button) => {
     setActiveButton(button);
