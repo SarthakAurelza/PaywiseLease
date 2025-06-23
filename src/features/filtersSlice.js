@@ -12,6 +12,7 @@ const filtersSlice = createSlice({
     fuel_consumption: '',
     comparisonCars: [],
     allCars: [],
+    allCarsByTable : {},
     selectedOption: 'browse',
     carQuotes: {}, // carId => quoteData
     isFetchingQuote: false,
@@ -52,6 +53,10 @@ const filtersSlice = createSlice({
     setAllCars: (state, action) => {
       console.log("Redux state updating: ", action.payload);
       state.allCars = action.payload;
+    },
+    setAllCarsForTable: (state, action) => {
+    const { table, cars } = action.payload;
+    state.allCarsByTable[table] = cars;
     },
     addToComparison: (state, action) => {
       if (state.comparisonCars.length < 3) {
@@ -99,6 +104,7 @@ export const {
   setFetchingQuote,
   setQuoteForCar,
   setUserPreferences,
+  setAllCarsForTable,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;
