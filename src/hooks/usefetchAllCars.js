@@ -14,63 +14,66 @@ const usefetchAllCars = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const getSelectedTable = () => {
-    if (!selectedOption) return null;
-    return selectedOption === 'know' ? 'test_data_dump2' : 'Car_Details';
+  const tables = {
+    know: 'test_data_dump2',
+    browse: 'Car_Details',
   };
 
-  const fetchCars = async () => {
-    const table = getSelectedTable();
-    if (!table) return;
+  const getSelectedTable = () => {
+    if (!selectedOption) return null;
+    return tables[selectedOption];
+  };
 
-    // Use cache if available
-    if (allCarsByTable[table]) {
-      const cachedCars = allCarsByTable[table];
-      setCars(cachedCars);
-      setBrands([...new Set(cachedCars.map((car) => car.brand))]);
-      setModels([...new Set(cachedCars.map((car) => car.model))]);
-      setVariants([...new Set(cachedCars.map((car) => car.variant))]);
-      return;
+  const processCars = (cars) => {
+    setCars(cars);
+    setBrands([...new Set(cars.map((car) => car.brand))]);
+    setModels([...new Set(cars.map((car) => car.model))]);
+    setVariants([...new Set(cars.map((car) => car.variant))]);
+  };
+
+  const fetchCarsFromTable = async (table) => {
+    const chunkSize = 1000;
+    let allCars = [];
+    let from = 0;
+    let to = chunkSize - 1;
+    let keepFetching = true;
+
+    while (keepFetching) {
+      const { data, error } = await supabase.from(table).select('*').range(from, to);
+      if (error) throw error;
+      allCars = allCars.concat(data);
+      if (data.length < chunkSize) {
+        keepFetching = false;
+      } else {
+        from += chunkSize;
+        to += chunkSize;
+      }
     }
 
-    // Otherwise fetch from Supabase
+    return allCars;
+  };
+
+  const fetchAllTables = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const chunkSize = 1000;
-      let allCars = [];
-      let from = 0;
-      let to = chunkSize - 1;
-      let keepFetching = true;
+      const allFetched = {};
 
-      while (keepFetching) {
-        const { data, error } = await supabase
-          .from(table)
-          .select('*')
-          .range(from, to);
-
-        if (error) throw error;
-
-        allCars = allCars.concat(data);
-
-        if (data.length < chunkSize) {
-          keepFetching = false;
+      for (const [key, table] of Object.entries(tables)) {
+        if (!allCarsByTable[table]) {
+          const cars = await fetchCarsFromTable(table);
+          dispatch(setAllCarsForTable({ table, cars }));
+          allFetched[table] = cars;
         } else {
-          from += chunkSize;
-          to += chunkSize;
+          allFetched[table] = allCarsByTable[table];
         }
       }
 
-      setCars(allCars);
-      dispatch(setAllCarsForTable({ table, cars: allCars }));
-
-      const uniqueBrands = [...new Set(allCars.map((car) => car.brand))];
-      setBrands(uniqueBrands);
-      const uniqueModels = [...new Set(allCars.map((car) => car.model))];
-      setModels(uniqueModels);
-      const uniqueVariants = [...new Set(allCars.map((car) => car.variant))];
-      setVariants(uniqueVariants);
+      const currentTable = getSelectedTable();
+      if (currentTable) {
+        processCars(allFetched[currentTable]);
+      }
     } catch (err) {
       console.error('Error fetching cars:', err.message);
       setError(err.message);
@@ -82,7 +85,7 @@ const usefetchAllCars = () => {
 
   useEffect(() => {
     if (selectedOption) {
-      fetchCars();
+      fetchAllTables();
     }
   }, [selectedOption]);
 
@@ -93,7 +96,7 @@ const usefetchAllCars = () => {
     variants,
     loading,
     error,
-    refresh: fetchCars,
+    refresh: fetchAllTables,
   };
 };
 

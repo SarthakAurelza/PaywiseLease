@@ -12,6 +12,25 @@ const Hero = () => {
   const selectedOption = useSelector((state) => state.filters.selectedOption);
   const filters = useSelector((state) => state.filters);
 
+  const engineIcons = {
+  'Petrol/Diesel': (filled) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 30 26" fill="none">
+                    <path d="M1 7.72H17.7832M1 13.48H17.7832M17.7832 21.16H24.0769C25.1897 21.16 26.2569 20.7554 27.0438 20.0353C27.8307 19.3151 28.2727 18.3384 28.2727 17.32C28.2727 16.3016 27.8307 15.3249 27.0438 14.6047C26.2569 13.8846 25.1897 13.48 24.0769 13.48C23.5205 13.48 22.9869 13.2777 22.5935 12.9176C22.2 12.5576 21.979 12.0692 21.979 11.56V6.76L28.2727 1M1 5.8V23.08C1 23.5892 1.22103 24.0776 1.61446 24.4376C2.00789 24.7977 2.5415 25 3.0979 25H15.6853C16.2417 25 16.7753 24.7977 17.1688 24.4376C17.5622 24.0776 17.7832 23.5892 17.7832 23.08V5.8C17.7832 4.78157 17.3412 3.80485 16.5543 3.08471C15.7674 2.36457 14.7002 1.96 13.5874 1.96H5.1958C4.08301 1.96 3.01579 2.36457 2.22892 3.08471C1.44206 3.80485 1 4.78157 1 5.8Z" stroke={filled ? 'white' : 'black'} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M21.9796 9.64017L26.1754 8.68017V2.92017M12.5391 18.2802V20.2002" stroke={filled ? 'white' : 'black'} stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+  ),
+  Electric: (filled) =>  (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+<path d="M5.481 21.174L8.1345 16.3275H6.549V12.5475L3.8655 17.394H5.481V21.174ZM1.5 9.75H10.5V2.424C10.5 2.193 10.404 1.981 10.212 1.788C10.02 1.595 9.8085 1.499 9.5775 1.5H2.4225C2.1925 1.5 1.981 1.596 1.788 1.788C1.595 1.98 1.499 2.192 1.5 2.424V9.75ZM1.5 22.5H10.5V11.25H1.5V22.5ZM0 24V2.424C0 1.733 0.2315 1.1565 0.6945 0.6945C1.1575 0.2325 1.734 0.001 2.424 0H9.5775C10.2675 0 10.844 0.2315 11.307 0.6945C11.77 1.1575 12.001 1.734 12 2.424V11.424H13.47C14.119 11.424 14.671 11.651 15.126 12.105C15.581 12.56 15.8085 13.1115 15.8085 13.7595V20.6685C15.8085 21.2085 16.0265 21.6775 16.4625 22.0755C16.8995 22.4745 17.3975 22.674 17.9565 22.674C18.5415 22.674 19.046 22.4745 19.47 22.0755C19.894 21.6775 20.106 21.2085 20.106 20.6685V7.3275H19.587C19.239 7.3275 18.95 7.2125 18.72 6.9825C18.49 6.7525 18.375 6.4635 18.375 6.1155V3.75H18.981V2.0775H20.1345V3.75H21.4035V2.0775H22.5585V3.75H23.163V6.1155C23.163 6.4635 23.048 6.7525 22.818 6.9825C22.588 7.2125 22.299 7.3275 21.951 7.3275H21.432V20.6685C21.432 21.5835 21.094 22.3675 20.418 23.0205C19.743 23.6735 18.923 24 17.958 24C17.017 24 16.202 23.6735 15.513 23.0205C14.825 22.3675 14.481 21.5835 14.481 20.6685V13.7595C14.481 13.4615 14.387 13.2185 14.199 13.0305C14.011 12.8425 13.7685 12.749 13.4715 12.75H12V24H0Z" fill={filled ? 'white' : 'black'}/>
+</svg>
+  ),
+  Hybrid: (filled) =>  (
+    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="24" viewBox="0 0 19 24" fill="none">
+                    <path d="M1.42926 13.944V15.687C1.42926 15.852 1.37387 15.9899 1.2631 16.1007C1.15232 16.2115 1.01443 16.2673 0.849424 16.268H0.581001C0.415997 16.268 0.278106 16.2123 0.167328 16.1007C0.0565509 15.9892 0.000774668 15.8513 0 15.687V7.15096L2.30658 0.581001C2.36313 0.39663 2.47197 0.253317 2.6331 0.15106C2.795 0.0503536 2.97511 0 3.17343 0H15.5081C15.6839 0 15.8439 0.0534521 15.988 0.160356C16.1321 0.267261 16.2316 0.407476 16.2866 0.581001L18.592 7.15096V15.687C18.592 15.852 18.5363 15.9899 18.4247 16.1007C18.3132 16.2115 18.1753 16.2673 18.011 16.268H17.7438C17.5788 16.268 17.4405 16.2123 17.3289 16.1007C17.2174 15.9892 17.1616 15.8513 17.1616 15.687V13.944H1.42926ZM1.6454 5.98896H16.9478L15.2362 1.162H3.35703L1.6454 5.98896ZM3.98334 11.2621C4.34434 11.2621 4.64956 11.1359 4.899 10.8833C5.14922 10.63 5.27433 10.3225 5.27433 9.96069C5.27433 9.59969 5.14767 9.29447 4.89435 9.04503C4.64104 8.79481 4.33388 8.6697 3.97289 8.6697C3.61112 8.6697 3.30512 8.79636 3.0549 9.04968C2.80624 9.30299 2.6819 9.61015 2.6819 9.97114C2.6819 10.3329 2.80817 10.6389 3.06071 10.8891C3.31403 11.1378 3.62235 11.2621 3.98334 11.2621ZM14.6203 11.2621C14.9813 11.2621 15.2865 11.1359 15.536 10.8833C15.7854 10.63 15.9101 10.3225 15.9101 9.96069C15.9101 9.59969 15.7839 9.29447 15.5313 9.04503C15.278 8.79481 14.9709 8.6697 14.6099 8.6697C14.2481 8.6697 13.9421 8.79636 13.6919 9.04968C13.4432 9.30299 13.3189 9.61015 13.3189 9.97114C13.3189 10.3329 13.4451 10.6389 13.6977 10.8891C13.951 11.1378 14.2585 11.2621 14.6203 11.2621ZM10.3023 24L4.35751 21.0055H8.29089V18.9953L14.2345 21.9886H10.3023V24ZM1.162 12.782H17.43V7.15096H1.162V12.782Z" fill={filled ? 'white' : 'black'}/>
+                    </svg>
+  ),
+};
+
   const toggleIcons = {
   browse: (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className='w-4 lg:w-6 2xl:w-10 xxl:w-12'>
@@ -95,15 +114,14 @@ const Hero = () => {
 
   return (
     <div className="bg-[#003e51] p-4 sm:p-8 md:pt-10 md:pb-10 lg:pt-14 xl:pt-20 xs:p-8 md:p-5 lg:p-16 text-white flex flex-col sm:gap-6 xl:gap-8 2xl:gap-12 xxl:gap-16 3xl:gap-20">
-      <div className="flex md:flex-row flex-col items-center justify-between gap-8">
-        <div className="flex flex-col gap-4 max-w-[1250px] text-center md:text-left">
-          <h1 className="text-[#41b6e6] font-bold text-2xl xs:text-4xl sm:text-[42px] md:text-4xl lg:text-5xl 2xl:text-6xl xxl:text-7xl 3xl:text-8xl">
-            Get on the Road to Great Savings
-          </h1>
-          <p className="text-white text-[13px] sm:text-[14px] md:text-sm lg:text-lg 2xl:text-xl xxl:text-2xl 3xl:text-3xl max-w-[860px]">
-            Take advantage of our simple novated lease calculator to explore your potential savings and find the ideal vehicle for your needs.
+      {/* Header Section */}
+      <div className="flex md:flex-row flex-col items-center md:items-start sm:items-center justify-between md:gap-0 sm:gap-8">
+        <div className="flex flex-col gap-4 xs:w-[395px] sm:w-[91%] md:w-[59%] lg:w-[722px] 2xl:w-[860px] xxl:w-[990px] 3xl:w-[1250px] md:items-start items-center">
+          <h1 className="lg:text-5xl sm:text-[42px] xs:text-4xl text-2xl font-bold mb-2 md:text-4xl 2xl:text-6xl xxl:text-7xl md:text-start text-center 3xl:text-8xl text-[#41b6e6]">Get on the Road to Great Savings</h1>
+          <p className="lg:text-lg sm:text-[14px] md:text-sm text-[13px] xxl:text-2xl 3xl:text-3xl 2xl:text-xl mb-4 md:text-start text-center md:w-[400px] lg:w-[90%] sm:w-[420px] xs:w-[350px]">
+            Take advantage of our simple novated lease calculator to explore your potential savings and find the ideal vehicle for your needs. Whether you know exactly what you’re after or need some guidance, we’re got you covered.
           </p>
-          <a href="#" className="text-[#41b6e6] underline sm:text-lg text-[13px] 2xl:text-2xl xxl:text-3xl 3xl:text-4xl">
+          <a href="#" className="text-[#41b6e6] sm:text-lg text-[13px] 2xl:text-2xl xxl:text-3xl 3xl:text-4xl underline mb-4 block font-Inter">
             Have questions? Get in touch.
           </a>
         </div>
@@ -141,21 +159,24 @@ const Hero = () => {
           </h2>
           <div className="grid grid-cols-3 gap-2 md:gap-3 lg:gap-6 2xl:gap-8 xxl:gap-12">
             {['Petrol/Diesel', 'Electric', 'Hybrid'].map((engine) => (
-              <button
-                key={engine}
-                onClick={() => {
-                  handleChange('engine', engine);
-                  setActiveButton(engine);
-                }}
-                className={`rounded-xl font-medium h-10 sm:h-auto text-sm sm:text-md xxl:h-20 ${
-                  activeButton === engine ? 'bg-primary text-white' : 'bg-white text-[#013243]'
-                }`}
-              >
-                <span className="px-2 sm:px-4 2xl:text-xl 3xl:text-3xl xxl:text-2xl">
-                  {engine}
-                </span>
-              </button>
-            ))}
+  <button
+    key={engine}
+    onClick={() => {
+      handleChange('engine', engine);
+      setActiveButton(engine);
+    }}
+    className={`rounded-xl font-medium flex items-center justify-start gap-5 h-10 sm:h-auto text-sm sm:text-md xxl:h-20 px-4 py-4 transition-colors duration-200 ${
+      activeButton === engine ? 'bg-primary text-white' : 'bg-white text-[#013243]'
+    }`}
+  >
+    <span className="w-6 h-6">
+      {engineIcons[engine](activeButton === engine)}
+    </span>
+    <span className="text-center text-xs sm:text-sm lg:text-lg 2xl:text-xl xxl:text-2xl">
+      {engine}
+    </span>
+  </button>
+))}
           </div>
         </div>
       ) : (
