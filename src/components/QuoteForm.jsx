@@ -5,9 +5,9 @@ const QuoteForm = ({ handleSubmit }) => (
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    className="flex flex-col h-auto justify-between items-start"
+    className="flex flex-col h-auto justify-between items-start w-full"
   >
-    <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full">
       <input type="text" name="first_name" className="border p-2 rounded-md w-full border-primary" placeholder="First Name*" required />
       <input type="text" name="last_name" className="border p-2 rounded-md w-full border-primary" placeholder="Last Name*" required />
       <input type="email" name="email" className="border p-2 rounded-md w-full border-primary" placeholder="Enter your email" required />
@@ -15,7 +15,7 @@ const QuoteForm = ({ handleSubmit }) => (
       <textarea name="comment" className="border p-2 rounded-md w-full h-24 border-primary" placeholder="Any additional requests"></textarea>
       <button type="submit" className="bg-muted text-white p-3 rounded-md text-lg font-semibold mt-4">Submit Quote Request</button>
     </form>
-    <p>By clicking "submit", you acknowledge our Privacy Policy which contains a description of how we use your personal information.</p>
+    <p className="mt-6">By clicking "submit", you acknowledge our Privacy Policy which contains a description of how we use your personal information.</p>
   </motion.div>
 );
 
