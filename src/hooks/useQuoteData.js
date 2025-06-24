@@ -152,6 +152,7 @@ const useQuoteData = () => {
       return data;
     } catch (err) {
       console.error("Error fetching quote data:", err);
+      console.warn("Request Body that caused error: ",requestBody)
       setError(err.message);
     } finally {
       setLoading(false);
