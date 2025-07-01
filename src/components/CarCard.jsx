@@ -5,7 +5,7 @@ import useVehicleData from "../hooks/useVehicleData";
 import useQuoteData from "@/hooks/useQuoteData";
 import { useState,useEffect } from "react";
 import {motion} from "framer-motion"
-import { buttons, grids, typography } from "./typography/typography";
+import { buttons, containers, grids, typography } from "./typography/typography";
 import PriceLoader from "./Card_Components/PriceLoader";
 
 const CarCard = ({
@@ -22,6 +22,7 @@ const CarCard = ({
   variant,
   onViewCalculation,
   imageUrl,
+  alignmentClass
 }) => {
   const dispatch = useDispatch();
   const comparisonCars = useSelector((state) => state.filters.comparisonCars); 
@@ -43,7 +44,7 @@ const CarCard = ({
   const [ isFetchingQuote , setIsFetchingQuote ] = useState(false);
 
   return (
-    <card className={typography.card.carCard}>
+    <card className={`${typography.card.carCard} ${alignmentClass}`}>
       <img className="w-full" src={selectedOption ==='know'? `https://liveimages.redbook.com.au/redbook/car/spec/${imageUrl}.jpg` : imageUrl} onError={(e) => {
         e.target.onerror = null; 
         e.target.src = '/images/no-image.jpeg'; 
@@ -89,7 +90,7 @@ const CarCard = ({
         {Object.entries(carfeatures).map(([key,value]) => (
           <div key={key}>
             <h6 className={typography.heading.h6}>{key}</h6>
-            <p className="font-semibold text-sm">{value} {key==='Consumption' && 'L/Km'}</p>
+            <p className="font-semibold text-sm xl:text-lg 2xl:text-xl">{value} {key==='Consumption' && 'L/Km'}</p>
           </div>
         ))}
       </section>
@@ -97,21 +98,26 @@ const CarCard = ({
       {
         quoteData ? (
            <>
-            <div className="w-full bg-primary h-12 xl:h-16 p-2 xs:p-3 sm:p-2 md:p-1 lg:p-2 xl:p-3 pt-4 pb-4 rounded-md flex flex-row items-center justify-between">
-              <p className="font-bold text-xl md:text-lg lg:text-3xl text-primary xl:text-[32px] 2xl:text-5xl xxl:text-4xl text-white">
-                <span className="sm:text-[8px] xl:text-[12px] 2xl:text-[16px] xxl:text-md 3xl:text-lg text-xs sm:font-semibold">FROM </span>{quoteData && (
-                    quoteTime === 'Weekly' ? (
-                      <span>${Math.round(quoteData?.periodicCalculations[0]?.cost?.totalLeaseNet ?? 'N/A')}</span>
-                    ) : quoteTime === 'Fortnightly' ? (
-                      <span>${Math.round(quoteData?.periodicCalculations[2]?.cost?.totalLeaseNet ?? 'N/A')}</span>
-                    ) : quoteTime === 'Monthly' ? (
-                      <span>${Math.round(quoteData?.periodicCalculations[1]?.cost?.totalLeaseNet ?? 'N/A')}</span>
-                    ) : <span>${Math.round(quoteData?.periodicCalculations[0]?.cost?.totalLeaseNet ?? 'N/A')}</span>
-                  )}
-                <span className="sm:text-[10px] xl:text-[14px] 2xl:text-[20px] xxl:text-[16px] text-xs font-semibold">/{quoteTime.slice(0,-2)}</span>
+            <div className={containers.price_container}>
+              <p className={typography.content.price_content}>
+                <span className="text-[10px] md:text-[12px] font-light xl:text-md">FROM </span>
+                <span className="flex flex-row items-center">
+                    <span className="text-xl md:text-2xl">
+                      {quoteData && (
+                      quoteTime === 'Weekly' ? (
+                        <span>${Math.round(quoteData?.periodicCalculations[0]?.cost?.totalLeaseNet ?? 'N/A')}</span>
+                      ) : quoteTime === 'Fortnightly' ? (
+                        <span>${Math.round(quoteData?.periodicCalculations[2]?.cost?.totalLeaseNet ?? 'N/A')}</span>
+                      ) : quoteTime === 'Monthly' ? (
+                        <span>${Math.round(quoteData?.periodicCalculations[1]?.cost?.totalLeaseNet ?? 'N/A')}</span>
+                      ) : <span>${Math.round(quoteData?.periodicCalculations[0]?.cost?.totalLeaseNet ?? 'N/A')}</span>
+                    )}
+                    </span>
+                  <span className="text-[12px] font-light xl:text-md sm:text-[14px]">/{quoteTime.slice(0,-2)}</span>
+                </span>
               </p>
               <button
-                className="bg-[#41b6e6] text-black font-semibold text-xs xl:text-md md:text-[9px] lg:text-xs rounded-md 3xl:rounded-lg px-2 p-1 xs:px-3 xs:p-2 sm:p-1 pt-2 pb-2 sm:pl-3 sm:pr-3 xl:py-2 xl:px-3 3xl:text-lg"
+                className={buttons.view_calculation}
                 onClick={async (e) => {
                   e.stopPropagation(); 
                   onViewCalculation();

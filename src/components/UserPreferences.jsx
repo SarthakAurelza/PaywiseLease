@@ -32,7 +32,7 @@ const UserPreferences = () => {
           value={salary}
           onChange={(e) => handleChange("salary", Number(e.target.value))}
           className="sm:w-[90%] w-full cursor-pointer appearance-none rounded-md h-2"
-          style={{ background: `linear-gradient(to right, #4A90E2 ${percentage_salary}%, #ddd ${percentage_salary}%)` }}
+          style={{ background: `linear-gradient(to right, #4A90E2 ${percentage_salary}%, #ffffff ${percentage_salary}%)` }}
         />
         <div className="sm:w-[90%] w-full flex justify-between text-xs md:text-sm text-gray-500 mt-2">
           <span>$20,000</span><span>$200,000</span>
@@ -52,7 +52,7 @@ const UserPreferences = () => {
           value={leaseTerm}
           onChange={(e) => handleChange("leaseTerm", Number(e.target.value))}
           className="sm:w-[90%] w-full cursor-pointer appearance-none rounded-md h-2"
-          style={{ background: `linear-gradient(to right, #4A90E2 ${percentage_lease_term}%, #ddd ${percentage_lease_term}%)` }}
+          style={{ background: `linear-gradient(to right, #4A90E2 ${percentage_lease_term}%, #ffffff ${percentage_lease_term}%)` }}
         />
         <div className="sm:w-[90%] w-full flex justify-between text-xs md:text-sm text-gray-500 mt-2">
           <span>1 year</span><span>5 years</span>
@@ -86,7 +86,7 @@ const UserPreferences = () => {
           value={yearlyKm}
           onChange={(e) => handleChange("yearlyKm", Number(e.target.value))}
           className="sm:w-[90%] w-full cursor-pointer appearance-none rounded-md h-2"
-          style={{ background: `linear-gradient(to right, #4A90E2 ${percentage_yearly_km}%, #ddd ${percentage_yearly_km}%)` }}
+          style={{ background: `linear-gradient(to right, #4A90E2 ${percentage_yearly_km}%, #ffffff ${percentage_yearly_km}%)` }}
         />
         <div className="sm:w-[90%] w-full flex justify-between text-xs md:text-sm text-gray-500 mt-2">
           <span>5,000 Km</span><span>30,000 Km</span>

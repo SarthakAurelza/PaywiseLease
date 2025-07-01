@@ -42,10 +42,10 @@ const CarList = () => {
 
   const { cars: allCars, loading: carsLoading, error: carsError } = usefetchAllCars();
 
-  const xxlBreakpoint = 1820;
+  const xxlBreakpoint = 1840;
 
   const updatePageSize = () => {
-    if (window.innerWidth >= xxlBreakpoint || (window.innerWidth >= 768 && window.innerWidth < 1200)) {
+    if (window.innerWidth >= xxlBreakpoint) {
       setPageSize(6);
     } else {
       setPageSize(4);
@@ -201,10 +201,11 @@ const CarList = () => {
             {carsLoading ? (
               <p className="text-center w-full py-10">🚗 Loading cars... Please wait.</p>
             ) : (
-              <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 grid-cols-1 xxl:grid-cols-3 gap-10 xs:gap-8 sm:gap-8 md:gap-4 lg:gap-4 xl:gap-12 xxl:gap-12 justify-stretch justify-items-center w-[100%]">
+              <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-2 md:gap-12 lg:gap-4 xl:gap-8 w-full justify-between xxl:grid-cols-3 xxl:gap-4">
                 {paginatedCars.length > 0 ? (
-                  paginatedCars.map((car) => (
-                    <CarCard
+                  paginatedCars.map((car,index) => {
+                    const alignment = index % 2 === 0 ? 'place-self-start' : 'place-self-end';
+                    return <CarCard
                       {...car}
                       key={car.id}
                       quoteData={quoteDataMap[car.id]}
@@ -213,8 +214,9 @@ const CarList = () => {
                         setSelectedCar(car);
                         if (window.innerWidth < 1200) setShowPopup(true);
                       }}
+                      alignmentClass={alignment}
                     />
-                  ))
+                  })
                 ) : (
                   <p>No cars available for the selected filters.</p>
                 )}
