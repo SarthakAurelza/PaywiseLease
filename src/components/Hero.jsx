@@ -6,6 +6,7 @@ import {
   setSelectedOption,
 } from '../features/filtersSlice';
 import usefetchAllCars from '@/hooks/usefetchAllCars';
+import { typography } from './typography/typography';
 
 const Hero = () => {
   const dispatch = useDispatch();
@@ -117,7 +118,7 @@ const Hero = () => {
       {/* Header Section */}
       <div className="flex md:flex-row flex-col items-center md:items-start sm:items-center justify-between md:gap-0 sm:gap-8">
         <div className="flex flex-col gap-4 xs:w-[395px] sm:w-[91%] md:w-[59%] lg:w-[722px] 2xl:w-[860px] xxl:w-[990px] 3xl:w-[1250px] md:items-start items-center">
-          <h1 className="lg:text-5xl sm:text-[42px] xs:text-4xl text-2xl font-bold mb-2 md:text-4xl 2xl:text-6xl xxl:text-7xl md:text-start text-center 3xl:text-8xl text-[#41b6e6]">Get on the Road to Great Savings</h1>
+          <h1 className={typography.heading.h1}>Get on the Road to Great Savings</h1>
           <p className="lg:text-lg sm:text-[14px] md:text-sm text-[13px] xxl:text-2xl 3xl:text-3xl 2xl:text-xl mb-4 md:text-start text-center md:w-[400px] lg:w-[90%] sm:w-[420px] xs:w-[350px]">
             Take advantage of our simple novated lease calculator to explore your potential savings and find the ideal vehicle for your needs. Whether you know exactly what you’re after or need some guidance, we’re got you covered.
           </p>

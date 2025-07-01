@@ -17,6 +17,8 @@ import usefetchAllCars from '@/hooks/usefetchAllCars';
 import useFilteredCars from '@/hooks/useFilteredCars';
 import UserPreferences from './UserPreferences';
 import SortFilterMenu from './SortFilterMenu';
+import { typography } from './typography/typography';
+import PaginationControls from './MainSite_Components/PaginationControls';
 
 const CarList = () => {
   const dispatch = useDispatch();
@@ -174,9 +176,10 @@ const CarList = () => {
     fetchQuoteDataForPage(cars, updatedVehicleDataMap);
   };
 
+
   return (
     <>
-      <h2 className='w-full lg:pr-16 lg:pl-16 lg:pt-16 pb-4 pr-4 pl-4 pt-8 xs:pr-6 xs:pl-6 xs:pt-10 xs:text-lg sm:text-md md:text-lg lg:text-xl xl:text-2xl 3xl:text-3xl'>About You</h2>
+      <h3 className={typography.heading.h3}>About You</h3>
       <div className='w-full h-auto'>
         <UserPreferences />
       </div>
@@ -185,7 +188,7 @@ const CarList = () => {
         <div className="bg-white md:p-5 p-4 sm:p-6 lg:p-12 xs:p-8 pt-8 xs:pt-14 rounded-lg w-full lg:w-[66%] xl:w-[68%] flex flex-col items-center sm:items-center">
           <div className='w-full flex flex-col'>
             <div className='flex items-center justify-between mb-6 xs:mb-10'>
-              <h2 className=" xs:text-lg lg:text-xl font-bold mb-4 xl:text-2xl 2xl:text-3xl xxl:text-4xl 3xl:text-5xl">Available Cars</h2>
+              <h2 className={typography.heading.h2}>Available Cars</h2>
               <SortFilterMenu
                 show={showFilterDropdown}
                 toggle={() => setShowFilterDropdown(!showFilterDropdown)}
@@ -198,7 +201,7 @@ const CarList = () => {
             {carsLoading ? (
               <p className="text-center w-full py-10">🚗 Loading cars... Please wait.</p>
             ) : (
-              <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 grid-cols-1 xxl:grid-cols-3 gap-10 xs:gap-8 sm:gap-8 md:gap-1 lg:gap-4 xl:gap-12 xxl:gap-12 justify-stretch justify-items-center w-[100%]">
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 grid-cols-1 xxl:grid-cols-3 gap-10 xs:gap-8 sm:gap-8 md:gap-4 lg:gap-4 xl:gap-12 xxl:gap-12 justify-stretch justify-items-center w-[100%]">
                 {paginatedCars.length > 0 ? (
                   paginatedCars.map((car) => (
                     <CarCard
@@ -220,31 +223,13 @@ const CarList = () => {
           </div>
 
           {totalPages > 1 && (
-            <Pagination className="w-full pt-8">
-              <PaginationContent className="w-full flex justify-between">
-                <PaginationItem>
-                  <PaginationPrevious
-                    href="#"
-                    onClick={(e) => handlePageChange(currentPage - 1, e)}
-                    disabled={currentPage === 1}
-                    className={`${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  >
-                    Previous
-                  </PaginationPrevious>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationNext
-                    href="#"
-                    onClick={(e) => handlePageChange(currentPage + 1, e)}
-                    disabled={currentPage === totalPages}
-                    className={`${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  >
-                    Next
-                  </PaginationNext>
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
+            <PaginationControls
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
           )}
+
         </div>
 
         <div className="hidden lg:block lg:w-[33%] xl:w-[31%] xxl:w-[27%] w-full">

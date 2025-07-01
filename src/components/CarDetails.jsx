@@ -9,12 +9,14 @@ const CarDetails = ({ car }) => (
         e.target.src = '/images/no-image.jpeg';
       }}
     />
-    <p className="3xl:text-3xl 2xl:text-xl sm:text-lg xs:text-[16px] text-sm font-semibold text-primary">
+    <div className="flex flex-wrap">
+      <p className="3xl:text-3xl 2xl:text-xl sm:text-lg xs:text-[16px] text-sm font-semibold text-primary">
       {car.brand.toUpperCase()} {car.model.toUpperCase()} <br />
       <span className='font-normal text-xs xs:text-sm lg:text-[13px] xl:text-lg 3xl:text-2xl'>
         {car.variant.split(" ").slice(-4).join(" ").toUpperCase()}
       </span>
     </p>
+    </div>
   </div>
 );
 
