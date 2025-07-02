@@ -27,7 +27,8 @@ export const buttons = {
   danger: "bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded",
   compare_inactive: "bg-transparent text-primary font-semibold border rounded-xl 3xl:rounded-2xl h-6 w-[100px] sm:h-4 sm:w-[70px] lg:h-5 lg:w-[80px] text-[10px] sm:text-[8px]  lg:text-[9px] xl:text-[12px] 3xl:text-sm xl:w-[110px] 3xl:w-[150px] 3xl:h-8 xl:h-7 border-muted",
   compare_active: "bg-primary text-white font-semibold border rounded-xl 3xl:rounded-2xl h-6 w-[100px] sm:h-4 sm:w-[70px] lg:h-5 lg:w-[80px] text-[10px] sm:text-[8px]  lg:text-[9px] xl:text-[12px] 3xl:text-sm xl:w-[110px] 3xl:w-[150px] 3xl:h-8 xl:h-7 border-muted",
-  view_calculation: "bg-[#41b6e6] text-black font-semibold text-xs p-2 rounded md:text-md xl:text-[15px] xl:rounded-lg"
+  view_calculation: "bg-[#41b6e6] text-black font-semibold text-xs p-2 rounded md:text-md xl:text-[15px] xl:rounded-lg",
+  roundButton: "rounded-full bg-gray-100 px-3 py-1 font-bold hover:bg-gray-200 border border-primary",
 
 }
 
@@ -36,5 +37,6 @@ export const containers = {
 }
 
 export const grids = {
-  carFeatureGrid: "w-full grid grid-cols-[2fr_1fr] gap-4"
+  carFeatureGrid: "w-full grid grid-cols-[2fr_1fr] gap-4",
+  compareGrid: " w-full grid grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-16"
 }

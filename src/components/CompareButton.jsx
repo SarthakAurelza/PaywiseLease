@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToComparison } from "@/features/filtersSlice";
 import { useNavigate } from "react-router-dom";
-import CompareModal from "./CompareModal";
+import CompareModal from "./comparison/CompareModal";
 import SelectCarModal from "./SelectCarModal";
 import usefetchAllCars from "@/hooks/usefetchAllCars";
 import useVehicleData from "@/hooks/useVehicleData";

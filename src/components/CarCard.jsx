@@ -73,6 +73,7 @@ const CarCard = ({
                   model,
                   body,
                   seats,
+                  variant,
                   transmission,
                   fuel_consumption,
                   imageUrl, 
