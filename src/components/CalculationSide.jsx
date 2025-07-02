@@ -99,10 +99,10 @@ const CalculationSide = ({ car, onClose, quoteData }) => {
   }
 
   return (
-    <div className="bg-white flex flex-col lg:p-4 lg:pt-12 lg:pb-12 p-2 sm:p-6 md:p-4 w-full rounded-lg shadow-md lg:gap-8 xl:gap-12 2xl:gap-16 3xl:gap-20 h-full lg:h-auto justify-between">
+    <div className="bg-white flex flex-col lg:p-4 lg:pt-12 lg:pb-12 p-2 sm:p-6 md:p-4 w-full rounded-lg shadow-md lg:gap-12 xl:gap-12 2xl:gap-16 3xl:gap-20 h-full lg:h-auto justify-between">
       <div className="flex justify-between items-center mb-4">
         <h2 className="font-bold text-xl md:text-2xl lg:text-[30px] 2xl:text-3xl 3xl:text-5xl">{showForm ? "Request a Quote" : "Your Calculation"}</h2>
-        <button onClick={onClose} className="rounded-full bg-gray-100 px-3 py-1 font-bold hover:bg-gray-200">X</button>
+        <button onClick={onClose} className="rounded-full bg-gray-100 px-3 py-1 font-bold hover:bg-gray-200 border border-primary">X</button>
       </div>
 
       {showForm ? (
@@ -121,22 +121,22 @@ const CalculationSide = ({ car, onClose, quoteData }) => {
           </div>
 
           <div className='flex items-center gap-6'>
-            <p className='text-primary font-semibold'>INCLUDED</p>
+            <p className='text-primary font-semibold text-xl'>INCLUDED</p>
             <hr className='w-full' />
 
           </div>
           
           <FeatureList features={["Fuel", "Finance", "Insurance", "Maintainence","Tyres","Registration & CTP"]} />
           <div className='flex items-center gap-6'>
-            <p className='text-primary font-semibold'>SAVINGS</p>
+            <p className='text-primary font-semibold text-xl'>SAVINGS</p>
             <hr className='w-full' />
 
           </div>
           <Savings />
 
           <div className='w-full flex items-center justify-between'>
-            <p className='font-bold'>Total</p>
-            <p className='font-bold'>$30,000</p>
+            <p className='font-bold text-lg'>Total</p>
+            <p className='font-bold text-lg'>$30,000</p>
           </div>
         </>
       )}

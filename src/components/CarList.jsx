@@ -15,7 +15,7 @@ import useQuoteData from '@/hooks/useQuoteData';
 import { setQuoteForCar } from '@/features/filtersSlice';
 import usefetchAllCars from '@/hooks/usefetchAllCars';
 import useFilteredCars from '@/hooks/useFilteredCars';
-import UserPreferences from './UserPreferences';
+import UserPreferences from './MainSite_Components/UserPreferences';
 import SortFilterMenu from './SortFilterMenu';
 import { typography } from './typography/typography';
 import PaginationControls from './MainSite_Components/PaginationControls';
@@ -234,7 +234,7 @@ const CarList = () => {
 
         </div>
 
-        <div className="hidden lg:block lg:w-[33%] xl:w-[31%] xxl:w-[27%] w-full">
+        <div className="hidden lg:block lg:w-[35%] xl:w-[31%] xxl:w-[27%] w-full">
           {selectedCar ? (
             <CalculationSide
               car={selectedCar}

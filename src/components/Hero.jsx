@@ -158,7 +158,7 @@ const Hero = () => {
           <h2 className="text-white font-semibold mb-2 text-[16px] sm:text-lg md:text-md lg:text-lg 2xl:text-xl xxl:text-2xl 3xl:text-3xl">
             Select Preference
           </h2>
-          <div className="grid grid-cols-3 gap-2 md:gap-3 lg:gap-6 2xl:gap-8 xxl:gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-3 lg:gap-6 2xl:gap-8 xxl:gap-12">
             {['Petrol/Diesel', 'Electric', 'Hybrid'].map((engine) => (
   <button
     key={engine}
@@ -166,14 +166,14 @@ const Hero = () => {
       handleChange('engine', engine);
       setActiveButton(engine);
     }}
-    className={`rounded-xl font-medium flex items-center justify-start gap-5 h-10 sm:h-auto text-sm sm:text-md xxl:h-20 px-4 py-4 transition-colors duration-200 ${
+    className={`rounded-xl font-medium flex items-center justify-start gap-5 px-2 py-4 transition-colors duration-200 ${
       activeButton === engine ? 'bg-primary text-white' : 'bg-white text-[#013243]'
     }`}
   >
     <span className="w-6 h-6">
       {engineIcons[engine](activeButton === engine)}
     </span>
-    <span className="text-center text-xs sm:text-sm lg:text-lg 2xl:text-xl xxl:text-2xl">
+    <span className="text-center text-sm">
       {engine}
     </span>
   </button>
