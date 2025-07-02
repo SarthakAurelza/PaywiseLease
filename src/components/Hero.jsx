@@ -60,11 +60,22 @@ const Hero = () => {
   const [activeButton, setActiveButton] = useState(null);
 
   const handleChange = useCallback(
-    (key, value) => {
-      dispatch(setFilter({ key, value }));
-    },
-    [dispatch]
-  );
+  (key, value) => {
+    dispatch(setFilter({ key, value }));
+
+    // Reset dependent fields when changing parent
+    if (key === 'brand') {
+      dispatch(setFilter({ key: 'model', value: '' }));
+      dispatch(setFilter({ key: 'variant', value: '' }));
+      setSearchQuery('');
+      setSuggestions([]);
+    } else if (key === 'model') {
+      dispatch(setFilter({ key: 'variant', value: '' }));
+    }
+  },
+  [dispatch]
+);
+
 
   const handleReset = useCallback(() => {
     dispatch(resetFilters());
