@@ -135,7 +135,7 @@ const { fetchQuoteData } = useQuoteData();
                       ) : (
                         <div
                           className="w-full h-full flex flex-col justify-center items-center cursor-pointer min-h-[200px]"
-                          onClick={() => setIsModalOpen(true)}
+                          onClick={() => setIsSelectCarModalOpen(true)}
                         >
                           <img
                             src="/images/carIcon.png"
@@ -173,7 +173,7 @@ const { fetchQuoteData } = useQuoteData();
       </div>
 
       {/* Car Select Modal */}
-      {isModalOpen && (
+      {isSelectCarModalOpen && (
         <SelectCarModal
         onClose={() => setIsSelectCarModalOpen(false)}
           filters={filters}
