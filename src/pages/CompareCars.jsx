@@ -32,7 +32,7 @@ const CompareCars = () => {
   const [isSelectCarModalOpen, setIsSelectCarModalOpen] = useState(false);
   const totalSlots = 3;
   const { fetchVehicleData } = useVehicleData();
-const { fetchQuoteData } = useQuoteData();
+  const { fetchQuoteData } = useQuoteData();
 
   const handleAddCar = async (car) => {
     dispatch(addToComparison(car));
@@ -83,7 +83,7 @@ const { fetchQuoteData } = useQuoteData();
                 const leaseAmount = getLeaseAmount(quote);
 
                 return (
-                  <th key={index} className="p-4 border-b bg-gray-100 align-top w-[300px]">
+                  <th key={index} className="p-0 border-b bg-gray-100 align-top w-[300px]">
                     <div className={typography.card.carCard}>
                       {car ? (
                         <>
@@ -143,7 +143,7 @@ const { fetchQuoteData } = useQuoteData();
                           <img
                             src="/images/carIcon.png"
                             alt="Select Car"
-                            className="w-12 h-12 mb-2"
+                            className="w-16 h-16 mb-4"
                           />
                           <span className="text-sm font-semibold text-primary">
                             Select Car
