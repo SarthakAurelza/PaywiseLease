@@ -65,6 +65,7 @@ const { fetchQuoteData } = useQuoteData();
   };
 
   return (
+    <>
     <div className="w-full p-10">
       <h1 className="text-3xl font-semibold mb-8">Compare Cars</h1>
 
@@ -187,10 +188,11 @@ const { fetchQuoteData } = useQuoteData();
           handleFilterChange={handleFilterChange}
         />
       )}
-
-      <Disclaimer />
-      <Info />
     </div>
+
+    <Disclaimer />
+    <Info />
+    </>
 
   );
 };
