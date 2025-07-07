@@ -74,7 +74,7 @@ const CompareCars = () => {
         <table className="min-w-full border border-gray-200 text-left bg-white shadow rounded-xl">
           <thead>
             <tr>
-              <th className="p-4 border-b font-medium text-gray-700 bg-gray-100 align-top">
+              <th className="p-4 border-b font-medium text-gray-700 bg-gray-100 align-top w-[15%]">
                 Feature
               </th>
               {Array.from({ length: totalSlots }).map((_, index) => {
