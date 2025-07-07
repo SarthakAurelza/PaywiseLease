@@ -109,8 +109,8 @@ const CompareCars = () => {
                             <h4 className={typography.heading.h4}>
                               {car.brand?.toUpperCase()} {car.model?.toUpperCase()}
                             </h4>
-                            <p className="text-sm text-primary font-medium">
-                              {car.variant?.split(" ").slice(0, 4).join(" ") || "Base Model"}
+                            <p className="text-sm text-primary font-medium flex flex-wrap">
+                              {car.variant || "Base Model"}
                             </p>
                           </div>
 
