@@ -66,7 +66,7 @@ const CompareCars = () => {
 
   return (
     <>
-    <div className="w-full p-10">
+    <div className="w-full p-20">
       <h1 className="text-3xl font-semibold mb-8">Compare Cars</h1>
 
       {/* Table */}
