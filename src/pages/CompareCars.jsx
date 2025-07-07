@@ -11,6 +11,8 @@ import useSearchSuggestions from "@/hooks/useSearchSuggestions";
 import { addToComparison } from "@/features/filtersSlice";
 import useVehicleData from "@/hooks/useVehicleData";
 import useQuoteData from "@/hooks/useQuoteData";
+import Info from "@/components/Info";
+import Disclaimer from "@/components/Disclaimer";
 
 const featureKeys = [
   { key: "engine", label: "Engine" },
@@ -185,7 +187,11 @@ const { fetchQuoteData } = useQuoteData();
           handleFilterChange={handleFilterChange}
         />
       )}
+
+      <Disclaimer />
+      <Info />
     </div>
+
   );
 };
 
