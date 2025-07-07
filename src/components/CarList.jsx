@@ -19,6 +19,7 @@ import UserPreferences from './MainSite_Components/UserPreferences';
 import SortFilterMenu from './SortFilterMenu';
 import { typography } from './typography/typography';
 import PaginationControls from './MainSite_Components/PaginationControls';
+import SkeletonLoader from './SkeletonLoader';
 
 const CarList = () => {
   const dispatch = useDispatch();
@@ -199,7 +200,7 @@ const CarList = () => {
             </div>
 
             {carsLoading ? (
-              <p className="text-center w-full py-10">🚗 Loading cars... Please wait.</p>
+              <SkeletonLoader paginatedCars={paginatedCars} />
             ) : (
               <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-2 md:gap-12 lg:gap-4 xl:gap-8 w-full justify-between xxl:grid-cols-3 xxl:gap-4">
                 {paginatedCars.length > 0 ? (

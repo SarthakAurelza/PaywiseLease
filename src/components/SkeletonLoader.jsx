@@ -1,22 +1,26 @@
 import React from 'react';
 import { motion } from "framer-motion";
 
-const SkeletonLoader = () => {
+const SkeletonCard = () => (
+  <div className="w-full bg-white rounded-lg shadow p-4 sm:p-6 animate-pulse flex flex-col gap-4 h-[380px]">
+    <div className="h-48 bg-gray-300 rounded-md w-full" />
+    <div className="h-5 bg-gray-300 rounded w-3/4" />
+    <div className="h-4 bg-gray-300 rounded w-1/2" />
+    <div className="h-10 bg-gray-300 rounded w-full mt-auto" />
+  </div>
+);
+
+const SkeletonLoader = ({ count = 4 }) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex flex-col min-h-[660px] justify-between"
+      className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-2 md:gap-12 lg:gap-4 xl:gap-8 w-full justify-between xxl:grid-cols-3 xxl:gap-4"
     >
-                  <div className="animate-pulse bg-gray-200 rounded-lg w-full h-20"></div>
-                  <div className="animate-pulse bg-gray-200 rounded-lg w-full h-72"></div>
-                  <div className="animate-pulse bg-gray-200 rounded-lg w-full h-16"></div>
-                  <div className="flex justify-between">
-                    <div className="animate-pulse bg-gray-200 rounded-lg w-1/3 h-24"></div>
-                    <div className="animate-pulse bg-gray-200 rounded-lg w-1/3 h-24"></div>
-                    <div className="animate-pulse bg-gray-200 rounded-lg w-1/3 h-24"></div>
-                  </div>
+      {Array.from({ length: count }).map((_, idx) => (
+        <SkeletonCard key={idx} />
+      ))}
     </motion.div>
   );
 };
