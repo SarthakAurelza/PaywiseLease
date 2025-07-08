@@ -121,7 +121,7 @@ const CompareCars = () => {
                                 e.target.src = "/images/no-image.jpeg";
                               }}
                               alt={car.model}
-                              className="w-full h-40 object-cover rounded-lg"
+                              className="w-full object-cover rounded-lg"
                             />
                             <button
                               className={`absolute top-2 right-2 ${buttons.roundButton}`}
