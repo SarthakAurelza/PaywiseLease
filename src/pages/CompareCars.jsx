@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromComparison } from "@/features/filtersSlice";
+import { removeFromComparison, setQuoteForCar } from "@/features/filtersSlice";
 
 import CompareModal from "@/components/comparison/CompareModal";
 import { buttons, containers, typography } from "@/components/typography/typography";
@@ -31,13 +31,39 @@ const CompareCars = () => {
   const [selectedTable, setSelectedTable] = useState(null);
   const [isSelectCarModalOpen, setIsSelectCarModalOpen] = useState(false);
   const totalSlots = 3;
+  const { salary, leaseTerm, yearlyKm, state: userState } = useSelector((state) => state.filters.userPreferences);
+  const userPreferences = { salary, leaseTerm, yearlyKm, state: userState };
+
   const { fetchVehicleData } = useVehicleData();
   const { fetchQuoteData } = useQuoteData();
 
   const handleAddCar = async (car) => {
-    dispatch(addToComparison(car));
-    setIsSelectCarModalOpen(false);
+  dispatch(addToComparison(car));
+  setIsSelectCarModalOpen(false);
+
+  try {
+    const vehicleData = await fetchVehicleData(car.brand, car.model, car.yearGroup);
+    
+    // FIX: Extract from Redux at top-level
+    const userInput = userPreferences;
+
+    const quote = await fetchQuoteData(vehicleData, {
+      state: userInput.state,
+      annualSalary: userInput.salary,
+      leaseTerm: userInput.leaseTerm * 12,
+      annualKms: userInput.yearlyKm,
+      hasHECS: false,
+      age: 35,
+      includeGAP: true,
+      includeRoadSide: false,
+    });
+
+    dispatch(setQuoteForCar({ carId: car.id, quoteData: { ...quote, userInput } }));
+  } catch (error) {
+    console.error("❌ Failed to fetch quote for comparison car:", error);
   }
+};
+
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
