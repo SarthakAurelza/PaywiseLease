@@ -9,7 +9,7 @@ import FeatureList from './FeatureList';
 import Savings from './Savings';
 import { SeparatorHorizontal } from 'lucide-react';
 
-const CalculationSide = ({ car, onClose, quoteData }) => {
+const CalculationSide = ({ car, onClose, price }) => {
   const [activeButton, setActiveButton] = useState('Weekly');
   const [showForm, setShowForm] = useState(false);
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const CalculationSide = ({ car, onClose, quoteData }) => {
     comment: formData.get("comment") || "",
     
     // Include car details (quote data)
-    dv_make: car?.brand || "N/A",        // Car brand
+    dv_make: car?.make || "N/A",        // Car brand
     dv_model: car?.model || "N/A",       // Car model
     dv_variant: car?.variant || "N/A",   // Car variant (if applicable)
     dv_price: getLeaseCost() || 0,       // Lease cost (or car price, based on what you need)
@@ -76,12 +76,12 @@ const CalculationSide = ({ car, onClose, quoteData }) => {
   };
 
   const getLeaseCost = () => {
-    if (!quoteData || !quoteData.periodicCalculations) return;
+    if (!price) return;
 
     const costMap = {
-      Weekly: quoteData.periodicCalculations[0]?.cost?.totalLeaseNet,
-      Fortnightly: quoteData.periodicCalculations[2]?.cost?.totalLeaseNet,
-      Monthly: quoteData.periodicCalculations[1]?.cost?.totalLeaseNet
+      Weekly: price.weekly,
+      Fortnightly: price.fortnightly,
+      Monthly: price.monthly
     };
     return Math.round(costMap[activeButton]);
   };

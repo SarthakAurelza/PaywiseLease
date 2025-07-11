@@ -9,33 +9,22 @@ import { buttons, containers, grids, typography } from "./typography/typography"
 import PriceLoader from "./Card_Components/PriceLoader";
 
 const CarCard = ({
-  id,
-  brand,
-  engine,
-  model,
-  body,
-  transmission,
-  fuel_consumption,
-  seats,
-  quoteData,
-  yearGroup,
-  variant,
+  car,
+  price,
   onViewCalculation,
-  imageUrl,
-  alignmentClass
 }) => {
   const dispatch = useDispatch();
   const comparisonCars = useSelector((state) => state.filters.comparisonCars); 
   const selectedOption = useSelector((state)=>state.filters.selectedOption);
-  const quoteTime = useSelector((state)=>state.filters.quoteTime);
+  const quoteTime = 'Weekly'
 
   const isInComparison = comparisonCars.some((car) => car.id === id);
 
   const carfeatures = {
-    'Engine' : engine,
-    'Body/Seats': body,
-    'Transmission': transmission,
-    'Consumption': fuel_consumption
+    'Engine' : car.engineDescription || car.engineType,
+    'Body/Seats': car.bodyStyle || car.bodyType,
+    'Transmission': car.gearTypeDescription || car.transmission,
+    'Consumption': car.fuelType
   }
 
   const { fetchVehicleData, loading, error } = useVehicleData();
@@ -44,44 +33,44 @@ const CarCard = ({
   const [ isFetchingQuote , setIsFetchingQuote ] = useState(false);
 
   return (
-    <card className={`${typography.card.carCard} ${alignmentClass}`}>
-      <img className="w-full" src={selectedOption ==='know'? `https://liveimages.redbook.com.au/redbook/car/spec/${imageUrl}.jpg` : imageUrl} onError={(e) => {
+    <card className={`${typography.card.carCard}`}>
+      <img className="w-full" src={`https://liveimages.redbook.com.au/redbook/car/spec/${car.imageCode}.jpg`} onError={(e) => {
         e.target.onerror = null; 
         e.target.src = '/images/no-image.jpeg'; 
       }}  alt="carImage" />
 
       <div className="w-full flex flex-row justify-between items-start">
         <div className="flex flex-wrap gap-1 w-[55%]">
-          <h4 className={typography.heading.h4}>{brand.toUpperCase()}</h4>
-          <h5 className={typography.heading.h5}>{model.toUpperCase()}</h5>
+          <h4 className={typography.heading.h4}>{car.make.toUpperCase()}</h4>
+          <h5 className={typography.heading.h5}>{car.model.toUpperCase()}</h5>
           <br/>
           {/* <h3 className="text-xs font-normal">{variant.toUpperCase()}</h3> */}
         </div>
 
         <Button
           className={isInComparison ? buttons.compare_active: buttons.compare_inactive}
-          onClick={(e) => {
-            e.stopPropagation(); 
-            if (isInComparison) {
-              dispatch(removeFromComparison(id)); 
-            } else {
-              dispatch(
-                addToComparison({
-                  id,
-                  brand,
-                  engine,
-                  model,
-                  body,
-                  seats,
-                  variant,
-                  transmission,
-                  fuel_consumption,
-                  imageUrl, 
+          // onClick={(e) => {
+          //   e.stopPropagation(); 
+          //   if (isInComparison) {
+          //     dispatch(removeFromComparison(id)); 
+          //   } else {
+          //     dispatch(
+          //       addToComparison({
+          //         id,
+          //         brand,
+          //         engine,
+          //         model,
+          //         body,
+          //         seats,
+          //         variant,
+          //         transmission,
+          //         fuel_consumption,
+          //         imageUrl, 
                   
-                })
-              )
-            }
-          }}
+          //       })
+          //     )
+          //   }
+          // }}
         >
           {isInComparison ? "Remove" : "Add to compare"}
         </Button>
@@ -97,22 +86,27 @@ const CarCard = ({
       </section>
 
       {
-        quoteData ? (
+        price ? (
            <>
             <div className={containers.price_container}>
               <p className={typography.content.price_content}>
                 <span className="text-[10px] md:text-[12px] font-light xl:text-md">FROM </span>
                 <span className="flex flex-row items-center">
                     <span className="text-xl md:text-2xl">
-                      {quoteData && (
-                      quoteTime === 'Weekly' ? (
-                        <span>${Math.round(quoteData?.periodicCalculations[0]?.cost?.totalLeaseNet ?? 'N/A')}</span>
-                      ) : quoteTime === 'Fortnightly' ? (
-                        <span>${Math.round(quoteData?.periodicCalculations[2]?.cost?.totalLeaseNet ?? 'N/A')}</span>
-                      ) : quoteTime === 'Monthly' ? (
-                        <span>${Math.round(quoteData?.periodicCalculations[1]?.cost?.totalLeaseNet ?? 'N/A')}</span>
-                      ) : <span>${Math.round(quoteData?.periodicCalculations[0]?.cost?.totalLeaseNet ?? 'N/A')}</span>
-                    )}
+                      {
+                        price ? (
+                          <span>
+                            {quoteTime === 'Weekly' && typeof price.weekly === 'number'
+                              ? `$${Math.round(price.weekly)}`
+                              : quoteTime === 'Fortnightly' && typeof price.fortnightly === 'number'
+                              ? `$${Math.round(price.fortnightly)}`
+                              : quoteTime === 'Monthly' && typeof price.monthly === 'number'
+                              ? `$${Math.round(price.monthly)}`
+                              : 'N/A'
+                            }
+                          </span>
+                        ) : null
+                      }
                     </span>
                   <span className="text-[12px] font-light xl:text-md sm:text-[14px]">/{quoteTime.slice(0,-2)}</span>
                 </span>
@@ -129,7 +123,7 @@ const CarCard = ({
             </div>
           </>
         ) : (
-          <PriceLoader data={quoteData} />
+          <PriceLoader data={price} />
         )
       }
     </card>

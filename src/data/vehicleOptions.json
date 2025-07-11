@@ -1,0 +1,8 @@
+{
+  "brands": ["Toyota", "Tesla"],
+  "models": {
+    "Toyota": ["Kluger", "Camry", "Fortuner"],
+    "Tesla": ["Model 3", "Model Y", "Model S", "Model X"]
+  },
+  "years": ["2024", "2025"]
+} 
