@@ -12,3 +12,13 @@ export async function getLeaseData(payload) {
   const res = await axios.post(`${BASE_URL}/get-lease-data`, payload);
   return res.data;
 } 
+
+export async function getBrands(){
+  const res = await axios.get(`${BASE_URL}/makes`);
+  return res.data
+}
+
+export async function getModels({ make }) {
+  const res = await axios.post(`${BASE_URL}/models`, { make});
+  return res.data;
+}
