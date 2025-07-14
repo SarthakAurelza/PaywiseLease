@@ -54,7 +54,7 @@ export default function useVehicles() {
       setLoading(true);
       let allFetchedCars = [];
       const brandsToUse = filters.brand ? [filters.brand] : brands;
-      const years = filters.yearGroup ? [filters.yearGroup] : [2021, 2022, 2023, 2024, 2025];
+      const years = filters.yearGroup ? [filters.yearGroup] : [2024, 2025];
 
       let combos = [];
       for (const brand of brandsToUse) {
@@ -66,7 +66,9 @@ export default function useVehicles() {
         }
       }
 
-      const BATCH_SIZE = 20;
+      console.log("Total cars",combos.length)
+
+      const BATCH_SIZE = 50;
 
       const processBatch = async (batch) => {
         const results = await Promise.allSettled(batch.map(combo => getVehicleData(combo)));
@@ -210,7 +212,7 @@ export default function useVehicles() {
     options: {
       brands,
       models: filters.brand ? modelsMap[filters.brand] || [] : [],
-      years: [2021, 2022, 2023, 2024, 2025],
+      years: [2024, 2025],
       engineTypes: ENGINE_TYPES,
       seaters: SEATERS,
       minPrice: MIN_PRICE,

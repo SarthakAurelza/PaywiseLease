@@ -11,8 +11,8 @@ const CarList = () => {
   console.log(cars); 
   return (
     <div className='w-full flex flex-col'>
-      <div className='w-full flex flex-row justify-between'>
-        <div className='w-[65%] bg-white'>
+      <div className='w-full flex flex-row justify-between p-20'>
+        <div className='w-[65%] bg-white p-8'>
           {
             loading ? (
               <SkeletonLoader />
