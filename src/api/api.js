@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3001/api";
+const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/api`;
 
 export async function getVehicleData({ brand, model, yearGroup }) {
   const res = await axios.post(`${BASE_URL}/get-vehicle-data`, { brand, model, yearGroup });
