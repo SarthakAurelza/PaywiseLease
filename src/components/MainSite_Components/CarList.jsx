@@ -1,9 +1,9 @@
 import useVehicles from '@/hooks/useVehicles';
 import React, { useState } from 'react'
 import SkeletonLoader from './SkeletonLoader';
-import CarCard from './CarCard';
-import FiltersBar from './FiltersBar';
-import CalculationSide from './CalculationSide';
+import CarCard from '../Card_Components/CarCard';
+import FiltersBar from '../FiltersBar';
+import CalculationSide from '../CalculationSide';
 
 const CarList = () => {
   const { cars, prices, loading, filters, setFilters, options, currentPage, setCurrentPage, totalPages } = useVehicles();

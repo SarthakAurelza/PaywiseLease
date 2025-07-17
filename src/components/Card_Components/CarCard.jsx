@@ -1,12 +1,12 @@
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { addToComparison, removeFromComparison, setQuoteData,setFetchingQuote } from "@/features/filtersSlice";
-import useVehicleData from "../hooks/useVehicleData";
+import useVehicleData from "@/hooks/useVehicleData";
 import useQuoteData from "@/hooks/useQuoteData";
 import { useState,useEffect } from "react";
 import {motion} from "framer-motion"
-import { buttons, containers, grids, typography } from "./typography/typography";
-import PriceLoader from "./Card_Components/PriceLoader";
+import { buttons, containers, grids, typography } from "../typography/typography"
+import PriceLoader from "./PriceLoader";
 
 const CarCard = ({
   car,

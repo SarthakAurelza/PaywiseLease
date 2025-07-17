@@ -1,7 +1,7 @@
-import CarList from '@/components/CarList'
+import CarList from '@/components/MainSite_Components/CarList'
 import CompareButton from '@/components/CompareButton'
 import Disclaimer from '@/components/Disclaimer'
-import Hero from '@/components/Hero'
+import Hero from '@/components/Hero_Components/Hero'
 import Info from '@/components/Info'
 import Request from '@/components/Request'
 
