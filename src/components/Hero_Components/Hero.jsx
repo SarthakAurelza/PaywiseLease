@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setFilter,
@@ -19,18 +19,27 @@ const Hero = () => {
   const [activeButton, setActiveButton] = useState(null);
 
   const handleChange = useCallback(
-    (key, value) => {
-      dispatch(setFilter({ key, value }));
+  (key, value) => {
+    console.log(`handleChange called — key: ${key}, value: ${value}`);
 
-      if (key === 'brand') {
-        dispatch(setFilter({ key: 'model', value: '' }));
-        dispatch(setFilter({ key: 'variant', value: '' }));
-      } else if (key === 'model') {
-        dispatch(setFilter({ key: 'variant', value: '' }));
-      }
-    },
-    [dispatch]
-  );
+    dispatch(setFilter({ key, value }));
+
+    if (key === 'brand') {
+      console.log('Brand changed — resetting model and variant');
+      dispatch(setFilter({ key: 'model', value: '' }));
+      dispatch(setFilter({ key: 'variant', value: '' }));
+    } else if (key === 'model') {
+      console.log('Model changed — resetting variant');
+      dispatch(setFilter({ key: 'variant', value: '' }));
+    }
+  },
+  [dispatch]
+);
+
+useEffect(() => {
+  console.log("filters state: ",filters)
+},[filters])
+
 
   const handleReset = useCallback(() => {
     dispatch(resetFilters());
@@ -126,7 +135,10 @@ const Hero = () => {
 
             <select
               className="p-2 sm:text-md lg:text-lg 2xl:text-xl border border-gray-300 rounded-md focus:ring focus:outline-none text-black"
-              onChange={(e) => handleChange('model', e.target.value)}
+              onChange={(e) => {
+                console.log('Model selected:', e.target.value);
+                handleChange('model', e.target.value);
+              }}
               value={filters.model || ''}
               disabled={!filters.brand}
             >

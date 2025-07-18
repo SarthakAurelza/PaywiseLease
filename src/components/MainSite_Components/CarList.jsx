@@ -7,8 +7,7 @@ import CalculationSide from '../CalculationSide';
 
 const CarList = () => {
   const { cars, prices, loading, filters, setFilters, options, currentPage, setCurrentPage, totalPages } = useVehicles();
-  const [selectedCar,setSelectedCar] = useState(null)
-  console.log(cars); 
+  const [selectedCar,setSelectedCar] = useState(null) 
   return (
     <div className='w-full flex flex-col'>
       <div className='w-full flex flex-row justify-between p-20'>
