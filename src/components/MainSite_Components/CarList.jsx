@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import useFetchCars from "@/hooks/useFetchCars";
 import SkeletonLoader from "./SkeletonLoader";
 import CarCard from "../Card_Components/CarCard";
@@ -32,13 +32,13 @@ const CarList = () => {
       prev.map((car) => (car.id === carId ? { ...car, leasePrices } : car))
     );
   };
-  const getUpdatedCars = () => {
-    return cars.map(car => {
-      const updatedCar = carLeaseMap.find(c => c.id === car.id);
-      return updatedCar || car;
-    });
-  };
-  const updatedCars = getUpdatedCars();
+  const updatedCars = useMemo(() => {
+  return cars.map(car => {
+    const updatedCar = carLeaseMap.find(c => c.id === car.id);
+    return updatedCar || car;
+  });
+}, [cars, carLeaseMap]);
+
 
   const selectedCarFull = carLeaseMap.find((c) => c.id === selectedCar?.id) || selectedCar;
 

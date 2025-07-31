@@ -75,13 +75,13 @@ const CarCard = ({ car, onViewCalculation, onUpdateLeasePrices }) => {
     };
 
     fetchLeasePrice();
-  }, [userPreferences, car]);
-  useEffect(() => {
-  if (car.leasePrices && typeof car.leasePrices === 'object' && Object.keys(car.leasePrices).length > 0) {
-    console.log("Car prop updated with lease prices:", car.brand, car.model, car.leasePrices);
-    setQuote(car.leasePrices);
-  }
-}, [car.leasePrices]);
+  }, [userPreferences, car?.id]);
+//   useEffect(() => {
+//   if (car.leasePrices && typeof car.leasePrices === 'object' && Object.keys(car.leasePrices).length > 0) {
+//     console.log("Car prop updated with lease prices:", car.brand, car.model, car.leasePrices);
+//     setQuote(car.leasePrices);
+//   }
+// }, [car.leasePrices]);
 
   return (
     <div className={typography.card.carCard}>
@@ -130,7 +130,7 @@ const CarCard = ({ car, onViewCalculation, onUpdateLeasePrices }) => {
             </span>
           </p>
           <button className={buttons.view_calculation} onClick={onViewCalculation}>
-            {isFetchingQuote ? "Loading..." : "View Calculation"}
+            {"View Calculation"}
           </button>
         </div>
       ) : (
