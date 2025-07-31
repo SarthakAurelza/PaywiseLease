@@ -57,24 +57,31 @@ const CarCard = ({ car, onViewCalculation, onUpdateLeasePrices }) => {
         annualSalary: current.salary,
       });
 
-      if (res?.periodicCalculations) {
         const leasePrices = {
           weekly: res.periodicCalculations.find(p => p.period === 'Weekly')?.cost?.budget?.budgetTotal || null,
           fortnightly: res.periodicCalculations.find(p => p.period === 'Fortnightly')?.cost?.budget?.budgetTotal || null,
           monthly: res.periodicCalculations.find(p => p.period === 'Monthly')?.cost?.budget?.budgetTotal || null,
         };
 
+        console.log("THIS IS WHERE I SET THE LEASE PRICES: ",leasePrices, "for ",car.brand,car.model)
+
         setQuote(leasePrices);
         onUpdateLeasePrices(car.id, leasePrices);
         dispatch(updateComparisonLeasePrices({ carId: car.id, leasePrices }));
         quoteRef.current = { carId: car?.id };
-      }
+      
 
       setIsFetchingQuote(false);
     };
 
     fetchLeasePrice();
   }, [userPreferences, car]);
+  useEffect(() => {
+  if (car.leasePrices && typeof car.leasePrices === 'object' && Object.keys(car.leasePrices).length > 0) {
+    console.log("Car prop updated with lease prices:", car.brand, car.model, car.leasePrices);
+    setQuote(car.leasePrices);
+  }
+}, [car.leasePrices]);
 
   return (
     <div className={typography.card.carCard}>

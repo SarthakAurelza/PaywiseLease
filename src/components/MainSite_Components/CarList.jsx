@@ -32,6 +32,13 @@ const CarList = () => {
       prev.map((car) => (car.id === carId ? { ...car, leasePrices } : car))
     );
   };
+  const getUpdatedCars = () => {
+    return cars.map(car => {
+      const updatedCar = carLeaseMap.find(c => c.id === car.id);
+      return updatedCar || car;
+    });
+  };
+  const updatedCars = getUpdatedCars();
 
   const selectedCarFull = carLeaseMap.find((c) => c.id === selectedCar?.id) || selectedCar;
 
@@ -52,8 +59,8 @@ const CarList = () => {
               {
                 cars.length>0 && (
                   <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 md:gap-12 xl:gap-8 xxl:grid-cols-3 xxl:gap-4">
-                {cars
-                  .filter((car) => car.leasePrices || car.powerPlant === "BEV")
+                {updatedCars
+                  // .filter((car) => car.leasePrices || car.powerPlant === "BEV")
                   .map((car) => (
                     <CarCard
                       key={car.id}
@@ -70,7 +77,7 @@ const CarList = () => {
               </div>
                 )
               }
-              {cars.length===0 && (
+              {updatedCars.length===0 && (
                     <>
                       <img className="mt-24" src="/images/Car_notavailable.png" alt="" />
                       <p className="text-3xl text-muted-foreground font-bold">No Car Available for selected filters</p>

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromComparison } from "@/features/filtersSlice";
+import { removeFromComparison, updateComparisonLeasePrices } from "@/features/filtersSlice";
 import { buttons, containers, grids, typography } from "../typography/typography";
 import PriceLoader from "../Card_Components/PriceLoader";
 
@@ -29,6 +29,7 @@ const CompareModal = ({ onClose, onSelectCarOpen, onCompareClick }) => {
             const car = comparisonCars[index];
             console.log("car in modal: ",car)
             const leaseAmount = car?.leasePrices?.weekly || null;
+            console.log("In the modal: ",leaseAmount);
 
             return (
               <div key={index} className={typography.card.carCard}>
