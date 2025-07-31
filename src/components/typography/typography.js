@@ -38,5 +38,5 @@ export const containers = {
 
 export const grids = {
   carFeatureGrid: "w-full grid grid-cols-[2fr_1fr] gap-4",
-  compareGrid: " w-full grid grid-cols-1 gap-2 lg:grid-cols-3 lg:gap-16"
+  compareGrid: " w-full grid grid-cols-1 md:grid-cols-2 gap-2 lg:grid-cols-3 lg:gap-16"
 }

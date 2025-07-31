@@ -1,48 +1,39 @@
-// hooks/useVehicleOptions.js
-
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { getBrands, getModels } from "@/api/api";
+import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
+import useFetchCars from './useFetchCars';
 
 export default function useVehicleOptions() {
   const filters = useSelector((state) => state.filters);
-  const [brands, setBrands] = useState([]);
-  const [modelsMap, setModelsMap] = useState({});
-  const [loading, setLoading] = useState(true);
+  const { brand, model } = filters;
+  const { allVehicles, loading } = useFetchCars();
 
-  useEffect(() => {
-    async function loadOptions() {
-      try {
-        const fetchedBrands = await getBrands();
-        setBrands(fetchedBrands);
+  const brands = useMemo(() => {
+    return [...new Set(allVehicles.map(v => v.brand).filter(Boolean))];
+  }, [allVehicles]);
 
-        const brandModelMap = {};
-        await Promise.all(
-          fetchedBrands.map(async (brand) => {
-            try {
-              const models = await getModels({ make: brand });
-              brandModelMap[brand] = models;
-            } catch {
-              brandModelMap[brand] = [];
-            }
-          })
-        );
-        setModelsMap(brandModelMap);
-      } catch (e) {
-        console.error("Failed to load vehicle options", e);
-      } finally {
-        setLoading(false);
-      }
-    }
+  const models = useMemo(() => {
+    if (!brand) return [];
+    return [...new Set(allVehicles
+      .filter(v => v.brand?.toLowerCase() === brand.toLowerCase())
+      .map(v => v.model)
+    )];
+  }, [allVehicles, brand]);
 
-    loadOptions();
-  }, []);
+  const variants = useMemo(() => {
+    if (!brand || !model) return [];
+    return [...new Set(allVehicles
+      .filter(v =>
+        v.brand?.toLowerCase() === brand.toLowerCase() &&
+        v.model?.toLowerCase() === model.toLowerCase()
+      )
+      .map(v => v.variant)
+    )];
+  }, [allVehicles, brand, model]);
 
-  const models = filters.brand ? modelsMap[filters.brand] || [] : [];
-
-  const variants = filters.brand && filters.model
-    ? modelsMap[filters.brand]?.filter((m) => m === filters.model) ?? []
-    : [];
-
-  return { brands, models, variants, loading };
+  return {
+    brands,
+    models,
+    variants,
+    loading,
+  };
 }

@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserPreferences } from "@/features/filtersSlice";
 
@@ -6,18 +8,18 @@ const UserPreferences = () => {
   const dispatch = useDispatch();
   const { salary, leaseTerm, yearlyKm, state } = useSelector((state) => state.filters.userPreferences);
 
-  const percentage_salary = ((salary - 20000) / (200000 - 20000)) * 100;
-  const percentage_lease_term = ((leaseTerm - 1) / (5 - 1)) * 100;
-  const percentage_yearly_km = ((yearlyKm - 5000) / (30000 - 5000)) * 100;
-
   const handleChange = (key, value) => {
     dispatch(setUserPreferences({ [key]: value }));
   };
 
   const stateOptions = ['NSW', 'VIC', 'WA', 'QLD', 'SA', 'TAS', 'ACT', 'NT'];
 
+  const percentage_salary = useMemo(() => ((salary - 20000) / (200000 - 20000)) * 100, [salary]);
+  const percentage_lease_term = useMemo(() => ((leaseTerm - 1) / (5 - 1)) * 100, [leaseTerm]);
+  const percentage_yearly_km = useMemo(() => ((yearlyKm - 5000) / (30000 - 5000)) * 100, [yearlyKm]);
+
   return (
-    <div className='w-full h-auto gap-3 grid justify-items-center xs:grid-cols-2 md:flex md:flex-row md:items-center md:justify-between lg:px-16 xs:px-6 px-4 pb-8'>
+    <div className='w-full h-auto gap-3 grid justify-items-center xs:grid-cols-2 md:flex md:flex-row md:items-center md:justify-between lg:px-16 xs:px-6 px-4 pb-8 mt-10'>
 
       {/* Salary */}
       <div className="w-full flex flex-col justify-between items-start">
@@ -42,7 +44,7 @@ const UserPreferences = () => {
       {/* Lease Term */}
       <div className="w-full flex flex-col justify-between items-start">
         <p className="text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2">
-          Lease Term <span className='font-light'>{leaseTerm} year</span>
+          Lease Term: <span className='font-light'>{leaseTerm} year{leaseTerm > 1 ? 's' : ''}</span>
         </p>
         <input
           type="range"
@@ -63,7 +65,7 @@ const UserPreferences = () => {
       <div className='w-full flex flex-col'>
         <p className='text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2'>State</p>
         <select
-          className='rounded-md p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%]'
+          className='rounded-xl p-3 sm:p-1 md:p-2 lg:p-3 xs:p-2 xs:w-[100%] sm:w-[95%] lg:w-[90%]'
           value={state}
           onChange={(e) => handleChange("state", e.target.value)}
         >
@@ -76,7 +78,7 @@ const UserPreferences = () => {
       {/* Yearly KM */}
       <div className="w-full flex flex-col justify-between items-start">
         <p className="text-primary font-semibold text-sm lg:text-md xl:text-lg 2xl:text-xl pb-2">
-          YearlyKm <span className='font-light'>{yearlyKm.toLocaleString()} Km</span>
+          YearlyKm: <span className='font-light'>{yearlyKm.toLocaleString()} Km</span>
         </p>
         <input
           type="range"

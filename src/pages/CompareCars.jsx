@@ -5,7 +5,7 @@ import { removeFromComparison, setQuoteForCar } from "@/features/filtersSlice";
 import CompareModal from "@/components/comparison/CompareModal";
 import { buttons, containers, typography } from "@/components/typography/typography";
 import PriceLoader from "@/components/Card_Components/PriceLoader";
-import SelectCarModal from "@/components/SelectCarModal";
+import SelectCarModal from "@/components/comparison/SelectCarModal";
 import usefetchAllCars from "@/hooks/usefetchAllCars";
 import useSearchSuggestions from "@/hooks/useSearchSuggestions";
 import { addToComparison } from "@/features/filtersSlice";
@@ -15,80 +15,27 @@ import Info from "@/components/Info";
 import Disclaimer from "@/components/Disclaimer";
 
 const featureKeys = [
-  { key: "engine", label: "Engine" },
-  { key: "seats", label: "Seats" },
+  {key:"fuelType",label:"Fuel Type"},
   { key: "body", label: "Body Type" },
-  { key: "fuel_consumption", label: "Fuel Consumption" },
   { key: "transmission", label: "Transmission" },
+  {key:"powerPlant",label:"Engine"},
   { key: "price", label: "Price" },
 ];
+
+const rawFeatureKeys = [
+  {key: "inductionDescription",label:"Induction Description"},
+  {key: "engineTypeDescription",label:"Engine Type Description"},
+  {key: "fuelCombined",label:"Fuel Consumption"},
+]
 
 const CompareCars = () => {
   const dispatch = useDispatch();
   const comparisonCars = useSelector((state) => state.filters.comparisonCars);
-  const carQuotes = useSelector((state) => state.filters.carQuotes);
-  const quoteTime = useSelector((state) => state.filters.quoteTime);
-  const [selectedTable, setSelectedTable] = useState(null);
-  const [isSelectCarModalOpen, setIsSelectCarModalOpen] = useState(false);
-  const totalSlots = 3;
-  const { salary, leaseTerm, yearlyKm, state: userState } = useSelector((state) => state.filters.userPreferences);
-  const userPreferences = { salary, leaseTerm, yearlyKm, state: userState };
-
-  const { fetchVehicleData } = useVehicleData();
-  const { fetchQuoteData } = useQuoteData();
-
-  const handleAddCar = async (car) => {
-  dispatch(addToComparison(car));
-  setIsSelectCarModalOpen(false);
-
-  try {
-    const vehicleData = await fetchVehicleData(car.brand, car.model, car.yearGroup);
-    
-    // FIX: Extract from Redux at top-level
-    const userInput = userPreferences;
-
-    const quote = await fetchQuoteData(vehicleData, {
-      state: userInput.state,
-      annualSalary: userInput.salary,
-      leaseTerm: userInput.leaseTerm * 12,
-      annualKms: userInput.yearlyKm,
-      hasHECS: false,
-      age: 35,
-      includeGAP: true,
-      includeRoadSide: false,
-    });
-
-    dispatch(setQuoteForCar({ carId: car.id, quoteData: { ...quote, userInput } }));
-  } catch (error) {
-    console.error("❌ Failed to fetch quote for comparison car:", error);
-  }
-};
-
-
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilters((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleAccordionToggle = (brand) => {
-    setFilters((prev) => ({
-      ...prev,
-      expandedBrand: prev.expandedBrand === brand ? null : brand,
-    }));
-  };
-
-  const [filters, setFilters] = useState({ search: "", expandedBrand: null });
-
-  const { cars:allCars, brands } = usefetchAllCars(selectedTable, filters);
-  const suggestions = useSearchSuggestions(allCars, filters.search);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const getLeaseAmount = (quote) => {
-    const indexMap = { Weekly: 0, Monthly: 1, Fortnightly: 2 };
-    const leaseIndex = indexMap[quoteTime] ?? 0;
-    return quote?.periodicCalculations?.[leaseIndex]?.cost?.totalLeaseNet ?? null;
-  };
+  const totalSlots = 3
+  const filters = useSelector((state) => state.filters);
+  const quoteTime = filters.quoteTime
+  console.log("cars to compare are: ",comparisonCars)
+  const [isSelectCarModalOpen,setIsSelectCarModalOpen] = useState(false);
 
   return (
     <>
@@ -105,12 +52,13 @@ const CompareCars = () => {
               </th>
               {Array.from({ length: totalSlots }).map((_, index) => {
                 const car = comparisonCars[index];
-                const quote = car ? carQuotes[car.id] : null;
-                const leaseAmount = getLeaseAmount(quote);
+                console.log("car is: ",car)
+                const leaseAmount = car ? car.leasePrices.weekly : null;
+                console.log("the lease amount: ",leaseAmount)
 
                 return (
-                  <th key={index} className="p-0 border-b bg-gray-100 align-top w-[300px]">
-                    <div className={typography.card.carCard}>
+                  <th key={index} className="p-0 border-b bg-gray-100 align-top w-[300px] h-[300px]">
+                    <div className={`border ${typography.card.carCard}`}>
                       {car ? (
                         <>
                           <div className="relative w-full">
@@ -151,7 +99,7 @@ const CompareCars = () => {
                                     ${Math.round(leaseAmount)}
                                   </span>
                                   <span className="text-[12px] font-light xl:text-md sm:text-[14px] ml-1">
-                                    /{quoteTime.toLowerCase()}
+                                    /week
                                   </span>
                                 </span>
                               </p>
@@ -189,11 +137,37 @@ const CompareCars = () => {
                 <td className="p-4 font-medium text-gray-600 border-b bg-gray-50">{label}</td>
                 {Array.from({ length: totalSlots }).map((_, idx) => {
                   const car = comparisonCars[idx];
-                  return (
+                  if(label==="Price"){
+                    return <td key={idx} className="p-4 border-b align-top text-gray-800">
+                      <span className="text-lg font-bold">$</span>{car?.[key] || "-"}
+                    </td>
+                  }
+                  else {return (
                     <td key={idx} className="p-4 border-b align-top text-gray-800">
                       {car?.[key] || "-"}
                     </td>
+                  );}
+                })}
+              </tr>
+            ))}
+            {rawFeatureKeys.map(({ key, label }) => (
+              <tr key={key} className="hover:bg-gray-50">
+                <td className="p-4 font-medium text-gray-600 border-b bg-gray-50">{label}</td>
+                {Array.from({ length: totalSlots }).map((_, idx) => {
+                  const car = comparisonCars[idx];
+                  if(label==="Fuel Consumption"){
+                    return (
+                    <td key={idx} className="p-4 border-b align-top text-gray-800">
+                      {car?.raw?.[key] || "-"} L/Km
+                    </td>
                   );
+                  }else{
+                    return (
+                    <td key={idx} className="p-4 border-b align-top text-gray-800">
+                      {car?.raw?.[key] || "-"}
+                    </td>
+                  );
+                  }
                 })}
               </tr>
             ))}
@@ -205,13 +179,6 @@ const CompareCars = () => {
       {isSelectCarModalOpen && (
         <SelectCarModal
         onClose={() => setIsSelectCarModalOpen(false)}
-          filters={filters}
-          suggestions={suggestions}
-          allCars={allCars}
-          brands={brands}
-          handleAddCar={handleAddCar}
-          handleAccordionToggle={handleAccordionToggle}
-          handleFilterChange={handleFilterChange}
         />
       )}
     </div>

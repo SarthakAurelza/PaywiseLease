@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToComparison } from "@/features/filtersSlice";
 import { useNavigate } from "react-router-dom";
-import CompareModal from "./comparison/CompareModal";
 import SelectCarModal from "./SelectCarModal";
 import usefetchAllCars from "@/hooks/usefetchAllCars";
 import useVehicleData from "@/hooks/useVehicleData";
 import useQuoteData from "@/hooks/useQuoteData";
 import { setQuoteForCar } from "@/features/filtersSlice";
 import useSearchSuggestions from "@/hooks/useSearchSuggestions";
+import CompareModal from "./CompareModal";
 
 const CompareButton = () => {
   const dispatch = useDispatch();

@@ -9,7 +9,7 @@ import FeatureList from './FeatureList';
 import Savings from './Savings';
 import { SeparatorHorizontal } from 'lucide-react';
 
-const CalculationSide = ({ car, onClose, price }) => {
+const CalculationSide = ({ car, onClose }) => {
   const [activeButton, setActiveButton] = useState('Weekly');
   const [showForm, setShowForm] = useState(false);
   const dispatch = useDispatch();
@@ -76,12 +76,12 @@ const CalculationSide = ({ car, onClose, price }) => {
   };
 
   const getLeaseCost = () => {
-    if (!price) return;
+    if (!car.leasePrices) return;
 
     const costMap = {
-      Weekly: price.weekly,
-      Fortnightly: price.fortnightly,
-      Monthly: price.monthly
+      Weekly: car.leasePrices.weekly,
+      Fortnightly: car.leasePrices.fortnightly,
+      Monthly: car.leasePrices.monthly
     };
     return Math.round(costMap[activeButton]);
   };

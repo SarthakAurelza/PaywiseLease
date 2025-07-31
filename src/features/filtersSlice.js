@@ -14,6 +14,7 @@ const filtersSlice = createSlice({
     allCars: [],
     allCarsByTable : {},
     selectedOption: 'browse',
+    selectedVehicle: null,
     carQuotes: {}, // carId => quoteData
     isFetchingQuote: false,
     quoteTime: 'weekly',
@@ -22,6 +23,7 @@ const filtersSlice = createSlice({
     leaseTerm: 1,
     yearlyKm: 5000,
     state: "NSW",
+    powerPlant: '',
     },
   },
   reducers: {
@@ -45,14 +47,26 @@ const filtersSlice = createSlice({
       state.engine = '';
       state.brand = '';
       state.model = '';
+      state.variant = '';
       state.body = '';
       state.seats = 0;
       state.price = { min: 0, max: Infinity };
       state.fuel_consumption = '';
+      state.powerPlant = '';
+      state.selectedVehicle = null;
     },
     setAllCars: (state, action) => {
       console.log("Redux state updating: ", action.payload);
       state.allCars = action.payload;
+    },
+    updateComparisonLeasePrices: (state, action) => {
+      const { carId, leasePrices } = action.payload;
+      state.comparisonCars = state.comparisonCars.map((car) =>
+        car.id === carId ? { ...car, leasePrices } : car
+      );
+    },
+    setSelectedVehicle: (state,action) => {
+      state.selectedOption = action.payload;
     },
     setAllCarsForTable: (state, action) => {
     const { table, cars } = action.payload;
@@ -105,6 +119,7 @@ export const {
   setQuoteForCar,
   setUserPreferences,
   setAllCarsForTable,
+  updateComparisonLeasePrices,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

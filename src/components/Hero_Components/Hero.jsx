@@ -8,13 +8,33 @@ import {
 import useVehicleOptions from '@/hooks/useVehicleOptions';
 import { typography } from '../typography/typography';
 import { engineIcons, toggleIcons } from './hero_svgs';
+import useMeiliSearch from '@/hooks/useMeiliSearch';
+import useFetchCars from '@/hooks/useFetchCars';
+import { concat } from 'lodash';
+import useAllBrands from '@/hooks/useAllBrands';
+import useAllModels from '@/hooks/useAllModels';
+import useAllVariants from '@/hooks/useAllVariants';
 
 const Hero = () => {
   const dispatch = useDispatch();
   const selectedOption = useSelector((state) => state.filters.selectedOption);
   const filters = useSelector((state) => state.filters);
+  const selectedVehicle = useSelector((state) => state.filters.selectedVehicle)
+  const {
+  results,
+  searchloading,
+  query,
+  clear,
+} = useMeiliSearch();
+
 
   const { brands, models: filteredModels, variants: filteredVariants, loading } = useVehicleOptions();
+  const allBrands = useAllBrands();
+  const allModels = useAllModels();
+  const allVariants = useAllVariants();
+
+  console.log("the data from useVariants: ",allVariants)
+  
 
   const [activeButton, setActiveButton] = useState(null);
 
@@ -91,25 +111,29 @@ useEffect(() => {
             Select Preference
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-3 lg:gap-6 2xl:gap-8 xxl:gap-12">
-            {['Petrol/Diesel', 'Electric', 'Hybrid'].map((engine) => (
-              <button
-                key={engine}
-                onClick={() => {
-                  handleChange('engineType', engine);
-                  setActiveButton(engine);
-                }}
-                className={`rounded-xl font-medium flex items-center justify-start gap-5 px-2 py-4 transition-colors duration-200 ${
-                  activeButton === engine ? 'bg-primary text-white' : 'bg-white text-[#013243]'
-                }`}
-              >
-                <span className="w-6 h-6">
-                  {engineIcons[engine](activeButton === engine)}
-                </span>
-                <span className="text-center text-sm">
-                  {engine}
-                </span>
-              </button>
-            ))}
+            {[
+  { label: 'Petrol/Diesel', value: 'ICE' },
+  { label: 'Electric', value: ['BEV'] },
+  { label: 'Hybrid', value: ['HEV','MHEV','PHEV'] },
+].map(({ label, value }) => (
+  <button
+    key={label}
+    onClick={() => {
+      dispatch(setFilter({ key: 'powerPlant', value }));
+      setActiveButton(label);
+    }}
+    className={`rounded-xl font-medium flex items-center justify-start gap-5 px-2 py-4 transition-colors duration-200 ${
+      activeButton === label ? 'bg-primary text-white' : 'bg-white text-[#013243]'
+    }`}
+  >
+    <span className="w-6 h-6">
+      {engineIcons[label](activeButton === label)}
+    </span>
+    <span className="text-center text-sm">{label}</span>
+  </button>
+))}
+
+
           </div>
         </div>
       ) : (
@@ -118,15 +142,48 @@ useEffect(() => {
             Search for Vehicles
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            <input className="p-2 sm:text-md lg:text-lg 2xl:text-xl border border-gray-300 rounded-md focus:ring focus:outline-none text-black"/>
+            <div className="relative">
+  <input
+    className="p-2 sm:text-md lg:text-lg 2xl:text-xl border border-gray-300 rounded-md focus:ring focus:outline-none text-black w-full"
+    placeholder="Search vehicles..."
+    onChange={(e) => query(e.target.value)}
+    onBlur={() => setTimeout(() => clear(), 200)} // clears suggestions after selection
+  />
+  {results.length > 0 && (
+    <ul className="absolute z-50 bg-white text-black mt-1 w-full border rounded-md shadow-md max-h-60 overflow-y-auto">
+      {results.map((vehicle, index) => (
+        <li
+          key={index}
+          onClick={() => {
+            handleReset();
+            console.log("cliked on vehicle: ",vehicle)
+            dispatch(setFilter({ key: 'brand', value: vehicle.brand }));
+            dispatch(setFilter({ key: 'model', value: vehicle.model }));
+            dispatch(setFilter({ key: 'variant', value: vehicle.variant }));
+            dispatch(setFilter({
+              key: 'selectedVehicle', value: vehicle
+            }));
+          }}
+
+          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+        >
+          {vehicle.fullName}
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
             <select
               className="p-2 sm:text-md lg:text-lg 2xl:text-xl border border-gray-300 rounded-md focus:ring focus:outline-none text-black"
-              onChange={(e) => handleChange('brand', e.target.value)}
+              onChange={(e) => {
+                handleReset()
+                handleChange('brand', e.target.value)}}
               value={filters.brand || ''}
               disabled={loading}
             >
               <option value="">Brand</option>
-              {brands.map((brand, i) => (
+              {allBrands.allBrands.map((brand, i) => (
                 <option key={i} value={brand}>
                   {brand}
                 </option>
@@ -143,7 +200,7 @@ useEffect(() => {
               disabled={!filters.brand}
             >
               <option value="">Model</option>
-              {filteredModels.map((model, i) => (
+              {allModels.allModels.map((model, i) => (
                 <option key={i} value={model}>
                   {model}
                 </option>
@@ -157,7 +214,7 @@ useEffect(() => {
               disabled={!filters.model}
             >
               <option value="">Variant</option>
-              {filteredVariants.map((variant, i) => (
+              {allVariants.allVariants.map((variant, i) => (
                 <option key={i} value={variant}>
                   {variant}
                 </option>

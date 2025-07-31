@@ -8,18 +8,12 @@ const CompareModal = ({ onClose, onSelectCarOpen, onCompareClick }) => {
   const comparisonCars = useSelector((state) => state.filters.comparisonCars || []);
   const carQuotes = useSelector((state) => state.filters.carQuotes || {});
   const quoteTime = useSelector((state) => state.filters.quoteTime || "Weekly");
+  const userPreferences = useSelector((state) => state.filters.userPreferences);
 
   const totalSlots = 3;
-
-  const getLeaseAmount = (quote) => {
-    const indexMap = { Weekly: 0, Monthly: 1, Fortnightly: 2 };
-    const leaseIndex = indexMap[quoteTime] ?? 0;
-    return quote?.periodicCalculations?.[leaseIndex]?.cost?.totalLeaseNet ?? null;
-  };
-
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4">
-      <div className="bg-white w-full max-w-6xl rounded-2xl shadow-xl p-6 md:p-10 relative flex flex-col gap-6">
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center sm:p-4">
+      <div className="bg-white w-full max-w-6xl rounded-2xl shadow-xl p-4 md:p-10 relative flex flex-col gap-6 overflow-y-scroll">
 
         {/* Header */}
         <div className="flex justify-between items-center">
@@ -33,8 +27,8 @@ const CompareModal = ({ onClose, onSelectCarOpen, onCompareClick }) => {
         <div className={grids.compareGrid}>
           {Array.from({ length: totalSlots }).map((_, index) => {
             const car = comparisonCars[index];
-            const quote = car ? carQuotes[car.id] : null;
-            const leaseAmount = getLeaseAmount(quote);
+            console.log("car in modal: ",car)
+            const leaseAmount = car?.leasePrices?.weekly || null;
 
             return (
               <div key={index} className={typography.card.carCard}>
@@ -103,7 +97,7 @@ const CompareModal = ({ onClose, onSelectCarOpen, onCompareClick }) => {
                     className="w-full h-full flex flex-col justify-center items-center cursor-pointer"
                     onClick={onSelectCarOpen}
                   >
-                    <img src="/images/carIcon.png" alt="Select Car" className="w-12 h-12 mb-2" />
+                    <img src="/images/carIcon.png" alt="Select Car" className="w-24 h-24 mb-2" />
                     <span className="text-sm font-semibold text-primary">Select Car</span>
                   </div>
                 )}
