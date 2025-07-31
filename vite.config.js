@@ -10,7 +10,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'build', // ✅ Serve expects this folder
+    outDir: 'dist', // ✅ Serve expects this folder
   },
   server: {
     host: '0.0.0.0',
