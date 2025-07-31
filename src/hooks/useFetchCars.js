@@ -67,8 +67,8 @@ export default function useFetchCars() {
   // 📦 Paginate cars
   const cars = useMemo(() => {
     
-    const validCars = filteredVehicles.filter(car => car.leasePrices?.weekly);
-    const ultraValid = validCars.filter(car => {
+    // const validCars = filteredVehicles.filter(car => car.leasePrices?.weekly);
+    const ultraValid = filteredVehicles.filter(car => {
   const matchBrand = brand ? car.brand?.toLowerCase() === brand.toLowerCase() : true;
   const matchModel = model ? car.model?.toLowerCase() === model.toLowerCase() : true;
   const matchVariant = variant ? car.variant?.toLowerCase() === variant.toLowerCase() : true;
