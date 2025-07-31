@@ -88,7 +88,7 @@ const CalculationSide = ({ car, onClose }) => {
 
   if (!car) {
     return (
-      <div className="bg-white sm:p-0 p-3 w-full rounded-lg shadow-md sm:gap-4">
+      <div className="bg-white sm:p-0 p-3 w-full rounded-lg shadow-md sm:gap-4 h-full">
         <div className="flex justify-between items-center mb-4">
           <h2 className="sm:text-xl font-semibold sm:text-[30px]">No Car Selected</h2>
           <button onClick={onClose} className="text-red-500 font-bold">X</button>
@@ -99,8 +99,8 @@ const CalculationSide = ({ car, onClose }) => {
   }
 
   return (
-    <div className="bg-white flex flex-col lg:p-4 lg:pt-12 lg:pb-12 p-2 sm:p-6 md:p-4 w-full rounded-lg shadow-md lg:gap-12 xl:gap-12 2xl:gap-16 3xl:gap-20 h-full lg:h-auto justify-between">
-      <div className="flex justify-between items-center mb-4">
+    <div className="bg-white flex flex-col lg:p-4 lg:pt-12 lg:pb-12 p-2 sm:p-6 w-full rounded-lg shadow-md gap-12 lg:gap-20 3xl:gap-20 h-auto justify-between overflow-y-scroll lg:overflow-hidden">
+      <div className="flex justify-between items-center mb-4 h-full">
         <h2 className="font-bold text-xl md:text-2xl lg:text-[30px] 2xl:text-3xl 3xl:text-5xl">{showForm ? "Request a Quote" : "Your Calculation"}</h2>
         <button onClick={onClose} className="rounded-full bg-gray-100 px-3 py-1 font-bold hover:bg-gray-200 border border-primary">X</button>
       </div>
@@ -111,9 +111,9 @@ const CalculationSide = ({ car, onClose }) => {
         <>
           <CarDetails car={car} />
           <div className="lg:mb-4 mb-2 flex flex-col md:gap-4 gap-2 lg:gap-4 3xl:gap-8">
-            <h3 className="md:text-4xl lg:text-5xl xs:text-3xl text-xl text-[#00445B] font-semibold max-w-full 2xl:text-6xl 3xl:text-7xl">
+            <h3 className="md:text-4xl lg:text-5xl text-3xl text-[#00445B] font-semibold max-w-full 2xl:text-6xl 3xl:text-7xl">
               ${getLeaseCost()}
-              <span className="text-xs xs:text-[16px] text-[#666666] 2xl:text-lg 3xl:text-2xl">
+              <span className="text-sm text-[#666666] 2xl:text-lg 3xl:text-2xl">
                 /{activeButton.toLowerCase().slice(0, -2)}
               </span>
             </h3>
@@ -132,11 +132,11 @@ const CalculationSide = ({ car, onClose }) => {
             <hr className='w-full' />
 
           </div>
-          <Savings />
+          {/* <Savings /> */}
 
           <div className='w-full flex items-center justify-between'>
-            <p className='font-bold text-lg'>Total</p>
-            <p className='font-bold text-lg'>$30,000</p>
+            <p className='font-bold text-lg md:text-xl'>Total</p>
+            <p className='font-bold text-lg md:text-xl'>${getLeaseCost()}</p>
           </div>
         </>
       )}

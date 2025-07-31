@@ -12,14 +12,14 @@ const CompareModal = ({ onClose, onSelectCarOpen, onCompareClick }) => {
 
   const totalSlots = 3;
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center sm:p-4">
-      <div className="bg-white w-full max-w-6xl rounded-2xl shadow-xl p-4 md:p-10 relative flex flex-col gap-6 overflow-y-scroll">
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-2">
+      <div className="bg-white w-full max-w-6xl rounded-2xl shadow-xl p-4 md:p-10 relative flex flex-col gap-6 overflow-y-scroll max-h-[90vh]">
 
         {/* Header */}
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold text-primary">Selected Cars</h2>
           <button onClick={onClose} className={buttons.roundButton}>
-            ✕
+            X
           </button>
         </div>
 
@@ -73,7 +73,7 @@ const CompareModal = ({ onClose, onSelectCarOpen, onCompareClick }) => {
                               ${Math.round(leaseAmount)}
                             </span>
                             <span className="text-[12px] font-light xl:text-md sm:text-[14px] ml-1">
-                              /{quoteTime.toLowerCase()}
+                              /week
                             </span>
                           </span>
                         </p>

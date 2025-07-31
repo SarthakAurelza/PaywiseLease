@@ -4,7 +4,7 @@ const QuoteButton = ({ activeButton, handleButtonClick }) => (
       <button
         key={button}
         onClick={() => handleButtonClick(button)}
-        className={`border text-[9px] xs:text-[11px] md:text-[14px] 2xl:text-[16px] 3xl:text-xl px-3 xs:px-6 xs:py-2 p-1 rounded-lg font-semibold ${
+        className={`border text-sm 2xl:text-[16px] 3xl:text-xl px-3 xs:px-6 xs:py-2 p-1 rounded-lg font-semibold ${
           activeButton === button ? 'bg-[#41b6e6] text-black' : 'bg-white'
         }`}
       >

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromComparison, setQuoteForCar } from "@/features/filtersSlice";
 
@@ -28,6 +28,12 @@ const rawFeatureKeys = [
   {key: "fuelCombined",label:"Fuel Consumption"},
 ]
 
+const leasePriceKeys = [
+  {key: "weekly",label:"Weekly Lease"},
+  {key: "fortnightly",label:"Fortnightly Lease"},
+  {key: "monthly",label:"Monthly Lease"},
+]
+
 const CompareCars = () => {
   const dispatch = useDispatch();
   const comparisonCars = useSelector((state) => state.filters.comparisonCars);
@@ -37,9 +43,13 @@ const CompareCars = () => {
   console.log("cars to compare are: ",comparisonCars)
   const [isSelectCarModalOpen,setIsSelectCarModalOpen] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <>
-    <div className="w-full p-20">
+    <div className="w-full lg:p-20 p-4">
       <h1 className="text-3xl font-semibold mb-8">Compare Cars</h1>
 
       {/* Table */}
@@ -57,11 +67,11 @@ const CompareCars = () => {
                 console.log("the lease amount: ",leaseAmount)
 
                 return (
-                  <th key={index} className="p-0 border-b bg-gray-100 align-top w-[300px] h-[300px]">
+                  <th key={index} className="p-0 border-b bg-gray-100 align-top h-[300px]">
                     <div className={`border ${typography.card.carCard}`}>
                       {car ? (
                         <>
-                          <div className="relative w-full">
+                          <div className="relative w-full min-w-[280px]">
                             <img
                               src={`https://liveimages.redbook.com.au/redbook/car/spec/${car.imageUrl}.jpg`}
                               onError={(e) => {
@@ -111,13 +121,13 @@ const CompareCars = () => {
                         </>
                       ) : (
                         <div
-                          className="w-full h-full flex flex-col justify-center items-center cursor-pointer min-h-[200px]"
+                          className="w-full h-full flex flex-col justify-center items-center cursor-pointer min-h-[200px] min-w-[280px]"
                           onClick={() => setIsSelectCarModalOpen(true)}
                         >
                           <img
                             src="/images/carIcon.png"
                             alt="Select Car"
-                            className="w-16 h-16 mb-4"
+                            className="w-24 h-24 mb-4"
                           />
                           <span className="text-sm font-semibold text-primary">
                             Select Car
@@ -168,6 +178,20 @@ const CompareCars = () => {
                     </td>
                   );
                   }
+                })}
+              </tr>
+            ))}
+            {leasePriceKeys.map(({key,label}) => (
+              <tr key={key} className="hover:bg-gray-50">
+                <td className="p-4 font-medium text-gray-600 border-b bg-gray-50">{label}</td>
+                {Array.from({ length: totalSlots }).map((_, idx) => {
+                  const car = comparisonCars[idx];
+                    return (
+                    <td key={idx} className="p-4 border-b align-top text-gray-800">
+                      <span className="text-lg font-bold">$ </span>{car?.leasePrices?.[key] || "-"}/{key.slice(0,-2)}
+                    </td>
+                  );
+                  
                 })}
               </tr>
             ))}

@@ -5,6 +5,7 @@ import useAllBrands from "@/hooks/useAllBrands";
 import useAllModels from "@/hooks/useAllModels";
 import { useDispatch, useSelector } from "react-redux";
 import { addToComparison } from "@/features/filtersSlice";
+import { buttons } from "../typography/typography";
 
 const SelectCarModal = ({ onClose}) => {
   const dispatch = useDispatch();
@@ -49,14 +50,14 @@ const SelectCarModal = ({ onClose}) => {
   }, [selectedBrand, selectedModel]);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white w-[50%] h-[90%] max-w-4xl rounded-lg p-6 shadow-lg relative">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2">
+      <div className="bg-white w-full md:w-[50%] h-[90vh] max-w-4xl rounded-lg p-6 shadow-lg relative">
         <button
-          onClick={onClose}
-          className="absolute top-4 right-4 rounded-full bg-gray-200 px-2 py-1 font-bold hover:bg-gray-300"
-        >
-          X
-        </button>
+                                className={`absolute top-4 right-2 ${buttons.roundButton}`}
+                                onClick={() => onClose()}
+                              >
+                                x
+                              </button>
 
         <h2 className="text-2xl text-primary mb-4 font-bold">Select a Car</h2>
 

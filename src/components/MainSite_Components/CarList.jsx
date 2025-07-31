@@ -39,8 +39,8 @@ const CarList = () => {
     <div className="w-full flex flex-col justify-start">
       <UserPreferences />
 
-      <div className="w-full flex flex-row justify-between md:p-8 lg:px-20 py-10">
-        <div className="lg:w-[65%] bg-white p-4 md:p-8 flex flex-col min-h-[900px] justify-between items-center">
+      <div className="w-full flex flex-row justify-center md:p-8 lg:px-20 py-10">
+        <div className="lg:w-[65%] bg-white p-4 md:p-8 flex flex-col min-h-[900px] justify-between items-center rounded-lg">
           <div className="w-full flex flex-row items-center justify-between mb-10">
             <h2 className={typography.heading.h2}> Available Cars</h2>
             <SortFilterMenu />
@@ -93,7 +93,7 @@ const CarList = () => {
           {selectedCar ? (
             <CalculationSide car={selectedCarFull} onClose={() => setSelectedCar(null)} />
           ) : (
-            <div className="relative w-full h-full border-4 border-white rounded-md">
+            <div className="relative w-full border-4 border-white rounded-md">
               <div className="blur-[22px]">
                 <CalculationSide car={cars[0]} />
               </div>
@@ -107,8 +107,8 @@ const CarList = () => {
         </div>
       </div>
         {showMobileModal && (
-          <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center px-4">
-            <div className="bg-white w-full max-w-lg mx-auto rounded-lg overflow-y-auto max-h-[90vh] p-4">
+          <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center px-2 sm;px-6">
+            <div className="bg-white w-full max-w-lg mx-auto rounded-lg overflow-y-auto max-h-[90vh] p-2">
               <CalculationSide
                 car={selectedCarFull}
                 onClose={() => {

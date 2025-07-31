@@ -3,16 +3,16 @@ const CarDetails = ({ car }) => (
     <img
       src={`https://liveimages.redbook.com.au/redbook/car/spec/${car.imageUrl}.jpg`}
       alt={car.model}
-      className="w-[35%] h-full object-cover rounded-md bg-white"
+      className="w-[40%] md:w-[35%] h-full object-cover rounded-md bg-white"
       onError={(e) => {
         e.target.onerror = null;
         e.target.src = '/images/no-image.jpeg';
       }}
     />
     <div className="flex flex-wrap">
-      <p className="3xl:text-3xl 2xl:text-xl sm:text-lg xs:text-[16px] text-sm font-semibold text-primary">
+      <p className="3xl:text-3xl 2xl:text-xl text-md sm:text-xl xs:text-[16px] font-semibold text-primary">
       {car.brand} <br/> {car.model} <br />
-      <span className='font-normal text-sm'>
+      <span className='font-normal text-xs md:text-lg'>
         {car.variant.split(" ").slice(0,3).join(" ").toUpperCase()}
       </span>
     </p>
