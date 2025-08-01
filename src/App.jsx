@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/Home';
 import Home from './pages/Home';
 import CompareCars from './pages/CompareCars';
+import Navbar from './components/Header/NavBar';
 
 
 
@@ -14,6 +15,7 @@ const App = () => {
 
   return (
     <div className='font-Quicksand'>
+      <Navbar />
       <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/compare" element={<CompareCars />} />

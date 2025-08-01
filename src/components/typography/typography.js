@@ -29,6 +29,7 @@ export const buttons = {
   compare_active: "bg-primary text-white font-semibold border rounded-xl 3xl:rounded-2xl h-6 w-[100px] sm:h-4 sm:w-[70px] lg:h-5 lg:w-[80px] text-[10px] sm:text-[8px]  lg:text-[9px] xl:text-[12px] 3xl:text-sm xl:w-[110px] 3xl:w-[150px] 3xl:h-8 xl:h-7 border-muted",
   view_calculation: "bg-[#41b6e6] text-black font-semibold text-xs p-2 rounded md:text-md xl:text-[15px] xl:rounded-lg",
   roundButton: "rounded-full bg-gray-100 px-3 py-1 font-bold hover:bg-gray-200 border border-primary",
+  navbar_requestaquote: "rounded-full bg-primary text-white md:px-12 md:p-4 md:text-lg text-xs px-4 p-2 cursor-pointer",
 
 }
 

@@ -24,7 +24,7 @@ const CarCard = ({ car, onViewCalculation, onUpdateLeasePrices }) => {
 
   const carfeatures = {
     Engine: car.powerPlant,
-    "Body/Seats": car.bodyStyle || car.bodyType,
+    "Body/Seats": car.raw.bodyStyle || car.raw.bodyType,
     Transmission: car.gearTypeDescription || car.transmission,
     Consumption: `${car.raw.fuelCombined} L/Km`,
   };
@@ -69,6 +69,7 @@ const CarCard = ({ car, onViewCalculation, onUpdateLeasePrices }) => {
         onUpdateLeasePrices(car.id, leasePrices);
         dispatch(updateComparisonLeasePrices({ carId: car.id, leasePrices }));
         quoteRef.current = { carId: car?.id };
+        initialPreferencesRef.current = current;
       
 
       setIsFetchingQuote(false);
